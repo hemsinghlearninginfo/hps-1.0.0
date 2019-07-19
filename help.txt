@@ -1,0 +1,16 @@
+For Server Side Email:
+https://medium.com/ingenious/sending-emails-from-a-create-react-app-dad5756a4ff2
+
+Bootstrap Templates
+https://www.tutorialrepublic.com/snippets/gallery.php
+
+Icons
+https://icons8.com/icon/set/candlestick/all
+
+Add value in array
+https://codepen.io/a810524z/pen/XKoQoB
+
+http://bootboxjs.com/examples.html
+
+Email Templates
+https://www.codementor.io/joshuaaroke/sending-html-message-in-nodejs-express-9i3d3uhjr
