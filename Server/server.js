@@ -14,7 +14,7 @@ app.use(cors());
 app.use(jwt());
 
 // api routes
-app.use('/users', require('./Controller/users.controller'));
+allRoutes();
 
 // global error handler
 app.use(errorHandler);
@@ -24,3 +24,9 @@ const port = process.env.NODE_ENV === 'production' ? 80 : 4000;
 const server = app.listen(port, function () {
     console.log('Server listening on port ' + port);
 });
+
+
+function allRoutes(){
+    app.use('/users', require('./Controller/users.controller'));
+    app.use('/faqs', require('./Controller/faqs.controller'));
+}

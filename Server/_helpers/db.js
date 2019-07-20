@@ -4,5 +4,6 @@ mongoose.connect(config.connectionString);
 mongoose.Promise = global.Promise;
 
 module.exports = {
-    User: require('../Model/user.model')
+    User: require('../Model/user.model'),
+    FAQ: require('../Model/faq.model')
 };

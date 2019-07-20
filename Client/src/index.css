@@ -22,12 +22,26 @@ code {
 }
 
 .footer-border{
+  padding-top: 20px;
+  padding-bottom: 20px;
   border-top: 1px solid #dad7d7;
   border-collapse: collapse;
 }
 
 .container-content{
-  margin: 1%;
-  padding-top:20px;
-  padding-bottom:20px;
+  margin: 10px;
+}
+
+.page-content{
+    border: 1px solid #e0dede;
+    border-radius: 5px;
+    background: #f8f9fa;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+.page-content .heading{
+  padding-top: 10px;
+}
+.page-content .content{
+  padding-bottom: 15px;
 }

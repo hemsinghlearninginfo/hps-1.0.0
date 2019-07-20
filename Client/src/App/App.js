@@ -8,6 +8,7 @@ import { PrivateRoute } from '../_controls';
 import { HomePage } from '../Components/HomePage';
 import { LoginPage } from '../Components/LoginPage';
 import { RegisterPage } from '../Components/RegisterPage';
+import { FAQPage } from '../Components/FAQ';
 import MyComponents from '../Components/index';
 import Wrapper from '../Components/Shared/Wrapper';
 
@@ -27,15 +28,16 @@ class App extends Component {
         return (
             <Wrapper>
                 <MyComponents.Header />
-                <div className="container container-content">
-                    {alert.message &&
-                        <div className={`alert ${alert.type}`}>{alert.message}</div>
-                    }
+                {alert.message &&
+                    <div className={`alert ${alert.type}`}>{alert.message}</div>
+                }
+                <div className="container-fluid container-content">
                     <Router history={history}>
                         <div>
                             <PrivateRoute exact path="/" component={HomePage} />
                             <Route path="/login" component={LoginPage} />
                             <Route path="/register" component={RegisterPage} />
+                            <Route path="/faq" component={FAQPage} />
                         </div>
                     </Router>
                 </div>

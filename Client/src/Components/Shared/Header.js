@@ -10,6 +10,7 @@ export function Header(props) {
 
             <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div className="navbar-nav">
+                    <a href="/faq" className="nav-item nav-link active">FAQ</a>
                     {/* <a href="#" className="nav-item nav-link active">Home</a>
                     <a href="#" className="nav-item nav-link">Profile</a> */}
                     <div className="nav-item dropdown">
@@ -32,15 +33,15 @@ export function Header(props) {
                 <div className="navbar-nav">
                     <a href="#" className="nav-item nav-link">Login</a>
                     <div className="nav-item dropdown">
-                    <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Hello Hem</a>
-                    <div className="dropdown-menu dropdown-menu-right">
-                        <a href="#" className="dropdown-item">Profile</a>
-                        <a href="#" className="dropdown-item">Settings</a>
-                        <a href="#" className="dropdown-item">Logout</a>
+                        <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Hello Hem</a>
+                        <div className="dropdown-menu dropdown-menu-right">
+                            <a href="#" className="dropdown-item">Profile</a>
+                            <a href="#" className="dropdown-item">Settings</a>
+                            <a href="#" className="dropdown-item">Logout</a>
+                        </div>
                     </div>
                 </div>
-                </div>
-                
+
             </div>
         </nav>
     );
