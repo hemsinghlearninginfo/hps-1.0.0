@@ -1,6 +1,7 @@
 import { faqConstants } from '../_constants';
 import { faqService } from '../_services';
-import { alertActions } from './';
+import { modalAlertActions, alertActions } from './';
+import $ from 'jquery';
 //import { history } from '../_helpers';
 
 export const faqActions = {
@@ -12,7 +13,7 @@ export const faqActions = {
     // delete: _delete
 };
 
-function addUpdate(faq) {
+function addUpdate(faq, closeObjectId) {
     return dispatch => {
         dispatch(request(faq));
 
@@ -20,12 +21,12 @@ function addUpdate(faq) {
             .then(
                 faq => { 
                     dispatch(success());
-                    //history.push('/login');
                     dispatch(alertActions.success('FAQ added successful'));
+                    $("#" + closeObjectId).click();
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(modalAlertActions.error(error.toString()));
                 }
             );
     };

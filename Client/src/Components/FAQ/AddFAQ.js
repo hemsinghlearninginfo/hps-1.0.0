@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {faqActions} from '../../_actions';
+import { faqActions } from '../../_actions';
 
 class AddFAQ extends Component {
     constructor(props) {
@@ -31,10 +31,9 @@ class AddFAQ extends Component {
         e.preventDefault();
         this.setState({ submitted: true });
         const { question, answer, isActive } = this.state;
-        console.log(isActive);
         const { dispatch } = this.props;
         if (question && answer) {
-            dispatch(faqActions.addUpdate({question, answer, isActive}));
+            dispatch(faqActions.addUpdate({ question, answer, isActive },'closeAddFaq'));
         }
     }
 
@@ -69,7 +68,7 @@ class AddFAQ extends Component {
                     </div>
                     <div className="modal-footer">
                         <button type="submit" className="btn btn-primary btn-sm">Save FAQ</button>
-                        <button type="button" className="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                        <button id="closeAddFaq" type="button" className="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </>

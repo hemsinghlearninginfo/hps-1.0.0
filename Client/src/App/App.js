@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import $ from 'jquery';
 
 import { history } from '../_helpers';
 import { alertActions } from '../_actions';
@@ -29,7 +30,7 @@ class App extends Component {
             <Wrapper>
                 <MyComponents.Header />
                 {alert.message &&
-                    <div className={`alert ${alert.type}`}>{alert.message}</div>
+                    <div id="globalAlert" className={`alert ${alert.type}`}>{alert.message}</div>
                 }
                 <div className="container-fluid container-content">
                     <Router history={history}>
@@ -56,4 +57,5 @@ function mapStateToProps(state) {
 }
 
 const connectedApp = connect(mapStateToProps)(App);
-export { connectedApp as App }; 
+export { connectedApp as App };
+

@@ -80,3 +80,7 @@ code {
     bottom: 0;
     right: 0;
 }
+
+.modal-alert{
+  padding: 10px 10px 10px 10px;
+}
