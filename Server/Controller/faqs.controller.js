@@ -21,7 +21,7 @@ function getAll(req, res, next) {
 
 function addUpdate(req, res, next) {
     faqService.addUpdate(req.body)
-        .then(faq => faq ? res.json(faq) : res.status(400).json({ message: 'We are working on this, please try again after sometime' }))
+        .then(() => res.json({}))
         .catch(err => next(err));
 }
 

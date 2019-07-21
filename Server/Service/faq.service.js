@@ -2,7 +2,7 @@
 // const jwt = require('jsonwebtoken');
 // const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
-const FAQ = db.FAQ;
+const FAQDb = db.FAQ;
 
 module.exports = {
     getAll,
@@ -15,22 +15,22 @@ module.exports = {
 };
 
 async function getAll() {
-    return await FAQ.find();
+    return await FAQDb.find();
 }
 
 async function addUpdate(faqParam) {
     // validate
-    const faq = null;
-    if(faqParam.id === null){
-        faq = new FAQ(faqParam);
+    let faq = null;
+    if (faqParam.id === undefined) {
+        faq = new FAQDb(faqParam);
     }
-    else{
-        faq = await FAQ.findOne({ _id: faqParam.id });
+    else {
+        faq = await FAQDb.findOne({ _id: faqParam.id });
         faq.question = faqParam.question;
         faq.answer = faqParam.answer;
+        faq.isActive = faqParam.isActive;
     }
-
-    // save user
+    // save faq
     await faq.save();
 }
 
