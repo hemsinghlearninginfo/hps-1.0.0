@@ -1,9 +1,10 @@
 import React from 'react';
+import { Logo } from '../../_controls/index';
 
 export function Header(props) {
     return (
         <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top shadow-sm">
-            <a href="#" className="navbar-brand">HPS-Trades</a>
+            <a href="#" className="navbar-brand"><Logo />HPS-Trades</a>
             <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span className="navbar-toggler-icon"></span>
             </button>

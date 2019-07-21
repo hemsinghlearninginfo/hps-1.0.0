@@ -30,6 +30,7 @@ code {
 
 .container-content{
   margin: 10px;
+  padding: 0px !important;
 }
 
 .page-content{
@@ -44,4 +45,37 @@ code {
 }
 .page-content .content{
   padding-bottom: 15px;
+}
+
+.logo {
+  width: 30px;
+  height: auto;
+  margin: 0 5px;
+  border: 1px solid white;
+  padding: 2px;
+  border-radius: 2px;
+  background-color: #1e3d7b;
+}
+
+.loading-spinner{
+  background-color: #5f5e5ea8;
+  left: 0px;
+  top: 0px;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+}
+
+.loading-spinner div{
+  position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: visible;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
