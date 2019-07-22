@@ -28,7 +28,7 @@ class FAQPage extends React.Component {
         const {role } = this.state;
         return (
             <PageTemplate heading="FAQs">
-                <ListFAQ />
+                <ListFAQ role={role} />
                 <br />
                 {role !== null && (role === Role.SuperAdmin || role === Role.Admin) &&  <ModalPopUp btnLabel="Add new FAQ" heading="Add FAQ" saveChanges={this.addUpdateFQA}>
                     <AddFAQ />

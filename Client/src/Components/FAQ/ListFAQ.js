@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { Role } from '../../_helpers';
 import { faqActions } from '../../_actions';
 
 class ListFAQ extends Component {
@@ -10,7 +10,7 @@ class ListFAQ extends Component {
     }
 
     render() {
-        const { faqs } = this.props;
+        const { faqs, role } = this.props;
 
         const emptyMessage = (
             <div className="d-flex justify-content-center text-danger">There are no faqs yet in added in the system.</div>
@@ -30,7 +30,7 @@ class ListFAQ extends Component {
                                 <div className={"collapse" + (index === 0 ? " show" : "")} id={"accordion-tab-content" + index} aria-labelledby={"accordion-tab-heading" + index} data-parent="#accordion-tab-1">
                                     <div className="card-body">
                                         <p>{faq.answer}</p>
-                                        <button type="button" className="btn btn-sm btn-success">Edit</button>
+                                        {role !== null && (role === Role.SuperAdmin || role === Role.Admin) && <button type="button" className="btn btn-sm btn-success">Edit</button>}
                                     </div>
                                 </div>
                             </div>
