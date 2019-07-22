@@ -6,10 +6,10 @@ import $ from 'jquery';
 
 export const faqActions = {
     addUpdate,
+    getAll,
     // login,
     // logout,
     // register,
-    // getAll,
     // delete: _delete
 };
 
@@ -36,6 +36,21 @@ function addUpdate(faq, closeObjectId) {
     function failure(error) { return { type: faqConstants.REGISTER_FAILURE, error } }
 }
 
+function getAll() {
+    return dispatch => {
+        dispatch(request());
+
+        faqService.getAll()
+            .then(
+                faqs => dispatch(success(faqs)),
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request() { return { type: faqConstants.GETALL_REQUEST } }
+    function success(faqs) { return { type: faqConstants.GETALL_SUCCESS, faqs } }
+    function failure(error) { return { type: faqConstants.GETALL_FAILURE, error } }
+}
 
 // function login(username, password) {
 //     return dispatch => {
@@ -64,22 +79,6 @@ function addUpdate(faq, closeObjectId) {
 //     return { type: userConstants.LOGOUT };
 // }
 
-
-// function getAll() {
-//     return dispatch => {
-//         dispatch(request());
-
-//         userService.getAll()
-//             .then(
-//                 users => dispatch(success(users)),
-//                 error => dispatch(failure(error.toString()))
-//             );
-//     };
-
-//     function request() { return { type: userConstants.GETALL_REQUEST } }
-//     function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
-//     function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
-// }
 
 // // prefixed function name with underscore because delete is a reserved word in javascript
 // function _delete(id) {

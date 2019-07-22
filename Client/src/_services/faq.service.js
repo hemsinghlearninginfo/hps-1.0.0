@@ -3,10 +3,10 @@ import { authHeader, handleResponse } from '../_helpers';
 
 export const faqService = {
     addUpdate,
+    getAll,
     // login,
     // logout,
     // register,
-    // getAll,
     // getById,
     // update,
     // delete: _delete
@@ -20,6 +20,14 @@ function addUpdate(faq) {
         body: JSON.stringify(faq)
     };
     return fetch(`${config.apiUrl}/faqs/addupdate`, requestOptions).then(handleResponse);
+}
+
+function getAll() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(`${config.apiUrl}/faqs`, requestOptions).then(handleResponse);
 }
 
 // function login(username, password) {
@@ -45,15 +53,6 @@ function addUpdate(faq) {
 // function logout() {
 //     // remove user from local storage to log user out
 //     localStorage.removeItem('user');
-// }
-
-// function getAll() {
-//     const requestOptions = {
-//         method: 'GET',
-//         headers: authHeader()
-//     };
-
-//     return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
 // }
 
 // function getById(id) {
