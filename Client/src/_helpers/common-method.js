@@ -8,8 +8,8 @@ export const commonMethods = {
 function getCurrentUser() {
     let currentUser = null;
     userService.currentUser.subscribe(x => currentUser = {
-        currentUser: x,
-        Role: x.role
+        currentUser: x !== null ? x : null,
+        Role: x !== null ? x.role : null
     });
     return currentUser
 }

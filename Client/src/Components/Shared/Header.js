@@ -8,16 +8,18 @@ export class Header extends Component {
         super(props);
         this.state = {
             currentUser: null,
-            role : null,
+            role: null,
         };
     }
 
     componentDidMount() {
         const user = commonMethods.getCurrentUser();
-        this.setState({
-            currentUser: user.currentUser,
-            role : user.Role
-        });
+        if (user !== null) {
+            this.setState({
+                currentUser: user.currentUser,
+                role: user.Role
+            });
+        }
     }
 
     logout() {
@@ -26,7 +28,7 @@ export class Header extends Component {
     }
 
     render() {
-        const { currentUser,role } = this.state;
+        const { currentUser, role } = this.state;
         return (
             <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top shadow-sm">
                 <a href="#" className="navbar-brand"><Logo />HPS-Trades</a>
