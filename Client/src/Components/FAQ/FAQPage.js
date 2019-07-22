@@ -30,7 +30,7 @@ class FAQPage extends React.Component {
             <PageTemplate heading="FAQs">
                 <ListFAQ role={role} />
                 <br />
-                {role !== null && (role === Role.SuperAdmin || role === Role.Admin) &&  <ModalPopUp btnLabel="Add new FAQ" heading="Add FAQ" saveChanges={this.addUpdateFQA}>
+                {role !== null && (role === Role.SuperAdmin || role === Role.Admin) && <ModalPopUp btnLabel="Add new FAQ" heading="Add FAQ" saveChanges={this.addUpdateFQA}>
                     <AddFAQ />
                 </ModalPopUp>}
             </PageTemplate>

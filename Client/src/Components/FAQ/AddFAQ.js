@@ -19,7 +19,7 @@ class AddFAQ extends Component {
 
     handleChange(e) {
         const { name, value } = e.target;
-        if (name === 'isActive') {
+        if (e.target.type === 'checkbox') {
             this.setState({ [name]: e.target.checked });
         }
         else {
@@ -33,7 +33,13 @@ class AddFAQ extends Component {
         const { question, answer, isActive } = this.state;
         const { dispatch } = this.props;
         if (question && answer) {
-            dispatch(faqActions.addUpdate({ question, answer, isActive },'closeAddFaq'));
+            dispatch(faqActions.addUpdate({ question, answer, isActive }, 'closeAddFaq'));
+            this.setState({
+                question: '',
+                answer: '',
+                isActive: true,
+                submitted: false
+            });
         }
     }
 
@@ -62,8 +68,9 @@ class AddFAQ extends Component {
                             }
                         </div>
                         <div className="form-check">
-                            <input type="checkbox" className="form-check-input" name="isActive" value={isActive} onClick={this.handleChange} />
-                            <label className="form-check-label" htmlFor="isActive">is Active</label>
+                            <label className="form-check-label" htmlFor="isActive">
+                                <input type="checkbox" className="form-check-input" name="isActive" defaultChecked={isActive} value={isActive} onChange={this.handleChange} />
+                                is Active</label>
                         </div>
                     </div>
                     <div className="modal-footer">
