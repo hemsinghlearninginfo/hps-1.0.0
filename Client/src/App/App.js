@@ -3,7 +3,8 @@ import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
-import { history } from '../_helpers';
+import { history, Role } from '../_helpers';
+import { userService } from '../_services';
 import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_controls';
 import { HomePage } from '../Components/HomePage';
@@ -22,29 +23,44 @@ class App extends Component {
             // clear alert on location change
             dispatch(alertActions.clear());
         });
+
+        this.state = {
+            currentUser: null,
+            isAdmin: false
+        };
+    }
+
+    componentDidMount() {
+        userService.currentUser.subscribe(x => this.setState({
+            currentUser: x,
+            isAdmin: x && x.role === Role.Admin
+        }));
+    }
+
+    logout() {
+        userService.logout();
+        history.push('/login');
     }
 
     render() {
+        const { currentUser, isAdmin } = this.state;
         const { alert } = this.props;
         return (
             <Wrapper>
-                <MyComponents.Header />
-                {alert.message &&
-                    <div id="globalAlert" className={`alert ${alert.type}`}>{alert.message}</div>
-                }
-                <div className="container-fluid container-content">
-                    <Router history={history}>
-                        <div>
-                            <PrivateRoute exact path="/" component={HomePage} />
-                            <Route path="/login" component={LoginPage} />
-                            <Route path="/register" component={RegisterPage} />
-                            <Route path="/faq" component={FAQPage} />
-                        </div>
-                    </Router>
-                </div>
-                <MyComponents.Fotter />
-            </Wrapper>
-
+                <Router history={history}>
+                    <MyComponents.Header />
+                    {alert.message &&
+                        <div id="globalAlert" className={`alert ${alert.type}`}>{alert.message}</div>
+                    }
+                    <div className="container-fluid container-content">
+                        <PrivateRoute exact path="/" component={HomePage} />
+                        <Route path="/login" component={LoginPage} />
+                        <Route path="/register" component={RegisterPage} />
+                        <Route path="/faq" component={FAQPage} />
+                    </div>
+                    <MyComponents.Fotter />
+                </Router>
+            </Wrapper >
         );
     }
 }

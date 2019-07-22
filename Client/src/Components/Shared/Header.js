@@ -32,7 +32,7 @@ export function Header(props) {
                     </div>
                 </form> */}
                 <div className="navbar-nav">
-                    <a href="#" className="nav-item nav-link">Login</a>
+                    <a href="/login" className="nav-item nav-link">Login</a>
                     <div className="nav-item dropdown">
                         <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Hello Hem</a>
                         <div className="dropdown-menu dropdown-menu-right">
