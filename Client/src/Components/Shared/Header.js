@@ -17,7 +17,7 @@ export class Header extends Component {
         if (user !== null) {
             this.setState({
                 currentUser: user.currentUser,
-                role: user.Role
+                role: user.role
             });
         }
     }

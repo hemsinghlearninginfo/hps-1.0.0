@@ -6,7 +6,7 @@ const schema = new Schema({
     hash: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    role: { type: String, default: 'Role.User' },
+    role: { type: String, default: 'User' },
     createdDate: { type: Date, default: Date.now }
 });
 

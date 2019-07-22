@@ -9,7 +9,7 @@ function getCurrentUser() {
     let currentUser = null;
     userService.currentUser.subscribe(x => currentUser = {
         currentUser: x !== null ? x : null,
-        Role: x !== null ? x.role : null
+        role: x !== null ? x.role : null
     });
     return currentUser
 }
