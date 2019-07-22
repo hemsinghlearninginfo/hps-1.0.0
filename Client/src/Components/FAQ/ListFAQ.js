@@ -5,22 +5,44 @@ import { faqActions } from '../../_actions';
 
 class ListFAQ extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchText: ''
+        }
+        this.handleChange = this.handleChange.bind(this);
+    }
+
     componentDidMount() {
         this.props.dispatch(faqActions.getAll());
     }
 
+    handleChange(e) {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
+
     render() {
+        const { searchText } = this.state;
         const { faqs, role } = this.props;
+        const isFaqsExists = (faqs.items && faqs.items.length > 0 ? true : false);
+        let faqItems = (faqs.items && faqs.items.length > 0 ? faqs.items : null);
 
         const emptyMessage = (
             <div className="d-flex justify-content-center text-danger">There are no faqs yet in added in the system.</div>
         );
 
-        const faqItems = (faqs.items && <div className="col-lg-12">
+        if (searchText !== '' && faqItems) {
+            faqItems = faqItems.filter(function (x) {
+                return (x.question.indexOf(searchText) > -1);
+            });
+        }
+
+        let faqItemsToRender = (faqItems && <div className="col-lg-12">
             <div className="tab-content">
                 <div className="tab-pane show active" id="tab1" role="tabpanel" aria-labelledby="tab1">
                     <div className="accordion" id="accordion-tab-1">
-                        {faqs.items.map((faq, index) =>
+                        {faqItems.map((faq, index) =>
                             <div className="card" key={faq.id}>
                                 <div className="card-header" id={"accordion-tab-heading-" + index}>
                                     <h5>
@@ -39,11 +61,21 @@ class ListFAQ extends Component {
                 </div>
             </div>
         </div>)
+
+        const searchControl = (
+            <div className="col-lg-12">
+                <div className="form-group list-textBox">
+                    <input type="text" className="form-control" value={searchText} name="searchText" onChange={this.handleChange} placeholder="Search Question by text." />
+                </div>
+            </div>
+        )
+
         return (
             <>
                 {faqs.loading && <em>Loading faqs...</em>}
                 {faqs.error && <span className="text-danger">ERROR: {faqs.error}</span>}
-                {faqs.items !== undefined && faqs.items.length > 0 ? faqItems : emptyMessage}
+                {isFaqsExists && searchControl}
+                {faqItems !== null && faqItems.length > 0 ? faqItemsToRender : emptyMessage}
             </>
         );
     }
