@@ -2,7 +2,8 @@
 import { userService } from '../_services';
 
 export const commonMethods = {
-    getCurrentUser
+    getCurrentUser,
+    getRandomNumber
 };
 
 function getCurrentUser() {
@@ -12,6 +13,10 @@ function getCurrentUser() {
         role: x !== null ? x.role : null
     });
     return currentUser
+}
+
+function getRandomNumber(){
+    return Math.floor(Math.random()*(10000-1+1)+1);
 }
 
 // function error(message) {

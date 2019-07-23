@@ -40,6 +40,7 @@ class AddFAQ extends Component {
                 isActive: true,
                 submitted: false
             });
+            this.props.refreshCode();
         }
     }
 

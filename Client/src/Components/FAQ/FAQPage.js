@@ -12,7 +12,9 @@ class FAQPage extends React.Component {
         super(props);
         this.state = {
             role: null,
+            baseRefresh: true
         }
+        this.refreshList = this.refreshList.bind(this);
     }
 
     componentDidMount() {
@@ -24,15 +26,19 @@ class FAQPage extends React.Component {
         }
     }
 
+    refreshList() {
+        this.setState({ baseRefresh: !this.state.baseRefresh });
+    }
+
     render() {
-        const {role } = this.state;
         return (
             <PageTemplate heading="FAQs">
-                <ListFAQ role={role} />
+                <ListFAQ role={this.state.role} refresh={this.state.baseRefresh} />
                 <br />
-                {role !== null && (role === Role.SuperAdmin || role === Role.Admin) && <ModalPopUp btnLabel="Add new FAQ" heading="Add FAQ" saveChanges={this.addUpdateFQA}>
-                    <AddFAQ />
-                </ModalPopUp>}
+                {this.state.role !== null && (this.state.role === Role.SuperAdmin || this.state.role === Role.Admin)
+                    && <ModalPopUp btnLabel="Add new FAQ" heading="Add FAQ" saveChanges={this.addUpdateFQA}>
+                        <AddFAQ refreshCode={this.refreshList} />
+                    </ModalPopUp>}
             </PageTemplate>
         );
     }

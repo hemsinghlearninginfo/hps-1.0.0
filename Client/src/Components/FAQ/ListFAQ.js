@@ -11,11 +11,23 @@ class ListFAQ extends Component {
             searchText: ''
         }
         this.handleChange = this.handleChange.bind(this);
+        this.getAllFAQS = this.getAllFAQS.bind(this);
     }
 
     componentDidMount() {
+        this.getAllFAQS();
+    }
+
+    getAllFAQS(){
         this.props.dispatch(faqActions.getAll());
     }
+
+    componentWillReceiveProps(props) {
+        const { refresh  } = this.props;
+        if (props.refresh !== refresh) {
+            this.getAllFAQS();
+        }
+      }
 
     handleChange(e) {
         const { name, value } = e.target;
