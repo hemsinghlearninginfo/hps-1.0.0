@@ -55,7 +55,7 @@ class FAQPage extends React.Component {
     }
 
     addNewFAQ() {
-        this.setState({ faqObject: { _id: null, question: '', answer: '', isActive: true } });
+        this.setState({ faqObject: null });
     }
 
     saveAndUpdate(faq) {
@@ -65,8 +65,10 @@ class FAQPage extends React.Component {
         }
         else {
             this.props.dispatch(faqActions.addUpdate({ question, answer, isActive }));
-            this.fetchFAQs();
-            return true;
+            if (!this.props.faqs.error) {
+                this.fetchFAQs();
+                return true;
+            }
         }
     }
 
@@ -82,7 +84,7 @@ class FAQPage extends React.Component {
                             && (<>
                                 <ModalPopUpButton action={this.addNewFAQ}>Add FAQ</ModalPopUpButton>
                                 <ModalPopUp heading={this.state.faqObject === null ? "Add FAQ" : "Edit FAQ"}>
-                                    <FAQForm faqObject={this.state.faqObject} saveAndUpdate={this.saveAndUpdate}  />
+                                    <FAQForm faqObject={this.state.faqObject} saveAndUpdate={this.saveAndUpdate} />
                                 </ModalPopUp>
                             </>)
                         }

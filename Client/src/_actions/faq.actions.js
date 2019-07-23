@@ -21,7 +21,6 @@ function addUpdate(faq) {
                 faq => { 
                     dispatch(success());
                     dispatch(alertActions.success('FAQ added successful'));
-                    
                 },
                 error => {
                     dispatch(failure(error.toString()));
