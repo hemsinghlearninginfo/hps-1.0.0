@@ -3,7 +3,8 @@ import { userService } from '../_services';
 
 export const commonMethods = {
     getCurrentUser,
-    getRandomNumber
+    getRandomNumber,
+    scrollTop
 };
 
 function getCurrentUser() {
@@ -17,6 +18,10 @@ function getCurrentUser() {
 
 function getRandomNumber(){
     return Math.floor(Math.random()*(10000-1+1)+1);
+}
+
+function scrollTop(){
+    window.scroll({top: 0, left: 0, behavior: 'smooth' })
 }
 
 // function error(message) {

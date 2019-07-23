@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Role } from '../../_helpers';
 import { faqActions } from '../../_actions';
+import { Role, commonMethods } from '../../_helpers';
 
 class ListFAQ extends Component {
 
@@ -18,16 +18,20 @@ class ListFAQ extends Component {
         this.getAllFAQS();
     }
 
-    getAllFAQS(){
+    getAllFAQS() {
         this.props.dispatch(faqActions.getAll());
     }
 
     componentWillReceiveProps(props) {
-        const { refresh  } = this.props;
+        const { refresh } = this.props;
         if (props.refresh !== refresh) {
             this.getAllFAQS();
         }
-      }
+    }
+
+     componentDidUpdate(prevProps, prevState) {
+        commonMethods.scrollTop();
+     }
 
     handleChange(e) {
         const { name, value } = e.target;

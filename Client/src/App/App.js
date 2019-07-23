@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, HashRouter, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
@@ -46,21 +46,27 @@ class App extends Component {
         const { currentUser, isAdmin } = this.state;
         const { alert } = this.props;
         return (
-            <Wrapper>
-                <Router history={history}>
-                    <MyComponents.Header />
-                    {alert.message &&
-                        <div id="globalAlert" className={`alert ${alert.type}`}>{alert.message}</div>
-                    }
-                    <div className="container-fluid container-content">
-                        <PrivateRoute exact path="/" component={HomePage} />
-                        <Route path="/login" component={LoginPage} />
-                        <Route path="/register" component={RegisterPage} />
-                        <Route path="/faq" component={FAQPage} />
-                    </div>
-                    <MyComponents.Fotter />
-                </Router>
-            </Wrapper >
+            <HashRouter>
+                <Wrapper>
+                    <Router history={history}>
+                        <MyComponents.Header />
+                        {alert.message &&
+                            <div id="globalAlert" className={`alert ${alert.type}`}>{alert.message}</div>
+                        }
+                        <div className="container-fluid container-content">
+                            <Switch>
+                                <PrivateRoute exact path="/" component={HomePage} />
+                                <Route path="/login" component={LoginPage} />
+                                <Route path="/register" component={RegisterPage} />
+                                <Route path="/faq" component={FAQPage} />
+                                <Route path='/404' component={MyComponents.Error404} />
+                                <Redirect path='*' to='/404' />
+                            </Switch>
+                        </div>
+                        <MyComponents.Fotter />
+                    </Router>
+                </Wrapper >
+            </HashRouter>
         );
     }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { history, Role, commonMethods } from '../../_helpers';
 import { userService } from '../../_services';
 import { Logo } from '../../_controls/index';
@@ -31,14 +32,14 @@ export class Header extends Component {
         const { currentUser, role } = this.state;
         return (
             <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top shadow-sm">
-                <a href="#" className="navbar-brand"><Logo />HPS-Trades</a>
+                <Link to="/" className="navbar-brand"><Logo />HPS-Trades</Link>
                 <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
                 <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div className="navbar-nav">
-                        <a href="/faq" className="nav-item nav-link active">FAQ</a>
+                        <Link to="/faq" className="nav-item nav-link active">FAQ</Link>
                         {/* <a href="#" className="nav-item nav-link active">Home</a>
                         <a href="#" className="nav-item nav-link">Profile</a> */}
                         <div className="nav-item dropdown">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 import { store } from './_helpers';
 import './index.css';
@@ -17,9 +18,11 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 // configureFakeBackend();
 
 render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
+    <BrowserRouter>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </BrowserRouter>,
     document.getElementById('root')
 );
 serviceWorker.unregister();
