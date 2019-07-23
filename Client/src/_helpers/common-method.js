@@ -1,10 +1,12 @@
 
+import $ from 'jquery';
 import { userService } from '../_services';
 
 export const commonMethods = {
     getCurrentUser,
     getRandomNumber,
-    scrollTop
+    scrollTop,
+    callClick
 };
 
 function getCurrentUser() {
@@ -22,6 +24,10 @@ function getRandomNumber(){
 
 function scrollTop(){
     window.scroll({top: 0, left: 0, behavior: 'smooth' })
+}
+
+function callClick(object){
+    $("#" + object).click();
 }
 
 // function error(message) {

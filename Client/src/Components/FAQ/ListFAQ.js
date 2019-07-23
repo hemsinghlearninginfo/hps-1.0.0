@@ -48,7 +48,10 @@ class ListFAQ extends Component {
                             <div className="card" key={faq.id}>
                                 <div className="card-header" id={"accordion-tab-heading-" + index}>
                                     <h5>
-                                        <button className="btn btn-link" type="button" data-toggle="collapse" data-target={"#accordion-tab-content" + index} aria-expanded="false" aria-controls={"accordion-tab-content" + index}>{faq.question}</button>
+                                        <button type="button" data-toggle="collapse" data-target={"#accordion-tab-content" + index} aria-expanded="false" aria-controls={"accordion-tab-content" + index}
+                                            className="btn btn-link">
+                                            {faq.question}
+                                        </button>
                                     </h5>
                                 </div>
                                 <div className={"collapse" + (index === 0 ? " show" : "")} id={"accordion-tab-content" + index} aria-labelledby={"accordion-tab-heading" + index} data-parent="#accordion-tab-1">

@@ -13,17 +13,13 @@ class FAQPage extends React.Component {
         super(props);
         this.state = {
             role: null,
-            baseRefresh: true,
-            faqEditObject: null
+            faqObject: null
         }
-        this.refreshList = this.refreshList.bind(this);
         this.faqEditId = this.faqEditId.bind(this);
-        this.getAllFAQS = this.getAllFAQS.bind(this);
         this.addNewFAQ = this.addNewFAQ.bind(this);
-    }
 
-    getAllFAQS() {
-        this.props.dispatch(faqActions.getAll());
+        this.fetchFAQs = this.fetchFAQs.bind(this);
+        this.saveAndUpdate = this.saveAndUpdate.bind(this);
     }
 
     componentDidMount() {
@@ -33,11 +29,11 @@ class FAQPage extends React.Component {
                 role: user.role
             });
         }
-        this.getAllFAQS();
+        this.fetchFAQs();
     }
 
-    refreshList() {
-        this.getAllFAQS();
+    fetchFAQs() {
+        this.props.dispatch(faqActions.getAll());
     }
 
     faqEditId(faqEditId) {
@@ -47,7 +43,7 @@ class FAQPage extends React.Component {
             });
             if (faq != null && faq.length > 0) {
                 this.setState({
-                    faqEditObject: {
+                    faqObject: {
                         _id: faq[0]._id,
                         question: faq[0].question,
                         answer: faq[0].answer,
@@ -59,7 +55,19 @@ class FAQPage extends React.Component {
     }
 
     addNewFAQ() {
-        this.setState({ faqEditObject: { _id: null, question: '', answer: '', isActive: true } });
+        this.setState({ faqObject: { _id: null, question: '', answer: '', isActive: true } });
+    }
+
+    saveAndUpdate(faq) {
+        const { question, answer, isActive } = faq;
+        if (faq._id) {
+            console.log('update');
+        }
+        else {
+            this.props.dispatch(faqActions.addUpdate({ question, answer, isActive }));
+            this.fetchFAQs();
+            return true;
+        }
     }
 
     render() {
@@ -73,15 +81,15 @@ class FAQPage extends React.Component {
                             && (this.state.role === Role.SuperAdmin || this.state.role === Role.Admin)
                             && (<>
                                 <ModalPopUpButton action={this.addNewFAQ}>Add FAQ</ModalPopUpButton>
-                                <ModalPopUp heading={this.state.faqEditObject === null ? "Add FAQ" : "Edit FAQ"}>
-                                    <FAQForm faqEditObject={this.state.faqEditObject} />
+                                <ModalPopUp heading={this.state.faqObject === null ? "Add FAQ" : "Edit FAQ"}>
+                                    <FAQForm faqObject={this.state.faqObject} saveAndUpdate={this.saveAndUpdate}  />
                                 </ModalPopUp>
                             </>)
                         }
                     </div>
                 </div>
                 <br />
-                <ListFAQ role={this.state.role} faqs={this.props.faqs} refresh={this.state.baseRefresh} faqEditId={this.faqEditId} />
+                <ListFAQ role={this.state.role} faqs={this.props.faqs} faqEditId={this.faqEditId} />
             </PageTemplate>
         );
     }

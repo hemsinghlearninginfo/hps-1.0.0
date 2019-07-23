@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Loading } from '../../_controls';
-import { faqActions } from '../../_actions';
+import { commonMethods } from '../../_helpers';
 
 class FAQForm extends Component {
     constructor(props) {
@@ -20,12 +20,12 @@ class FAQForm extends Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        if (nextProps.faqEditObject != null && nextProps.faqEditObject._id !== null) {
+        if (nextProps.faqObject != null && nextProps.faqObject._id !== null) {
             this.setState({
-                _id: nextProps.faqEditObject._id,
-                question: nextProps.faqEditObject.question,
-                answer: nextProps.faqEditObject.answer,
-                isActive: nextProps.faqEditObject.isActive
+                _id: nextProps.faqObject._id,
+                question: nextProps.faqObject.question,
+                answer: nextProps.faqObject.answer,
+                isActive: nextProps.faqObject.isActive
             });
         }
         else {
@@ -51,15 +51,17 @@ class FAQForm extends Component {
         this.setState({ isLoading: true });
 
         if (question && answer) {
-            dispatch(faqActions.addUpdate({ question, answer, isActive }, 'closeAddFaq'));
-            this.setState({
-                question: '',
-                answer: '',
-                isActive: true,
-                submitted: false,
-                isLoading: false
-            });
-            this.props.refreshCode();
+            let result = this.props.saveAndUpdate({ question, answer, isActive });
+            if(result){
+                commonMethods.callClick('closeAddFaq');
+                this.setState({
+                    question: '',
+                    answer: '',
+                    isActive: true,
+                    submitted: false,
+                    isLoading: false
+                });
+            }
         }
     }
 
