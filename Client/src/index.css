@@ -1,8 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #e9ecef !important;
@@ -13,38 +11,43 @@ html, body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.help-block{
+.help-block {
   color: red;
   font-size: small;
 }
 
-.footer-border{
+.required {
+  border-left: 2px solid red !important;
+}
+
+.footer-border {
   padding-top: 20px;
   padding-bottom: 20px;
   border-top: 1px solid #dad7d7;
   border-collapse: collapse;
 }
 
-.container-content{
+.container-content {
   margin: 10px;
   padding: 0px !important;
 }
 
-.page-content{
-    border: 1px solid #e0dede;
-    border-radius: 5px;
-    background: #f8f9fa;
-    margin-left: 10px !important;
-    margin-right: 10px !important;
+.page-content {
+  border: 1px solid #e0dede;
+  border-radius: 5px;
+  background: #f8f9fa;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
 }
-.page-content .heading{
+
+.page-content .heading {
   padding-top: 10px;
 }
-.page-content .content{
+
+.page-content .content {
   padding-bottom: 15px;
 }
 
@@ -58,7 +61,7 @@ code {
   background-color: #1e3d7b;
 }
 
-.loading-spinner{
+.loading-spinner {
   background-color: #5f5e5ea8;
   left: 0px;
   top: 0px;
@@ -68,38 +71,42 @@ code {
   height: 100%;
 }
 
-.loading-spinner div{
+.loading-spinner div {
   position: fixed;
-    z-index: 999;
-    height: 2em;
-    width: 2em;
-    overflow: visible;
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: visible;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
-.modal-alert{
+.modal-alert {
   padding: 10px 10px 10px 10px;
 }
 
 .tab-content {
   box-shadow: 0 1px 5px rgba(85, 85, 85, 0.15);
 }
+
 .tab-content .card {
   border-radius: 0;
   padding-bottom: 1px;
 }
+
 .tab-content .card-header {
   padding: 15px 16px;
   border-radius: 0;
   background-color: #f6f6f6;
 }
+
 .tab-content .card-header h5 {
   margin: 0;
 }
+
 .tab-content .card-header h5 button {
   display: block;
   width: 100%;
@@ -110,16 +117,20 @@ code {
   text-align: left;
   white-space: normal;
 }
+
 .tab-content .card-header h5 button:hover, .tab-content .card-header h5 button:focus, .tab-content .card-header h5 button:active, .tab-content .card-header h5 button:hover:active {
   text-decoration: none;
 }
+
 .tab-content .card-body p {
   color: #616161;
 }
+
 .tab-content .card-body p:last-of-type {
   margin: 0;
 }
-.accordion > .card:not(:first-child) {
+
+.accordion>.card:not(:first-child) {
   border-top: 0;
 }
 
@@ -127,6 +138,6 @@ code {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.list-textBox{
+.list-textBox {
   margin: 0px !important;
 }

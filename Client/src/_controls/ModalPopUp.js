@@ -10,11 +10,6 @@ class ModalPopUp extends Component {
         //const { params, modalAlert } = this.props;
         return (
             <>
-                <button type="button" className="btn btn-primary btn-sm" data-toggle="modal"
-                    data-backdrop="static" data-keyboard="false"
-                    data-target="#modalPopUp">
-                    {this.props.btnLabel}
-                </button>
                 <div className="modal fade" id="modalPopUp" tabIndex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-lg" role="document">

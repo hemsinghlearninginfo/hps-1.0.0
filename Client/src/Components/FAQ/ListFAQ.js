@@ -2,36 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { faqActions } from '../../_actions';
 import { Role, commonMethods } from '../../_helpers';
+import { ModalPopUpButton } from '../../_controls/index'
 
 class ListFAQ extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            faqs: [],
             searchText: ''
         }
         this.handleChange = this.handleChange.bind(this);
-        this.getAllFAQS = this.getAllFAQS.bind(this);
     }
 
-    componentDidMount() {
-        this.getAllFAQS();
-    }
-
-    getAllFAQS() {
-        this.props.dispatch(faqActions.getAll());
-    }
-
-    componentWillReceiveProps(props) {
-        const { refresh } = this.props;
-        if (props.refresh !== refresh) {
-            this.getAllFAQS();
-        }
-    }
-
-     componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps, prevState) {
         commonMethods.scrollTop();
-     }
+    }
 
     handleChange(e) {
         const { name, value } = e.target;
@@ -67,8 +53,19 @@ class ListFAQ extends Component {
                                 </div>
                                 <div className={"collapse" + (index === 0 ? " show" : "")} id={"accordion-tab-content" + index} aria-labelledby={"accordion-tab-heading" + index} data-parent="#accordion-tab-1">
                                     <div className="card-body">
-                                        <p>{faq.answer}</p>
-                                        {role !== null && (role === Role.SuperAdmin || role === Role.Admin) && <button type="button" className="btn btn-sm btn-success">Edit</button>}
+                                        <div className="container-fluid">
+                                            <div className="row">
+                                                <div className="col-sm-11">
+                                                    <p>{faq.answer}</p>
+                                                </div>
+                                                <div className="col-sm-1 text-right">
+                                                    {role !== null && (role === Role.SuperAdmin || role === Role.Admin)
+                                                        &&
+                                                        <ModalPopUpButton action={() => this.props.faqEditId(faq.id)}>Edit</ModalPopUpButton>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

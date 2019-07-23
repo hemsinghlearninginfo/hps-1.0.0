@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { Loading } from '../../_controls';
 import { faqActions } from '../../_actions';
 
-class AddFAQ extends Component {
+class FAQForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            _id: this.props.faqEditId != null ? this.props.faqEditId : null,
             question: '',
             answer: '',
             isActive: true,
-            submitted: false
+            submitted: false,
+            isLoading: false
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        if (nextProps.faqEditObject != null && nextProps.faqEditObject._id !== null) {
+            this.setState({
+                _id: nextProps.faqEditObject._id,
+                question: nextProps.faqEditObject.question,
+                answer: nextProps.faqEditObject.answer,
+                isActive: nextProps.faqEditObject.isActive
+            });
+        }
+        else {
+            this.setState({ _id: null, question: '', answer: '', isActive: true });
+        }
     }
 
     handleChange(e) {
@@ -32,28 +48,31 @@ class AddFAQ extends Component {
         this.setState({ submitted: true });
         const { question, answer, isActive } = this.state;
         const { dispatch } = this.props;
+        this.setState({ isLoading: true });
+
         if (question && answer) {
             dispatch(faqActions.addUpdate({ question, answer, isActive }, 'closeAddFaq'));
             this.setState({
                 question: '',
                 answer: '',
                 isActive: true,
-                submitted: false
+                submitted: false,
+                isLoading: false
             });
             this.props.refreshCode();
         }
     }
 
     render() {
-        const { loggingIn } = this.props;
-        const { question, answer, isActive, submitted } = this.state;
+        const { question, answer, isActive, submitted, isLoading } = this.state;
         return (
             <>
+                {isLoading && <Loading />}
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className="modal-body">
                         <div className={'form-group' + (submitted && !question ? ' has-error' : '')}>
                             <label htmlFor="question">Question</label>
-                            <input type="type" className="form-control" name="question" placeholder="Question"
+                            <input type="type" className="form-control required" name="question" placeholder="Question"
                                 value={question} onChange={this.handleChange}
                             />
                             {submitted && !question &&
@@ -62,7 +81,7 @@ class AddFAQ extends Component {
                         </div>
                         <div className={'form-group' + (submitted && !answer ? ' has-error' : '')}>
                             <label htmlFor="answer">Answer</label>
-                            <textarea className="form-control" name="answer" placeholder="Answer"
+                            <textarea className="form-control required" name="answer" placeholder="Answer"
                                 value={answer} onChange={this.handleChange} />
                             {submitted && !answer &&
                                 <div className="help-block">Answer is required.</div>
@@ -91,5 +110,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedAddFAQ = connect(mapStateToProps)(AddFAQ);
-export { connectedAddFAQ as AddFAQ }; 
+const connectedFAQForm = connect(mapStateToProps)(FAQForm);
+export { connectedFAQForm as FAQForm }; 
