@@ -144,9 +144,9 @@ code {
 
 .notifications-wrapper{
   position: fixed;
-    top: 61px;
+    top: 63px;
     z-index: 10001;
-    right: 20px;
+    right: 1px;
     width: 350px;
 }
 .notifications-wrapper .alert-warning{

@@ -28,6 +28,12 @@ export class Notifications extends Component {
         this.subscription.unsubscribe();
     }
 
+    deleteMessage(index) {
+        const messages = this.state.messages.filter(function (value, arrIndex) {
+            return arrIndex !== index;
+        });
+        this.setState({ messages });
+    }
 
     render() {
         const { messages } = this.state;
@@ -36,7 +42,9 @@ export class Notifications extends Component {
                 {messages && messages.map((message, index) =>
                     <div key={index} className={"alert alert-dismissible fade show alert-" + message.text.type} role="alert">
                         <strong>Holy guacamole!</strong> {message.text.displayMessage}
-                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                        <button type="button" className="close" data-dismiss="alert"
+                            onClick={() => this.deleteMessage(index)}
+                            aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>

@@ -21,6 +21,7 @@ class FAQPage extends React.Component {
 
         this.fetchFAQs = this.fetchFAQs.bind(this);
         this.saveAndUpdate = this.saveAndUpdate.bind(this);
+
     }
 
     componentDidMount() {
@@ -56,6 +57,8 @@ class FAQPage extends React.Component {
     }
 
     addNewFAQ() {
+        messageService.sendMessage(commonMethods.getMessage('info','Message from Home Page Component to App Component!'));
+        //messageService.sendMessage('Message from Home Page Component to App Component!');
         this.setState({ faqObject: null });
     }
 
