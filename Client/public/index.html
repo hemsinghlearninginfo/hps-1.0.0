@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -19,12 +20,159 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>HPS Systems</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+
+  <style type="text/css">
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    body {
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .ipl-progress-indicator.available {
+      opacity: 0;
+    }
+
+    .ipl-progress-indicator {
+      background-color: #f5f5f5;
+      width: 100%;
+      position: fixed;
+      opacity: 1;
+      pointer-events: none;
+      -webkit-transition: opacity cubic-bezier(.4, 0, .2, 1) 436ms;
+      -moz-transition: opacity cubic-bezier(.4, 0, .2, 1) 436ms;
+      transition: opacity cubic-bezier(.4, 0, .2, 1) 436ms;
+      z-index: 9999;
+    }
+
+    .insp-logo-frame {
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: flex;
+      -webkit-flex-direction: column;
+      -moz-flex-direction: column;
+      flex-direction: column;
+      -webkit-justify-content: center;
+      -moz-justify-content: center;
+      justify-content: center;
+      -webkit-animation: fadein 436ms;
+      -moz-animation: fadein 436ms;
+      animation: fadein 436ms;
+      height: 98%;
+    }
+    .ipl-progress-indicator-head {
+      background-color: #c6dafc;
+      height: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ipl-progress-indicator .first-indicator,
+    .ipl-progress-indicator .second-indicator {
+      background-color: #056D8B;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      position: absolute;
+      -webkit-transform-origin: left center;
+      -moz-transform-origin: left center;
+      transform-origin: left center;
+      -webkit-transform: scaleX(0);
+      -moz-transform: scaleX(0);
+      transform: scaleX(0);
+    }
+
+    .ipl-progress-indicator .first-indicator {
+      -webkit-animation: first-indicator 2000ms linear infinite;
+      -moz-animation: first-indicator 2000ms linear infinite;
+      animation: first-indicator 2000ms linear infinite;
+    }
+
+    .ipl-progress-indicator .second-indicator {
+      -webkit-animation: second-indicator 2000ms linear infinite;
+      -moz-animation: second-indicator 2000ms linear infinite;
+      animation: second-indicator 2000ms linear infinite;
+    }
+
+    @-webkit-keyframes fadein {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }      ;
+    }
+
+    @-moz-keyframes fadein {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }      ;
+    }
+
+    @keyframes first-indicator {
+      0% {
+        transform: translate(0%) scaleX(0);
+      }
+
+      25% {
+        transform: translate(0%) scaleX(0.5);
+      }
+
+      50% {
+        transform: translate(25%) scaleX(0.75);
+      }
+
+      75% {
+        transform: translate(100%) scaleX(0);
+      }
+
+      100% {
+        transform: translate(100%) scaleX(0);
+      }      ;
+    }
+
+    @keyframes second-indicator {
+      0% {
+        transform: translate(0%) scaleX(0);
+      }
+
+      60% {
+        transform: translate(0%) scaleX(0);
+      }
+
+      80% {
+        transform: translate(0%) scaleX(0.6);
+      }
+
+      100% {
+        transform: translate(100%) scaleX(0.1);
+      };
+    }
+  </style>
+  <title>HPS Systems</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div class="ipl-progress-indicator" id="ipl-progress-indicator">
+    <div class="ipl-progress-indicator-head">
+      <div class="first-indicator"></div>
+      <div class="second-indicator"></div>
+    </div>
+  </div>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -34,5 +182,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>

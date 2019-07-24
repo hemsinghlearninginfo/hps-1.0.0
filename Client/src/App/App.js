@@ -3,7 +3,7 @@ import { Router, Route, HashRouter, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
-import { history, Role } from '../_helpers';
+import { history, Role, commonMethods } from '../_helpers';
 import { userService } from '../_services';
 import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_controls';
@@ -26,7 +26,8 @@ class App extends Component {
 
         this.state = {
             currentUser: null,
-            isAdmin: false
+            isAdmin: false,
+            globalLoading : true,
         };
     }
 
@@ -35,7 +36,9 @@ class App extends Component {
             currentUser: x,
             isAdmin: x && x.role === Role.Admin
         }));
+        commonMethods.globalLoader(false);
     }
+
 
     logout() {
         userService.logout();
