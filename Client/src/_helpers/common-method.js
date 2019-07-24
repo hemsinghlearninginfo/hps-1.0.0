@@ -7,7 +7,8 @@ export const commonMethods = {
     getRandomNumber,
     scrollTop,
     callClick,
-    globalLoader
+    globalLoader,
+    getMessage
 };
 
 function getCurrentUser() {
@@ -43,10 +44,9 @@ function globalLoader(isVisible) {
     }
 }
 
-// function error(message) {
-//     return { type: alertConstants.ERROR, message };
-// }
-
-// function clear() {
-//     return { type: alertConstants.CLEAR };
-// }
+function getMessage(type, displayMessage){
+    return {
+        type,
+        displayMessage
+    }
+}

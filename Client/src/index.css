@@ -141,3 +141,23 @@ code {
 .list-textBox {
   margin: 0px !important;
 }
+
+.notifications-wrapper{
+  position: fixed;
+    top: 61px;
+    z-index: 10001;
+    right: 20px;
+    width: 350px;
+}
+.notifications-wrapper .alert-warning{
+  background-color: #fff3cd63 !important;
+} 
+ .notifications-wrapper .alert-danger{
+  background-color: #f8d7da63 !important;
+}
+.notifications-wrapper .alert-info{
+  background-color: #d1ecf163 !important;
+}
+.notifications-wrapper .alert-success{
+  background-color: #d4edda63 !important;
+}

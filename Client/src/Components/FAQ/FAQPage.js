@@ -6,6 +6,7 @@ import { FAQForm } from './FAQForm';
 import { ListFAQ } from './ListFAQ';
 import { Role, commonMethods } from '../../_helpers';
 import { faqActions } from '../../_actions';
+import { messageService } from '../../_services';
 
 class FAQPage extends React.Component {
 

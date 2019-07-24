@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import $ from 'jquery';
 
 import { history, Role, commonMethods } from '../_helpers';
-import { userService, messageService  } from '../_services';
+import { userService } from '../_services';
 import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_controls';
 import { HomePage } from '../Components/HomePage';
@@ -27,8 +27,7 @@ class App extends Component {
         this.state = {
             currentUser: null,
             isAdmin: false,
-            globalLoading : true,
-            messages: []
+            globalLoading: true
         };
     }
 
@@ -37,24 +36,8 @@ class App extends Component {
             currentUser: x,
             isAdmin: x && x.role === Role.Admin
         }));
-        // subscribe to home component messages
-        this.subscription = messageService.getMessage().subscribe(message => {
-            if (message) {
-                // add message to local state if not empty
-                this.setState({ messages: [...this.state.messages, message] });
-            } else {
-                // clear messages when empty message received
-                this.setState({ messages: [] });
-            }
-        });
         commonMethods.globalLoader(false);
     }
-
-    componentWillUnmount() {
-        // unsubscribe to ensure no memory leaks
-        this.subscription.unsubscribe();
-    }
-
 
     logout() {
         userService.logout();
@@ -62,13 +45,13 @@ class App extends Component {
     }
 
     render() {
-        const { currentUser, isAdmin } = this.state;
         const { alert } = this.props;
         return (
             <HashRouter>
                 <Wrapper>
                     <Router history={history}>
-                        <MyComponents.Header message={this.state.messages} />
+                        <MyComponents.Notifications />
+                        <MyComponents.Header />
                         {alert.message &&
                             <div id="globalAlert" className={`alert ${alert.type}`}>{alert.message}</div>
                         }
