@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import $ from 'jquery';
 
 import { history, Role, commonMethods } from '../_helpers';
-import { userService } from '../_services';
+import { userService, messageService  } from '../_services';
 import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_controls';
 import { HomePage } from '../Components/HomePage';
@@ -28,6 +28,7 @@ class App extends Component {
             currentUser: null,
             isAdmin: false,
             globalLoading : true,
+            messages: []
         };
     }
 
@@ -36,7 +37,22 @@ class App extends Component {
             currentUser: x,
             isAdmin: x && x.role === Role.Admin
         }));
+        // subscribe to home component messages
+        this.subscription = messageService.getMessage().subscribe(message => {
+            if (message) {
+                // add message to local state if not empty
+                this.setState({ messages: [...this.state.messages, message] });
+            } else {
+                // clear messages when empty message received
+                this.setState({ messages: [] });
+            }
+        });
         commonMethods.globalLoader(false);
+    }
+
+    componentWillUnmount() {
+        // unsubscribe to ensure no memory leaks
+        this.subscription.unsubscribe();
     }
 
 
@@ -52,7 +68,7 @@ class App extends Component {
             <HashRouter>
                 <Wrapper>
                     <Router history={history}>
-                        <MyComponents.Header />
+                        <MyComponents.Header message={this.state.messages} />
                         {alert.message &&
                             <div id="globalAlert" className={`alert ${alert.type}`}>{alert.message}</div>
                         }
