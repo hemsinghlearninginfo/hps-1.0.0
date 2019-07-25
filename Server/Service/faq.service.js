@@ -19,7 +19,6 @@ async function getAll() {
 }
 
 async function addUpdate(faqParam) {
-    //throw new Error("We are working on your request, thanks for you patience.");
     // validate
     let faq = null;
     if (faqParam.id === undefined) {

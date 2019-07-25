@@ -4,6 +4,9 @@ mongoose.connect(config.connectionString);
 mongoose.Promise = global.Promise;
 
 module.exports = {
+    MyError: require('../Model/myError.model'),
+
     User: require('../Model/user.model'),
-    FAQ: require('../Model/faq.model')
+    FAQ: require('../Model/faq.model'),
+    
 };

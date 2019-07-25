@@ -1,6 +1,11 @@
 module.exports = errorHandler;
+const myErrorService = require('../Service/myError.service');
+const commonMethod = require('../_helpers/common-methods');
+
 
 function errorHandler(err, req, res, next) {
+    myErrorService.interLogger(commonMethod.ErrorObject(err.stack, err.message));
+
     if (typeof (err) === 'string') {
         // custom application error
         return res.status(400).json({ message: err });

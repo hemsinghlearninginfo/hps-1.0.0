@@ -15,18 +15,20 @@ module.exports = router;
 
 function getAll(req, res, next) {
     faqService.getAll()
-        .then(faqs => { 
+        .then(faqs => {
             res.json(faqs)
         })
-        .catch(err => { 
-            next(err) 
+        .catch(err => {
+            next(err)
         });
 }
 
 function addUpdate(req, res, next) {
     faqService.addUpdate(req.body)
         .then(() => res.json({}))
-        .catch(err => next(err));
+        .catch(err => {
+            next(err);
+        });
 }
 
 // function register(req, res, next) {
