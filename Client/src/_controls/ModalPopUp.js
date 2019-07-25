@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 
 
 class ModalPopUp extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         //const { params, modalAlert } = this.props;
         return (

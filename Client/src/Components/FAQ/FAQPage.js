@@ -6,7 +6,6 @@ import { FAQForm } from './FAQForm';
 import { ListFAQ } from './ListFAQ';
 import { Role, commonMethods } from '../../_helpers';
 import { faqActions } from '../../_actions';
-import { messageService } from '../../_services';
 
 class FAQPage extends React.Component {
 
@@ -66,7 +65,7 @@ class FAQPage extends React.Component {
             console.log('update');
         }
         else {
-            this.props.dispatch(faqActions.addUpdate({ question, answer, isActive }));
+            this.props.dispatch(faqActions.addUpdate({ question, answer, isActive }))
             if (!this.props.faqs.error) {
                 this.fetchFAQs();
                 return true;
@@ -86,7 +85,7 @@ class FAQPage extends React.Component {
                             && (<>
                                 <ModalPopUpButton action={this.addNewFAQ}>Add FAQ</ModalPopUpButton>
                                 <ModalPopUp heading={this.state.faqObject === null ? "Add FAQ" : "Edit FAQ"}>
-                                    <FAQForm faqObject={this.state.faqObject} saveAndUpdate={this.saveAndUpdate} />
+                                    <FAQForm faqObject={this.state.faqObject} refreshList={this.fetchFAQs} />
                                 </ModalPopUp>
                             </>)
                         }

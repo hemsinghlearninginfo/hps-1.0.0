@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Loading } from '../../_controls';
 import { commonMethods } from '../../_helpers';
+import { faqActions } from '../../_actions';
 
 class FAQForm extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class FAQForm extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     componentWillReceiveProps = (nextProps) => {
@@ -30,6 +32,24 @@ class FAQForm extends Component {
         }
         else {
             this.setState({ _id: null, question: '', answer: '', isActive: true });
+        }
+        this.closeModal(nextProps);
+    }
+
+    closeModal = (nextProps) => {
+        if (nextProps.faqs.isPosted) {
+            commonMethods.callClick('closeAddFaq');
+            this.setState({
+                question: '',
+                answer: '',
+                isActive: true,
+                submitted: false,
+                isLoading: false
+            });
+            this.props.refreshList();
+        }
+        else if (nextProps.faqs.isPostingFail) {
+            this.setState({ submitted: true, isLoading: false });
         }
     }
 
@@ -47,21 +67,10 @@ class FAQForm extends Component {
         e.preventDefault();
         this.setState({ submitted: true });
         const { question, answer, isActive } = this.state;
-        const { dispatch } = this.props;
-        this.setState({ isLoading: true });
-
         if (question && answer) {
-            let result = this.props.saveAndUpdate({ question, answer, isActive });
-            if(result){
-                commonMethods.callClick('closeAddFaq');
-                this.setState({
-                    question: '',
-                    answer: '',
-                    isActive: true,
-                    submitted: false,
-                    isLoading: false
-                });
-            }
+            this.setState({ isLoading: true });
+            const { dispatch } = this.props;
+            dispatch(faqActions.addUpdate({ question, answer, isActive }));
         }
     }
 
@@ -107,8 +116,10 @@ class FAQForm extends Component {
 
 function mapStateToProps(state) {
     const { loggingIn } = state.authentication;
+    const { faqs } = state;
     return {
-        loggingIn
+        loggingIn,
+        faqs
     };
 }
 

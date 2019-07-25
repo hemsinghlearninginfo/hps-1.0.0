@@ -15,11 +15,10 @@ export const faqActions = {
 function addUpdate(faq) {
     return dispatch => {
         dispatch(request(faq));
-
         faqService.addUpdate(faq)
             .then(
                 faq => { 
-                    dispatch(success());
+                    dispatch(success(faq));
                     dispatch(alertActions.success('FAQ added successful'));
                 },
                 error => {
@@ -29,9 +28,9 @@ function addUpdate(faq) {
             );
     };
 
-    function request(faq) { return { type: faqConstants.REGISTER_REQUEST, user: faq } }
-    function success(faq) { return { type: faqConstants.REGISTER_SUCCESS, user: faq } }
-    function failure(error) { return { type: faqConstants.REGISTER_FAILURE, error } }
+    function request(faq) { return { type: faqConstants.POST_REQUEST, faq: faq } }
+    function success(faq) { return { type: faqConstants.POST_SUCCESS, faq: faq } }
+    function failure(error) { return { type: faqConstants.POST_FAILURE, error } }
 }
 
 function getAll() {

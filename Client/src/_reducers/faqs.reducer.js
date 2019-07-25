@@ -11,9 +11,10 @@ export function faqs(state = {}, action) {
         items: action.faqs
       };
     case faqConstants.GETALL_FAILURE:
-      return { 
+      return {
         error: action.error
       };
+
     case faqConstants.DELETE_REQUEST:
       return {
         ...state,
@@ -38,6 +39,14 @@ export function faqs(state = {}, action) {
           return faq;
         })
       };
+
+    case faqConstants.POST_REQUEST:
+      return { isPosted: false, isPostingFail: false };
+    case faqConstants.POST_SUCCESS:
+      return { isPosted: true };
+    case faqConstants.POST_FAILURE:
+      return { isPostingFail: true };
+
     default:
       return state
   }
