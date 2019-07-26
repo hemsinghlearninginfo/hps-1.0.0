@@ -19,7 +19,7 @@ function addUpdate(faq) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(faq)
     };
-    return fetch(`${config.apiUrl}/faqs/addupdate`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/faqs/create`, requestOptions).then(handleResponse);
 }
 
 function getAll() {

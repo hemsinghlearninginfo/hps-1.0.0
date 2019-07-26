@@ -19,7 +19,7 @@ class ModalPopUp extends Component {
                             </div>
                             <div className="modal-alert">
                                 {this.props.modalAlert.message &&
-                                    <div className={`alert ${this.props.modalAlert.type}`}>{this.props.modalAlert.message}</div>
+                                    <div className={`modal-alert-padding alert ${this.props.modalAlert.type}`}>{this.props.modalAlert.message}</div>
                                 }
                             </div>
                             {this.props.children}

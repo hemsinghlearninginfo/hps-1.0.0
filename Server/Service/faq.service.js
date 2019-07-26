@@ -6,7 +6,7 @@ const FAQDb = db.FAQ;
 
 module.exports = {
     getAll,
-    addUpdate,
+    create,
     // authenticate,
     // getById,
     // create,
@@ -18,7 +18,7 @@ async function getAll() {
     return await FAQDb.find();
 }
 
-async function addUpdate(faqParam) {
+async function create(faqParam) {
     // validate
     let faq = null;
     if (faqParam.id === undefined) {

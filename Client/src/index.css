@@ -85,7 +85,11 @@ code {
 }
 
 .modal-alert {
-  padding: 10px 10px 10px 10px;
+  padding: 5px;
+}
+
+.modal-alert-padding{
+  margin-bottom: 0rem !important;
 }
 
 .tab-content {
@@ -161,3 +165,5 @@ code {
 .notifications-wrapper .alert-success{
   background-color: #d4edda63 !important;
 }
+
+

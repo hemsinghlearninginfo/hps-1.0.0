@@ -12,7 +12,7 @@ function jwt() {
             '/errors/create',
             '/users/authenticate',
             '/users/register',
-            '/faqs/addupdate',
+            '/faqs/create',
             '/faqs',
         ]
     });

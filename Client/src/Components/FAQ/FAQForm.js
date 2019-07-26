@@ -50,6 +50,7 @@ class FAQForm extends Component {
         }
         else if (nextProps.faqs.isPostingFail) {
             this.setState({ submitted: true, isLoading: false });
+            this.props.refreshList();
         }
     }
 
@@ -67,7 +68,7 @@ class FAQForm extends Component {
         e.preventDefault();
         this.setState({ submitted: true });
         const { question, answer, isActive } = this.state;
-        if (question && answer) {
+        if (true || (question && answer)) {
             this.setState({ isLoading: true });
             const { dispatch } = this.props;
             dispatch(faqActions.addUpdate({ question, answer, isActive }));
