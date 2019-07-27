@@ -8,7 +8,7 @@ class FAQForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.faqEditId != null ? this.props.faqEditId : null,
+            id: null,
             question: '',
             answer: '',
             isActive: true,
@@ -22,17 +22,17 @@ class FAQForm extends Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        if (nextProps.faqObject != null && nextProps.faqObject.id !== null) {
+        if (nextProps.faqObject != null && nextProps.faqObject._id !== null) {
             this.setState({
-                id: nextProps.faqObject.id,
+                id: nextProps.faqObject._id,
                 question: nextProps.faqObject.question,
                 answer: nextProps.faqObject.answer,
                 isActive: nextProps.faqObject.isActive
             });
         }
-        else {
-            this.setState({ id: null, question: '', answer: '', isActive: true });
-        }
+        // else {
+        //     this.setState({ id: null, question: '', answer: '', isActive: true });
+        // }
         this.closeModal(nextProps);
     }
 
@@ -71,8 +71,11 @@ class FAQForm extends Component {
         if (question && answer) {
             this.setState({ isLoading: true });
             const { dispatch } = this.props;
-            if (id !== undefined) {
+            if (id === undefined) {
                 dispatch(faqActions.create({ question, answer, isActive }));
+            }
+            else{
+                dispatch(faqActions.update({ id, question, answer, isActive }));
             }
         }
     }

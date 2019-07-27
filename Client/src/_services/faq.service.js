@@ -3,6 +3,7 @@ import { authHeader, handleResponse } from '../_helpers';
 
 export const faqService = {
     create,
+    update,
     getAll,
     // login,
     // logout,
@@ -16,10 +17,18 @@ export const faqService = {
 function create(faq) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...authHeader(),'Content-Type': 'application/json' },
         body: JSON.stringify(faq)
     };
     return fetch(`${config.apiUrl}/faqs/create`, requestOptions).then(handleResponse);
+}
+function update(faq) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(faq)
+    };
+    return fetch(`${config.apiUrl}/faqs/${faq.id}`, requestOptions).then(handleResponse);
 }
 
 function getAll() {

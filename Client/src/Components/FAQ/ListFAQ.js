@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { faqActions } from '../../_actions';
 import { Role, commonMethods } from '../../_helpers';
 import { ModalPopUpButton } from '../../_controls/index'
 
@@ -49,8 +48,8 @@ class ListFAQ extends Component {
                                 <div className="card-header" id={"accordion-tab-heading-" + index}>
                                     <h5>
                                         <button type="button" data-toggle="collapse" data-target={"#accordion-tab-content" + index} aria-expanded="false" aria-controls={"accordion-tab-content" + index}
-                                            className="btn btn-link">
-                                            {faq.question}
+                                            className={"btn btn-link" + (faq.isActive ? "" : " text-danger")}>
+                                            {(faq.isActive ? "" : " (In Active) ") + faq.question}
                                         </button>
                                     </h5>
                                 </div>

@@ -5,6 +5,7 @@ import { modalAlertActions, alertActions } from './';
 
 export const faqActions = {
     create,
+    update,
     getAll,
     // login,
     // logout,
@@ -17,9 +18,30 @@ function create(faq) {
         dispatch(request(faq));
         faqService.create(faq)
             .then(
-                faq => { 
+                faq => {
                     dispatch(success(faq));
                     dispatch(alertActions.success('FAQ added successful'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(modalAlertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request(faq) { return { type: faqConstants.POST_REQUEST, faq: faq } }
+    function success(faq) { return { type: faqConstants.POST_SUCCESS, faq: faq } }
+    function failure(error) { return { type: faqConstants.POST_FAILURE, error } }
+}
+
+function update(faq) {
+    return dispatch => {
+        dispatch(request(faq));
+        faqService.update(faq)
+            .then(
+                faq => {
+                    dispatch(success(faq));
+                    dispatch(alertActions.success('FAQ updated successful'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
