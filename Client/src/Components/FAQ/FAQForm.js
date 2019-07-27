@@ -84,7 +84,6 @@ class FAQForm extends Component {
 
     render() {
         const { question, answer, isActive, submitted, isLoading } = this.state;
-        debugger;
         return (
             <>
                 {isLoading && <Loading />}
@@ -109,7 +108,8 @@ class FAQForm extends Component {
                         </div>
                         <div className="form-check">
                             <label className="form-check-label" htmlFor="isActive">
-                                <input type="checkbox" className="form-check-input" name="isActive" defaultChecked={isActive} value={isActive} onChange={this.handleChange} />
+                                <input type="checkbox" className="form-check-input" name="isActive"
+                                    checked={isActive ? 1 : 0}  onChange={this.handleChange} />
                                 is Active</label>
                         </div>
                     </div>

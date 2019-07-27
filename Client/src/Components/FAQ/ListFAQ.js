@@ -58,7 +58,7 @@ class ListFAQ extends Component {
                                         <div className="container-fluid">
                                             <div className="row">
                                                 <div className="col-sm-11">
-                                                    <p>{faq.answer}</p>
+                                                    <p className={faq.isActive ?  "" : "text-danger"}>{faq.answer}</p>
                                                 </div>
                                                 <div className="col-sm-1 text-right">
                                                     {role !== null && (role === Role.SuperAdmin || role === Role.Admin)
@@ -80,7 +80,7 @@ class ListFAQ extends Component {
         const searchControl = (
             <div className="col-lg-12">
                 <div className="form-group list-textBox">
-                    <input type="text" className="form-control" value={searchText} name="searchText" onChange={this.handleChange} placeholder="Search Question by text." />
+                    <input type="text" className="form-control shadow" value={searchText} name="searchText" onChange={this.handleChange} placeholder="Search Question by text." />
                 </div>
             </div>
         )
