@@ -8,7 +8,7 @@ class FAQForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            _id: this.props.faqEditId != null ? this.props.faqEditId : null,
+            id: this.props.faqEditId != null ? this.props.faqEditId : null,
             question: '',
             answer: '',
             isActive: true,
@@ -22,16 +22,16 @@ class FAQForm extends Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        if (nextProps.faqObject != null && nextProps.faqObject._id !== null) {
+        if (nextProps.faqObject != null && nextProps.faqObject.id !== null) {
             this.setState({
-                _id: nextProps.faqObject._id,
+                id: nextProps.faqObject.id,
                 question: nextProps.faqObject.question,
                 answer: nextProps.faqObject.answer,
                 isActive: nextProps.faqObject.isActive
             });
         }
         else {
-            this.setState({ _id: null, question: '', answer: '', isActive: true });
+            this.setState({ id: null, question: '', answer: '', isActive: true });
         }
         this.closeModal(nextProps);
     }
@@ -49,7 +49,7 @@ class FAQForm extends Component {
             this.props.refreshList();
         }
         else if (nextProps.faqs.isPostingFail) {
-            this.setState({ submitted: true, isLoading: false });
+            this.setState({ submitted: false, isLoading: false });
             this.props.refreshList();
         }
     }
@@ -67,11 +67,13 @@ class FAQForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.setState({ submitted: true });
-        const { question, answer, isActive } = this.state;
-        if (true || (question && answer)) {
+        const { id, question, answer, isActive } = this.state;
+        if (question && answer) {
             this.setState({ isLoading: true });
             const { dispatch } = this.props;
-            dispatch(faqActions.addUpdate({ question, answer, isActive }));
+            if (id !== undefined) {
+                dispatch(faqActions.create({ question, answer, isActive }));
+            }
         }
     }
 

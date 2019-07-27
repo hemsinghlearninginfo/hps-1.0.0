@@ -4,7 +4,7 @@ import { modalAlertActions, alertActions } from './';
 //import { history } from '../_helpers';
 
 export const faqActions = {
-    addUpdate,
+    create,
     getAll,
     // login,
     // logout,
@@ -12,10 +12,10 @@ export const faqActions = {
     // delete: _delete
 };
 
-function addUpdate(faq) {
+function create(faq) {
     return dispatch => {
         dispatch(request(faq));
-        faqService.addUpdate(faq)
+        faqService.create(faq)
             .then(
                 faq => { 
                     dispatch(success(faq));

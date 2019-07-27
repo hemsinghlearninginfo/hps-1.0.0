@@ -2,7 +2,7 @@ import config from 'config';
 import { authHeader, handleResponse } from '../_helpers';
 
 export const faqService = {
-    addUpdate,
+    create,
     getAll,
     // login,
     // logout,
@@ -13,7 +13,7 @@ export const faqService = {
 };
 
 
-function addUpdate(faq) {
+function create(faq) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

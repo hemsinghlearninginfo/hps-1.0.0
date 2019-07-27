@@ -1,0 +1,5 @@
+﻿{
+    "notFound" : "%s not found.",
+    "alreadyAdded" : "%s '%s' is already added.",
+    "generic": "Please fill all required details."
+}

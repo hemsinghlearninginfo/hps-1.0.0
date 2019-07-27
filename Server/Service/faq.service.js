@@ -1,16 +1,16 @@
-﻿// const config = require('config.json');
-// const jwt = require('jsonwebtoken');
-// const bcrypt = require('bcryptjs');
+﻿const message = require('message.json');
+const validator = require('validator');
+const util = require('util');
 const db = require('_helpers/db');
 const FAQDb = db.FAQ;
 
 module.exports = {
     getAll,
     create,
+    update,
     // authenticate,
     // getById,
     // create,
-    // update,
     // delete: _delete
 };
 
@@ -19,20 +19,29 @@ async function getAll() {
 }
 
 async function create(faqParam) {
-    // validate
-    let faq = null;
-    if (faqParam.id === undefined) {
-        faq = new FAQDb(faqParam);
+    if (validator.isEmpty(faqParam.question) || validator.isEmpty(faqParam.answer)) {
+        throw new Error(message.generic);
     }
-    else {
-        faq = await FAQDb.findOne({ _id: faqParam.id });
-        faq.question = faqParam.question;
-        faq.answer = faqParam.answer;
-        faq.isActive = faqParam.isActive;
+
+    if (await FAQDb.findOne({ question: faqParam.question })) {
+        throw new Error(util.format(message.alreadyAdded, 'Question', faqParam.question));
     }
-    // save faq
+
+    let faq = new FAQDb(faqParam);
     await faq.save();
 }
+
+async function update(id, faqParam) {
+    const faq = await FAQDb.findById(id);
+    if (!faq) throw new Error(util.format(message.notfound, 'FAQ'));
+
+    if (faq.question !== faqParam.question && await FAQDb.findOne({ question: faqParam.question })) {
+        throw new Error(util.format(message.alreadyAdded, 'Question', faqParam.question));
+    }
+    Object.assign(faq, faqParam);
+    await faq.save();
+}
+
 
 // async function authenticate({ username, password }) {
 //     const user = await User.findOne({ username });
