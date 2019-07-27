@@ -22,17 +22,19 @@ class FAQForm extends Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        if (nextProps.faqObject != null && nextProps.faqObject._id !== null) {
+        if (nextProps.faqObject != null && nextProps.faqObject._id !== null && nextProps.action === 'Edit') {
             this.setState({
                 id: nextProps.faqObject._id,
                 question: nextProps.faqObject.question,
                 answer: nextProps.faqObject.answer,
-                isActive: nextProps.faqObject.isActive
+                isActive: nextProps.faqObject.isActive,
+                submitted: false,
+                isLoading: false
             });
         }
-        // else {
-        //     this.setState({ id: null, question: '', answer: '', isActive: true });
-        // }
+        else if (nextProps.action === 'Add') {
+            this.setState({ id: null, question: '', answer: '', isActive: true, submitted: false, isLoading: false });
+        }
         this.closeModal(nextProps);
     }
 
@@ -74,7 +76,7 @@ class FAQForm extends Component {
             if (id === undefined) {
                 dispatch(faqActions.create({ question, answer, isActive }));
             }
-            else{
+            else {
                 dispatch(faqActions.update({ id, question, answer, isActive }));
             }
         }
@@ -82,6 +84,7 @@ class FAQForm extends Component {
 
     render() {
         const { question, answer, isActive, submitted, isLoading } = this.state;
+        debugger;
         return (
             <>
                 {isLoading && <Loading />}

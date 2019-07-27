@@ -13,14 +13,13 @@ class FAQPage extends React.Component {
         super(props);
         this.state = {
             role: null,
-            faqObject: null
+            faqObject: null,
+            action: 'Add',
         }
         this.faqEditId = this.faqEditId.bind(this);
         this.addNewFAQ = this.addNewFAQ.bind(this);
 
         this.fetchFAQs = this.fetchFAQs.bind(this);
-        this.saveAndUpdate = this.saveAndUpdate.bind(this);
-
     }
 
     componentDidMount() {
@@ -49,28 +48,15 @@ class FAQPage extends React.Component {
                         question: faq[0].question,
                         answer: faq[0].answer,
                         isActive: faq[0].isActive
-                    }
+                    },
+                    action: 'Edit'
                 });
             }
         }
     }
 
     addNewFAQ() {
-        this.setState({ faqObject: null });
-    }
-
-    saveAndUpdate(faq) {
-        const { question, answer, isActive } = faq;
-        if (faq._id) {
-            console.log('update');
-        }
-        else {
-            this.props.dispatch(faqActions.addUpdate({ question, answer, isActive }))
-            if (!this.props.faqs.error) {
-                this.fetchFAQs();
-                return true;
-            }
-        }
+        this.setState({ faqObject: null, action: 'Add' });
     }
 
     render() {
@@ -85,7 +71,7 @@ class FAQPage extends React.Component {
                             && (<>
                                 <ModalPopUpButton action={this.addNewFAQ}>Add FAQ</ModalPopUpButton>
                                 <ModalPopUp heading={this.state.faqObject === null ? "Add FAQ" : "Edit FAQ"}>
-                                    <FAQForm faqObject={this.state.faqObject} refreshList={this.fetchFAQs} />
+                                    <FAQForm faqObject={this.state.faqObject} refreshList={this.fetchFAQs} action={this.state.action} />
                                 </ModalPopUp>
                             </>)
                         }
