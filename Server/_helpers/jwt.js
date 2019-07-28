@@ -14,6 +14,7 @@ function jwt() {
             '/users/register',
             '/faqs/create',
             '/faqs',
+            '/extra/addnewsletterrequest',
         ]
     });
 }

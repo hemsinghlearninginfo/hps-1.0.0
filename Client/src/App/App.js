@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, HashRouter, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import $ from 'jquery';
 
 import { history, Role, commonMethods } from '../_helpers';
 import { userService } from '../_services';

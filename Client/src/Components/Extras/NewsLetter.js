@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { extraActions } from '../../_actions';
 import { Icon } from '../../_controls';
+import { commonMethods } from '../../_helpers';
 
 class NewsLetter extends Component {
     constructor(props) {
@@ -14,6 +15,12 @@ class NewsLetter extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        if(nextProps.extra.isExtraIsSuccess || nextProps.extra.isExtraFail){
+            commonMethods.scrollTop();
+        }
     }
 
     handleChange(e) {

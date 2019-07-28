@@ -6,13 +6,12 @@ export const extraService = {
 };
 
 
-function addNewsLetterRequest(faq) {
+function addNewsLetterRequest(emailId) {
     const requestOptions = {
         method: 'POST',
         headers: { ...authHeader(),'Content-Type': 'application/json' },
-        body: JSON.stringify(faq)
+        body: JSON.stringify(emailId)
     };
-    debugger;
-    //return fetch(`${config.apiUrl}/faqs/create`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/extra/addnewsletterrequest`, requestOptions).then(handleResponse);
 }
 
