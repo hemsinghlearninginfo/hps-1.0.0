@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { history, Role, commonMethods } from '../../_helpers';
 import { userService } from '../../_services';
-import { Logo, Icon } from '../../_controls/index';
+import { Logo, Icon, Authorise } from '../../_controls';
 
 export class Header extends Component {
     constructor(props) {
@@ -50,16 +50,16 @@ export class Header extends Component {
                                 <a href="#" className="dropdown-item">Drafts</a>
                             </div>
                         </div>
-                        {(role === Role.SuperAdmin || role === Role.Admin || role === Role.Master) &&
-                            (<div className="nav-item dropdown">
+                        <Authorise to={[Role.SuperAdmin, Role.Admin, Role.Master]}>
+                            <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Configurations</a>
                                 <div className="dropdown-menu">
                                     <a href="#" className="dropdown-item">Inbox</a>
                                     <a href="#" className="dropdown-item">Sent</a>
                                     <a href="#" className="dropdown-item">Drafts</a>
                                 </div>
-                            </div>)
-                        }
+                            </div>
+                        </Authorise>
                     </div>
                     {/* <form className="form-inline">
                         <div className="input-group">

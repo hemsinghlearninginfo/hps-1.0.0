@@ -5,3 +5,4 @@ export * from './Loading';
 export * from './ModalPopUp';
 export * from './ModalPopUpButon';
 export * from './Icon';
+export * from './Authorise';

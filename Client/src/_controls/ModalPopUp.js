@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-
 class ModalPopUp extends Component {
     render() {
-        //const { params, modalAlert } = this.props;
         return (
             <>
                 <div className="modal fade" id="modalPopUp" tabIndex="-1" role="dialog"
