@@ -2,7 +2,7 @@ import { Header, Fotter } from './Shared/index';
 import { FAQPage } from './FAQ'; 
 import { Error404 } from './Error'; 
 
-import NewsLetter  from './Extras/NewsLetter';
+import { NewsLetter }  from './Extras/NewsLetter';
 
 import {Notifications} from './Shared';
 

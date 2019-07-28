@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-//import { extrasActions } from '../../_actions';
+import { connect } from 'react-redux';
+
+import { extraActions } from '../../_actions';
 import { Icon } from '../../_controls';
 
-export default class NewsLetter extends Component {
+class NewsLetter extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,7 +16,6 @@ export default class NewsLetter extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
     handleChange(e) {
         const { name, value } = e.target;
         this.setState({ [name]: value });
@@ -22,11 +23,12 @@ export default class NewsLetter extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        // const {  emailId } = this.state;
-        // if (question ) {
-        //     const { dispatch } = this.props;
-        //     dispatch(extrasActions.createNewLetter({ emailId }));
-        // }
+        const { emailId } = this.state;
+        this.setState({ submitted: true });
+        if (emailId) {
+            const { dispatch } = this.props;
+            dispatch(extraActions.addNewsLetterRequest({ emailId }));
+        }
     }
 
     render() {
@@ -52,13 +54,12 @@ export default class NewsLetter extends Component {
     }
 }
 
-// function mapStateToProps(state) {
-//     return {
-//         loggingIn,
-//         faqs
-//     };
-// }
+function mapStateToProps(state) {
+    const { extra } = state;
+    return {
+        extra
+    };
+}
 
-// const connectedNewsLetter = connect(mapStateToProps)(NewsLetter);
-// export { connectedNewsLetter as NewsLetter }; 
-//export default NewsLetter;
+const connectedNewsLetter = connect(mapStateToProps)(NewsLetter);
+export { connectedNewsLetter as NewsLetter }; 
