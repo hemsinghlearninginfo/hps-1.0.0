@@ -6,7 +6,9 @@ class Authorise extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isUserRolesAllowed: false
+            isUserRolesAllowed: false,
+            isLoggedIn: false,
+            isNonLoggedIn: false,
         };
         this.refreshAuth = this.refreshAuth.bind(this);
     }
@@ -20,21 +22,22 @@ class Authorise extends Component {
     }
 
     refreshAuth(param) {
-        if (param.userroles) {
-            this.setState({ isUserRolesAllowed: false });
+        if (param.userroles || param.isLoggedIn || param.isNonLoggedIn) {
+            this.setState({ isUserRolesAllowed: false, isLoggedIn: false, isNonLoggedIn: false });
             const user = commonMethods.getCurrentUser();
-            if (user.currentUser !== null) {
-                if (param.userroles && user.role) {
-                    this.setState({ isUserRolesAllowed : param.userroles.includes(user.role)});
-                }
-            }
+            this.setState({
+                isUserRolesAllowed: (param.userroles != undefined && user.role !== null && param.userroles.includes(user.role)),
+                isLoggedIn: (param.isLoggedIn && user.currentuser !== null),
+                isNonLoggedIn: (param.isNonLoggedIn && user.currentUser === null)
+            });
         }
     }
 
     render() {
+        const { isUserRolesAllowed, isLoggedIn, isNonLoggedIn } = this.state;
         return (
             <>
-                {this.state.isUserRolesAllowed && this.props.children}
+                {(isUserRolesAllowed || isLoggedIn || isNonLoggedIn) && this.props.children}
             </>
         );
     }

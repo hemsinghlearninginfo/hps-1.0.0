@@ -11,9 +11,18 @@ export class Header extends Component {
             currentUser: null,
             role: null,
         };
+        this.logout = this.logout.bind(this);
+        this.setUser = this.setUser.bind(this);
     }
 
     componentDidMount() {
+        this.setUser();
+    }
+    componentWillReceiveProps(nextprops){
+        this.setUser();
+    }
+
+    setUser(){
         const user = commonMethods.getCurrentUser();
         if (user !== null) {
             this.setState({
@@ -24,12 +33,17 @@ export class Header extends Component {
     }
 
     logout() {
+        this.setState({
+            currentUser: null,
+            role: null
+        });
         userService.logout();
         history.push('/login');
+        commonMethods.scrollTop();
     }
 
     render() {
-        const { currentUser, role } = this.state;
+        const { currentUser } = this.state;
         return (
             <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top shadow-sm">
                 <Link to="/" className="navbar-brand"><Logo />HPS-Trades</Link>
@@ -70,16 +84,20 @@ export class Header extends Component {
                         </div>
                     </form> */}
                     <div className="navbar-nav">
-                        {!currentUser && <a href="/login" className="nav-item nav-link"><Icon type='login' /> Login</a>}
-                        {currentUser && <div className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown"><Icon type='loggedInUser' /> Hello {currentUser.firstName}</a>
-                            <div className="dropdown-menu dropdown-menu-right">
-                                <a href="#" className="dropdown-item"><Icon type='profile' /> Profile</a>
-                                <a href="#" className="dropdown-item"><Icon type='UserSetting' /> Settings</a>
-                                <a className="dropdown-item" onClick={this.logout}><Icon type='logout' /> Logout</a>
+                        <Authorise isNonLoggedIn={true} >
+                            <Link to="/login" className="nav-item nav-link"><Icon type='login' /> Login</Link>
+                        </Authorise>
+                        <Authorise isLoggedIn={true} >
+                            {currentUser && <div className="nav-item dropdown">
+                                <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown"><Icon type='loggedInUser' /> Hello {currentUser.firstName}</a>
+                                <div className="dropdown-menu dropdown-menu-right">
+                                    <a href="#" className="dropdown-item"><Icon type='profile' /> Profile</a>
+                                    <a href="#" className="dropdown-item"><Icon type='UserSetting' /> Settings</a>
+                                    <a className="dropdown-item" onClick={this.logout}><Icon type='logout' /> Logout</a>
+                                </div>
                             </div>
-                        </div>
-                        }
+                            }
+                        </Authorise>
                     </div>
                 </div>
             </nav>
