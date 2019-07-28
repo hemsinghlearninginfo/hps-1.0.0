@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { history, Role, commonMethods } from '../../_helpers';
 import { userService } from '../../_services';
-import { Logo } from '../../_controls/index';
+import { Logo, Icon } from '../../_controls/index';
 
 export class Header extends Component {
     constructor(props) {
@@ -39,7 +39,7 @@ export class Header extends Component {
 
                 <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div className="navbar-nav">
-                        <Link to="/faq" className="nav-item nav-link active">FAQ</Link>
+                        <Link to="/faq" className="nav-item nav-link active"><Icon type='faq' /> FAQ</Link>
                         {/* <a href="#" className="nav-item nav-link active">Home</a>
                         <a href="#" className="nav-item nav-link">Profile</a> */}
                         <div className="nav-item dropdown">
@@ -70,13 +70,13 @@ export class Header extends Component {
                         </div>
                     </form> */}
                     <div className="navbar-nav">
-                        {!currentUser && <a href="/login" className="nav-item nav-link">Login</a>}
+                        {!currentUser && <a href="/login" className="nav-item nav-link"><Icon type='login' /> Login</a>}
                         {currentUser && <div className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Hello {currentUser.firstName}</a>
+                            <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown"><Icon type='loggedInUser' /> Hello {currentUser.firstName}</a>
                             <div className="dropdown-menu dropdown-menu-right">
-                                <a href="#" className="dropdown-item">Profile</a>
-                                <a href="#" className="dropdown-item">Settings</a>
-                                <a className="dropdown-item" onClick={this.logout}>Logout</a>
+                                <a href="#" className="dropdown-item"><Icon type='profile' /> Profile</a>
+                                <a href="#" className="dropdown-item"><Icon type='UserSetting' /> Settings</a>
+                                <a className="dropdown-item" onClick={this.logout}><Icon type='logout' /> Logout</a>
                             </div>
                         </div>
                         }

@@ -165,3 +165,28 @@ code {
 .notifications-wrapper .alert-success{
   background-color: #d4edda63 !important;
 }
+
+.btn-sm svg{
+  vertical-align: initial !important;
+  height: 13px !important;
+}
+
+.dropdown-item  svg{
+  vertical-align: middle !important;
+}
+
+svg{
+  vertical-align: initial !important;
+}
+
+.news-letter{
+  padding-left: 140px;
+}
+
+.news-letter .help-block{
+  padding-left: 20px;
+}
+
+.dropdown-menu .dropdown-item{
+  cursor: pointer;
+}

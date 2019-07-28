@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Role, commonMethods } from '../../_helpers';
 import { ModalPopUpButton } from '../../_controls/index'
+import { Icon } from '../../_controls';
 
 class ListFAQ extends Component {
 
@@ -63,7 +64,7 @@ class ListFAQ extends Component {
                                                 <div className="col-sm-1 text-right">
                                                     {role !== null && (role === Role.SuperAdmin || role === Role.Admin)
                                                         &&
-                                                        <ModalPopUpButton action={() => this.props.faqEditId(faq.id)}>Edit</ModalPopUpButton>
+                                                        <ModalPopUpButton action={() => this.props.faqEditId(faq.id)}><Icon type='Edit' /> Edit</ModalPopUpButton>
                                                     }
                                                 </div>
                                             </div>

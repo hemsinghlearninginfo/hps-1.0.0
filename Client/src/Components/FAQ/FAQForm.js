@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Loading } from '../../_controls';
 import { commonMethods } from '../../_helpers';
 import { faqActions } from '../../_actions';
+import { Icon } from '../../_controls';
 
 class FAQForm extends Component {
     constructor(props) {
@@ -109,13 +110,13 @@ class FAQForm extends Component {
                         <div className="form-check">
                             <label className="form-check-label" htmlFor="isActive">
                                 <input type="checkbox" className="form-check-input" name="isActive"
-                                    checked={isActive ? 1 : 0}  onChange={this.handleChange} />
+                                    checked={isActive ? 1 : 0} onChange={this.handleChange} />
                                 is Active</label>
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="submit" className="btn btn-primary btn-sm">Save FAQ</button>
-                        <button id="closeAddFaq" type="button" className="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                        <button type="submit" className="btn btn-primary btn-sm"><Icon type='save' /> Save FAQ</button>
+                        <button id="closeAddFaq" type="button" className="btn btn-secondary btn-sm" data-dismiss="modal"><Icon type='close' /> Close</button>
                     </div>
                 </form>
             </>
