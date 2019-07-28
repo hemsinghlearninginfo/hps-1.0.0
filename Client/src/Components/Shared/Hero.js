@@ -1,9 +1,6 @@
 import React from 'react';
 import Background from '../../Resources/images/hero.png';
-let bgStyle = {
-    backgroundImage: `url(${Background})`
-};
-const Hero = (props) => (
+const Hero = () => (
     <div>
         <img src={Background} className="hero-image" />
         <div className="hero-text">
