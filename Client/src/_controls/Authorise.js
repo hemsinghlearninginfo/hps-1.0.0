@@ -6,20 +6,27 @@ class Authorise extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isVisible: false
+            isUserRolesAllowed: false
         };
+        this.refreshAuth = this.refreshAuth.bind(this);
     }
 
     componentDidMount() {
-        const user = commonMethods.getCurrentUser();
-        if (user !== null) {
-            this.setState({
-                currentUser: user.currentUser,
-                role: user.role
-            });
-            if (this.props.to && user.role) {
-                const isVisible = this.props.to.includes(user.role);
-                this.setState({ isVisible });
+        this.refreshAuth(this.props);
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        this.refreshAuth(nextProps);
+    }
+
+    refreshAuth(param) {
+        if (param.userroles) {
+            this.setState({ isUserRolesAllowed: false });
+            const user = commonMethods.getCurrentUser();
+            if (user.currentUser !== null) {
+                if (param.userroles && user.role) {
+                    this.setState({ isUserRolesAllowed : param.userroles.includes(user.role)});
+                }
             }
         }
     }
@@ -27,7 +34,7 @@ class Authorise extends Component {
     render() {
         return (
             <>
-                {this.state.isVisible && this.props.children}
+                {this.state.isUserRolesAllowed && this.props.children}
             </>
         );
     }

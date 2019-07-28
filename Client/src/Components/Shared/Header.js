@@ -50,7 +50,7 @@ export class Header extends Component {
                                 <a href="#" className="dropdown-item">Drafts</a>
                             </div>
                         </div>
-                        <Authorise to={[Role.SuperAdmin, Role.Admin, Role.Master]}>
+                        <Authorise userroles={[Role.SuperAdmin, Role.Admin, Role.Master]}>
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Configurations</a>
                                 <div className="dropdown-menu">
