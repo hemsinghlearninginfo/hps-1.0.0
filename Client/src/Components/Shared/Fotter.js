@@ -5,11 +5,10 @@ import MyComponent from '../index';
 export class Fotter extends React.Component {
     render() {
         return (
-            <footer className="footer page-footer font-small bg-light footer-border">
+            <footer className="footer page-footer font-small bg-dark text-white footer-border">
                 <div className="container">
                     <div className="row">
-                        <div className="col-sm text-center"></div>
-                        <div className="col-sm">
+                        <div className="col">
                             <MyComponent.NewsLetter />
                         </div>
                     </div>

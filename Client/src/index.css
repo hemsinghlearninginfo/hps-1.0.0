@@ -23,6 +23,15 @@ code {
   border-left: 2px solid red !important;
 }
 
+input.required-body{
+border-color: red;
+}
+
+.heart{
+color: red;
+font-size: large;
+}
+
 .footer-border {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -183,10 +192,9 @@ svg {
   vertical-align: initial !important;
 }
 
-.news-letter {
-  padding-left: 140px;
+.news-letter{
+  margin: 20px;
 }
-
 .news-letter .help-block {
   padding-left: 20px;
 }

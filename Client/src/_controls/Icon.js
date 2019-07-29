@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     FaRegEdit, FaPlusSquare, FaSave, FaWindowClose, FaEnvelope, FaUserTie,
-    FaSignOutAlt, FaSignInAlt, FaAddressCard, FaUserCog, FaQuestion
+    FaSignOutAlt, FaSignInAlt, FaAddressCard, FaUserCog, FaQuestion, FaHeart
 } from 'react-icons/fa';
 export const Icon = (props) => (
     <>{getIcon(props.type)}</>
@@ -31,6 +31,8 @@ function getIcon(type) {
             return <FaUserCog />
         case 'FAQ':
             return <FaQuestion />
+        case "HEART":
+            return <FaHeart />
         default:
             return <></>;
     }

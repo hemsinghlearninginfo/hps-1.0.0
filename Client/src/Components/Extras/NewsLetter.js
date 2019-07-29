@@ -18,7 +18,7 @@ class NewsLetter extends Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        if(nextProps.extra.isExtraIsSuccess || nextProps.extra.isExtraFail){
+        if (nextProps.extra.isExtraIsSuccess || nextProps.extra.isExtraFail) {
             commonMethods.scrollTop();
         }
     }
@@ -42,19 +42,23 @@ class NewsLetter extends Component {
         const { emailId, submitted } = this.state;
         return (
             <>
-                <div className="news-letter">
-                    <form name="form" className="form-inline" onSubmit={this.handleSubmit}>
-                        <div className="form-group mx-sm-3 mb-2">
-                            <label htmlFor="emailId" className="sr-only">Password</label>
-                            <input type="email" className="form-control" name="emailId"
-                                placeholder="Email Id for updates"
-                                value={emailId} onChange={this.handleChange} />
+                <div className="container">
+                    <div className="row justify-content-md-center">
+                        <div className="col-md-auto">
+                            <div className="news-letter">
+                                <form name="form" className="form-inline" onSubmit={this.handleSubmit}>
+                                    <div className="form-group mx-sm-3">
+                                        <label className="mx-sm-3"><strong>STAY CONNECTED</strong></label>
+                                        <input type="email" className={"form-control" + (!emailId && submitted ? " required-body" : "")} name="emailId"
+                                            placeholder="Email address *"
+                                            value={emailId} onChange={this.handleChange} />
+                                    </div>
+                                    <button type="submit" className="btn btn-primary mb-2"><Icon type='email' /> Subscribe</button>
+                                </form>
+                                <div className="text-center font-italic small">Subscribe to the mailing list to keep up with new features &amp; updates from us. <br />Don't Worry... we don't like spam either <span className="heart"><Icon type="heart" /></span></div>
+                            </div>
                         </div>
-                        <button type="submit" className="btn btn-primary mb-2"><Icon type='email' /> Submit</button>
-                    </form>
-                    {!emailId && submitted &&
-                        <div className="help-block">EmailId is required.</div>
-                    }
+                    </div>
                 </div>
             </>
         );
