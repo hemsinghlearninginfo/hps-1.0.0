@@ -88,7 +88,7 @@ code {
   padding: 5px;
 }
 
-.modal-alert-padding{
+.modal-alert-padding {
   margin-bottom: 0rem !important;
 }
 
@@ -146,52 +146,57 @@ code {
   margin: 0px !important;
 }
 
-.notifications-wrapper{
+.notifications-wrapper {
   position: fixed;
-    top: 63px;
-    z-index: 10001;
-    right: 1px;
-    width: 350px;
+  top: 63px;
+  z-index: 10001;
+  right: 1px;
+  width: 350px;
 }
-.notifications-wrapper .alert-warning{
+
+.notifications-wrapper .alert-warning {
   background-color: #fff3cd63 !important;
-} 
- .notifications-wrapper .alert-danger{
+}
+
+.notifications-wrapper .alert-danger {
   background-color: #f8d7da63 !important;
 }
-.notifications-wrapper .alert-info{
+
+.notifications-wrapper .alert-info {
   background-color: #d1ecf163 !important;
 }
-.notifications-wrapper .alert-success{
+
+.notifications-wrapper .alert-success {
   background-color: #d4edda63 !important;
 }
 
-.btn-sm svg{
+.btn-sm svg {
   vertical-align: initial !important;
   height: 13px !important;
 }
 
-.dropdown-item  svg{
+.dropdown-item svg {
   vertical-align: middle !important;
 }
 
-svg{
+svg {
   vertical-align: initial !important;
 }
 
-.news-letter{
+.news-letter {
   padding-left: 140px;
 }
 
-.news-letter .help-block{
+.news-letter .help-block {
   padding-left: 20px;
 }
 
-.dropdown-menu .dropdown-item{
+.dropdown-menu .dropdown-item {
   cursor: pointer;
 }
 
 /* The hero image */
+
 .hero-image {
   background-position: center;
   background-repeat: no-repeat;
@@ -204,12 +209,13 @@ svg{
 }
 
 /* Place text in the middle of the image */
+
 .hero-text {
   text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #2a465a;
-    padding-top: 162px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #2a465a;
+  padding-top: 162px;
 }
