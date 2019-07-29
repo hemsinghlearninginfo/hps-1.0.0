@@ -196,13 +196,12 @@ svg {
 }
 
 /* The hero image */
-
 .hero-image {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  opacity: 0.2;
+  opacity: 0.15;
   filter: alpha(opacity=50);
   height: auto;
   width: 100%;
@@ -213,9 +212,8 @@ svg {
 .hero-text {
   text-align: center;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #2a465a;
-  padding-top: 162px;
 }
