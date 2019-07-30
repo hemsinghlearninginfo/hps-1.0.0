@@ -1,1 +1,1 @@
-export * from './AllMasters';
+export * from './SlideMasters';

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { Icon } from '../../_controls';
 import './master.css';
 
-class AllMasters extends Component {
+class SlideMasters extends Component {
     constructor(props) {
         super(props);
     }
@@ -17,7 +15,7 @@ class AllMasters extends Component {
                         <div className="row heading heading-icon">
                             <h2>Our Top Masters</h2>
                         </div>
-                        <ul className="row">
+                        <ul className="row master-items">
                             <li className="col-12 col-md-6 col-lg-3">
                                 <div className="cnt-block equal-hight" >
                                     <figure><img src="http://www.webcoderskull.com/img/team4.png" className="img-responsive" alt="" /></figure>
@@ -82,5 +80,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedAllMasters = connect(mapStateToProps)(AllMasters);
-export { connectedAllMasters as AllMasters }; 
+const connectedSlideMasters = connect(mapStateToProps)(SlideMasters);
+export { connectedSlideMasters as SlideMasters }; 

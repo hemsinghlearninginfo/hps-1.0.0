@@ -5,7 +5,8 @@ import { Error404 } from './Error';
 import { NewsLetter } from './Extras/NewsLetter';
 
 import { Notifications, Expire } from './Shared';
-import { AllMasters } from './Master';
+import { SlideMasters } from './Master';
+import { SlideWriteUps } from './WriteUp';
 
 export default class MyComponent {
     static Header = Header;
@@ -20,5 +21,6 @@ export default class MyComponent {
     static Notifications = Notifications;
     static Expire = Expire;
 
-    static AllMasters = AllMasters;
+    static SlideMasters = SlideMasters;
+    static SlideWriteUps = SlideWriteUps;
 }

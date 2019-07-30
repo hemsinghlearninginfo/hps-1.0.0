@@ -21,7 +21,8 @@ class HomePage extends React.Component {
         return (
             <>
                 <Hero />
-                <MyComponents.AllMasters />
+                <MyComponents.SlideMasters />
+                <MyComponents.SlideWriteUps />
                 <div className="col-md-6 col-md-offset-3">
                     <h1>Hi {user.firstName}!</h1>
                     <p>You're logged in with React!!</p>
