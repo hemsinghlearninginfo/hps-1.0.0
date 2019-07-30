@@ -38,6 +38,10 @@ class App extends Component {
         commonMethods.globalLoader(false);
     }
 
+    componentWillReceiveProps(){
+        //commonMethods.hideAlert('globalAlert');
+    }
+
     logout() {
         userService.logout();
         history.push('/login');
@@ -52,7 +56,9 @@ class App extends Component {
                         <MyComponents.Notifications />
                         <MyComponents.Header />
                         {alert.message &&
-                            <div id="globalAlert" className={`alert ${alert.type}`}>{alert.message}</div>
+                            <div className="global-alert">
+                                <div id="globalAlert" className={`alert ${alert.type}`}>{alert.message}</div>
+                            </div>
                         }
                         <Switch>
                             <PrivateRoute exact path="/" component={HomePage} />

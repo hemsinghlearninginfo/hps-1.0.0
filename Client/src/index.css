@@ -225,3 +225,10 @@ svg {
   transform: translate(-50%, -50%);
   color: #2a465a;
 }
+
+.global-alert{
+  position: absolute;
+    z-index: 1;
+    width: 100%;
+    padding: 0px 1em;
+}
