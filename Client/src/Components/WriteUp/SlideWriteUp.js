@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './writeup.css';
+
 
 class SlideWriteUps extends Component {
     constructor(props) {
@@ -10,73 +10,38 @@ class SlideWriteUps extends Component {
     render() {
         return (
             <>
-                <section className="container p-t-3">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <h2>Bootstrap 4 Card Slider</h2>
+                <section className="shadow-sm p-3 bg-white rounded slides write-up padding-lg">
+                    <div className="container text-center">
+                        <div className="row heading heading-icon">
+                            <h2>User Views</h2>
                         </div>
-                    </div>
-                </section>
-                <section className="carousel slide" data-ride="carousel" id="postsCarousel">
-                    <div className="container carousel-inner">
-                        <div className="row row-equal carousel-item active">
-                            <div className="col-md-4">
-                                <div className="card">
-                                    <div className="card-block">
-                                        <h2>
-                                            <a href="#">Why Stuff Happens Every Year.</a>
-                                        </h2>
-                                    </div>
+                        <ul className="row master-items">
+                            <li className="col-12 col-md-6 col-lg-3">
+                                <div className="cnt-block equal-hight" >
+                                    <h3>Web coder skull</h3>
+                                    <p>Freelance Web Developer</p>
                                 </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="card">
-                                    <div className="card-block">
-                                        <h2>
-                                            <a href="#">How to Make Every Line Count.</a>
-                                        </h2>
-                                    </div>
+                            </li>
+                            <li className="col-12 col-md-6 col-lg-3">
+                                <div className="cnt-block equal-hight" >
+                                    <h3>Kappua</h3>
+                                    <p>Freelance Web Developer</p>
                                 </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="card">
-                                    <div className="card-block">
-                                        <h2>
-                                            <a href="#">How to Make Every Line Count.</a>
-                                        </h2>
-                                    </div>
+                            </li>
+                            <li className="col-12 col-md-6 col-lg-3">
+                                <div className="cnt-block equal-hight" >
+                                    <h3>Manish</h3>
+                                    <p>Freelance Web Developer</p>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="row row-equal carousel-item">
-                            <div className="col-md-4">
-                                <div className="card">
-                                    <div className="card-block">
-                                        <h2>
-                                            <a href="#">Why Stuff Happens Every Year.</a>
-                                        </h2>
-                                    </div>
+                            </li>
+                            <li className="col-12 col-md-6 col-lg-3">
+                                <div className="cnt-block equal-hight" >
+                                    <h3>Atul</h3>
+                                    <p>Freelance Web Developer</p>
                                 </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="card">
-                                    <div className="card-block">
-                                        <h2>
-                                            <a href="#">Why Stuff Happens Every Year.</a>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="card">
-                                    <div className="card-block">
-                                        <h2>
-                                            <a href="#">Why Stuff Happens Every Year.</a>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
+                        <button className="btn btn-info">More Feedback...</button>
                     </div>
                 </section>
             </>

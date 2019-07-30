@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './master.css';
 
 class SlideMasters extends Component {
     constructor(props) {
@@ -10,7 +9,7 @@ class SlideMasters extends Component {
     render() {
         return (
             <>
-                <section className="shadow-sm p-3 mb-5 bg-white rounded our-webcoderskull padding-lg">
+                <section className="shadow-sm p-3 bg-white rounded slides out-master padding-lg">
                     <div className="container text-center">
                         <div className="row heading heading-icon">
                             <h2>Our Top Masters</h2>
