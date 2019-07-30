@@ -1,11 +1,19 @@
 import React from 'react';
-import Background from '../../Resources/images/hero.png';
+import './hero.css';
 const Hero = () => (
-    <div>
-        <img src={Background} className="hero-image" />
-        <div className="hero-text">
-            <h1>We have Master's and More...</h1>
-            <button className="btn btn-success">Try me</button>
+    <div className="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+        <div className="overlay"></div>
+        <div className="carousel-inner">
+            <div className="item slides active">
+                <div className="slide-1"></div>
+                <div className="hero">
+                    <hgroup>
+                        <h1>We are Traders</h1>
+                        <h3>Get start your next awesome tradding</h3>
+                    </hgroup>
+                    <button className="btn btn-hero btn-lg" role="button">Try</button>
+                </div>
+            </div>
         </div>
     </div>
 );

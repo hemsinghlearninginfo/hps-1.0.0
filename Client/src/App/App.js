@@ -13,8 +13,6 @@ import { FAQPage } from '../Components/FAQ';
 import MyComponents from '../Components/index';
 import Wrapper from '../Components/Shared/Wrapper';
 
-import $ from 'jquery';
-
 class App extends Component {
     constructor(props) {
         super(props);

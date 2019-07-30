@@ -1,10 +1,11 @@
 import { Header, Fotter } from './Shared/index';
-import { FAQPage } from './FAQ'; 
-import { Error404 } from './Error'; 
+import { FAQPage } from './FAQ';
+import { Error404 } from './Error';
 
-import { NewsLetter }  from './Extras/NewsLetter';
+import { NewsLetter } from './Extras/NewsLetter';
 
-import {Notifications, Expire} from './Shared';
+import { Notifications, Expire } from './Shared';
+import { AllMasters } from './Master';
 
 export default class MyComponent {
     static Header = Header;
@@ -18,4 +19,6 @@ export default class MyComponent {
 
     static Notifications = Notifications;
     static Expire = Expire;
+
+    static AllMasters = AllMasters;
 }
