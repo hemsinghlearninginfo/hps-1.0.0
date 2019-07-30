@@ -8,7 +8,7 @@ export const commonMethods = {
     scrollTop,
     callClick,
     globalLoader,
-    getMessage
+    getMessage,
 };
 
 function getCurrentUser() {
@@ -44,7 +44,7 @@ function globalLoader(isVisible) {
     }
 }
 
-function getMessage(type, displayMessage){
+function getMessage(type, displayMessage) {
     return {
         type,
         displayMessage

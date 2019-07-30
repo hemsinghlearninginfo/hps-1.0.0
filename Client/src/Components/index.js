@@ -4,7 +4,7 @@ import { Error404 } from './Error';
 
 import { NewsLetter }  from './Extras/NewsLetter';
 
-import {Notifications} from './Shared';
+import {Notifications, Expire} from './Shared';
 
 export default class MyComponent {
     static Header = Header;
@@ -17,4 +17,5 @@ export default class MyComponent {
     static NewsLetter = NewsLetter;
 
     static Notifications = Notifications;
+    static Expire = Expire;
 }

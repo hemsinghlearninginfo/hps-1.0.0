@@ -13,16 +13,16 @@ import { FAQPage } from '../Components/FAQ';
 import MyComponents from '../Components/index';
 import Wrapper from '../Components/Shared/Wrapper';
 
+import $ from 'jquery';
+
 class App extends Component {
     constructor(props) {
         super(props);
-
         const { dispatch } = this.props;
         history.listen((location, action) => {
             // clear alert on location change
             dispatch(alertActions.clear());
         });
-
         this.state = {
             currentUser: null,
             isAdmin: false,
@@ -38,15 +38,6 @@ class App extends Component {
         commonMethods.globalLoader(false);
     }
 
-    componentWillReceiveProps(){
-        //commonMethods.hideAlert('globalAlert');
-    }
-
-    logout() {
-        userService.logout();
-        history.push('/login');
-    }
-
     render() {
         const { alert } = this.props;
         return (
@@ -56,9 +47,9 @@ class App extends Component {
                         <MyComponents.Notifications />
                         <MyComponents.Header />
                         {alert.message &&
-                            <div className="global-alert">
-                                <div id="globalAlert" className={`alert ${alert.type}`}>{alert.message}</div>
-                            </div>
+                            (<MyComponents.Expire delay={8}><div id="globalAlert" className="global-alert row justify-content-center align-items-center">
+                                <div className={`alert ${alert.type}`}>{alert.message}</div>
+                            </div></MyComponents.Expire>)
                         }
                         <Switch>
                             <PrivateRoute exact path="/" component={HomePage} />

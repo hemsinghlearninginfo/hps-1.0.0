@@ -23,13 +23,13 @@ code {
   border-left: 2px solid red !important;
 }
 
-input.required-body{
-border-color: red;
+input.required-body {
+  border-color: red;
 }
 
-.heart{
-color: red;
-font-size: large;
+.heart {
+  color: red;
+  font-size: large;
 }
 
 .footer-border {
@@ -192,9 +192,10 @@ svg {
   vertical-align: initial !important;
 }
 
-.news-letter{
+.news-letter {
   margin: 20px;
 }
+
 .news-letter .help-block {
   padding-left: 20px;
 }
@@ -204,6 +205,7 @@ svg {
 }
 
 /* The hero image */
+
 .hero-image {
   background-position: center;
   background-repeat: no-repeat;
@@ -226,9 +228,10 @@ svg {
   color: #2a465a;
 }
 
-.global-alert{
+.global-alert {
   position: absolute;
-    z-index: 1;
-    width: 100%;
-    padding: 0px 1em;
+  z-index: 1499;
+  width: 100%;
+  padding: 0px 10em;
+  top: 50px;
 }
