@@ -5,3 +5,4 @@ export * from './Wrapper';
 export * from './Hero';
 export * from './Expire';
 export * from './Notifications';
+export * from './GoUp';

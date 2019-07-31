@@ -9,6 +9,7 @@ export const commonMethods = {
     callClick,
     globalLoader,
     getMessage,
+    gotop,
 };
 
 function getCurrentUser() {
@@ -49,4 +50,27 @@ function getMessage(type, displayMessage) {
         type,
         displayMessage
     }
+}
+
+
+function gotop() {
+    $(document).ready(function () {
+
+        var elm_class = '.go-up'; // Adjust this accordingly. 
+
+        //Check to see if the window is top if not then display button
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 300) { // 300px from top
+                $(elm_class).fadeIn();
+            } else {
+                $(elm_class).fadeOut();
+            }
+        });
+
+        //Click event to scroll to top
+        $(elm_class).click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+    });
 }

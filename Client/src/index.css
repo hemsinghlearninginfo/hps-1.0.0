@@ -422,7 +422,7 @@ ul {
   font-size: 30px !important;
 }
 
-.section-title h2::before,.pagetemplate-title h2::before {
+.section-title h2::before, .pagetemplate-title h2::before {
   content: "";
   position: absolute;
   left: 0;
@@ -432,7 +432,7 @@ ul {
   bottom: -25px;
 }
 
-.pagetemplate-title h2::before{
+.pagetemplate-title h2::before {
   bottom: -15px !important;
 }
 
@@ -441,4 +441,16 @@ ul {
   font-weight: normal;
   line-height: 26px;
   color: #7e7e7e;
+}
+
+.go-up {
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+  font-size: 50px;
+  cursor: pointer;
+  color: #089bf5;
+}
+.go-up:hover{
+  color: #5ed7e4;
 }

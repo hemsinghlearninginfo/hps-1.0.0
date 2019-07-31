@@ -34,6 +34,7 @@ class App extends Component {
             isAdmin: x && x.role === Role.Admin
         }));
         commonMethods.globalLoader(false);
+        commonMethods.gotop();
     }
 
     render() {
@@ -58,6 +59,7 @@ class App extends Component {
                             <Route path='/404' component={MyComponents.Error404} />
                             <Redirect path='*' to='/404' />
                         </Switch>
+                        <MyComponents.GoUp />
                         <MyComponents.Fotter />
                     </Router>
                 </Wrapper >
