@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { PageTemplate, ModalPopUp, ModalPopUpButton, Loading } from '../../_controls/index';
+import { PageTemplate, ModalPopUp, ModalPopUpButton, Loading, Authorise } from '../../_controls';
 import { FAQForm } from './FAQForm';
 import { ListFAQ } from './ListFAQ';
 import { Role, commonMethods } from '../../_helpers';
 import { faqActions } from '../../_actions';
-import {Icon} from '../../_controls';
+import { Icon } from '../../_controls';
 
 class FAQPage extends React.Component {
 
@@ -63,23 +63,23 @@ class FAQPage extends React.Component {
     render() {
         return (
             <PageTemplate heading="FAQs">
-                {!this.props && <Loading />}
-                <div className="col-lg-12">
-                    <div className="form-group list-textBox">
-                        {
-                            (this.state.role !== null)
-                            && (this.state.role === Role.SuperAdmin || this.state.role === Role.Admin)
-                            && (<>
+                <div className="row">
+                    <div className="col-lg-12 text-right p">
+                        <div className="form-group list-textBox add-Faq-Button">
+                            <Authorise userroles={[Role.SuperAdmin, Role.Admin]}>
                                 <ModalPopUpButton action={this.addNewFAQ}><Icon type='add' /> Add FAQ</ModalPopUpButton>
                                 <ModalPopUp heading={this.state.faqObject === null ? "Add FAQ" : "Edit FAQ"}>
                                     <FAQForm faqObject={this.state.faqObject} refreshList={this.fetchFAQs} action={this.state.action} />
                                 </ModalPopUp>
-                            </>)
-                        }
+                            </Authorise>
+                        </div>
                     </div>
                 </div>
-                <br />
-                <ListFAQ role={this.state.role} faqs={this.props.faqs} faqEditId={this.faqEditId} />
+                <div className="row">
+                    <div className="col-lg-12">
+                        <ListFAQ role={this.state.role} faqs={this.props.faqs} faqEditId={this.faqEditId} />
+                    </div>
+                </div>
             </PageTemplate>
         );
     }
@@ -95,6 +95,6 @@ function mapStateToProps(state) {
 }
 
 const connectedFAQPage = connect(mapStateToProps)(FAQPage);
-export { connectedFAQPage as FAQPage }; 
+export { connectedFAQPage as FAQPage };
 
 //export * from './FAQPage';

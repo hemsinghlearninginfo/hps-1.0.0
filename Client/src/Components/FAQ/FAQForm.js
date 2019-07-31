@@ -89,7 +89,7 @@ class FAQForm extends Component {
             <>
                 {isLoading && <Loading />}
                 <form name="form" onSubmit={this.handleSubmit}>
-                    <div className="modal-body">
+                    <div className="modal-body text-left">
                         <div className={'form-group' + (submitted && !question ? ' has-error' : '')}>
                             <label htmlFor="question">Question</label>
                             <input type="type" className="form-control required" name="question" placeholder="Question"
