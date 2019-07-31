@@ -38,7 +38,7 @@ class AddWriteUp extends Component {
                 <div className="text-right p-1">
                     <button type="submit" className="btn btn-primary btn-sm"><Icon type='save' /> Save</button>
                     {' '}
-                    <button id="closeConfirm" type="button" className="btn btn-secondary btn-sm" data-dismiss="modal"><Icon type='close' /> Close</button>
+                    <button type="button" className="btn btn-secondary btn-sm" onClick={() => this.setState({ isAdd: false, isError : false })}><Icon type='close' /> Close</button>
                 </div>
             </div>
         </form>)
