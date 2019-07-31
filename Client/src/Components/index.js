@@ -1,4 +1,4 @@
-import { Header, Fotter } from './Shared/index';
+import { Header, Fotter, AboutUs } from './Shared/index';
 import { FAQPage } from './FAQ';
 import { Error404 } from './Error';
 
@@ -11,6 +11,7 @@ import { SlideWriteUps } from './WriteUp';
 export default class MyComponent {
     static Header = Header;
     static Fotter = Fotter;
+    static AboutUs = AboutUs;
 
 
     static FAQPage = FAQPage;
