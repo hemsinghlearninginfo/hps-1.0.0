@@ -7,6 +7,7 @@ export const faqActions = {
     create,
     update,
     getAll,
+    delete: _delete
     // login,
     // logout,
     // register,
@@ -71,6 +72,26 @@ function getAll() {
     function failure(error) { return { type: faqConstants.GETALL_FAILURE, error } }
 }
 
+// // prefixed function name with underscore because delete is a reserved word in javascript
+function _delete(id) {
+    return dispatch => {
+        dispatch(request(id));
+
+        faqService.delete(id)
+            .then(
+                faq => {
+                    dispatch(success(id));
+                    dispatch(alertActions.success('FAQ deleted successful'));
+                },
+                error => dispatch(failure(id, error.toString()))
+            );
+    };
+
+    function request(id) { return { type: faqConstants.DELETE_REQUEST, id } }
+    function success(id) { return { type: faqConstants.DELETE_SUCCESS, id } }
+    function failure(id, error) { return { type: faqConstants.DELETE_FAILURE, id, error } }
+}
+
 // function login(username, password) {
 //     return dispatch => {
 //         dispatch(request({ username }));
@@ -99,19 +120,3 @@ function getAll() {
 // }
 
 
-// // prefixed function name with underscore because delete is a reserved word in javascript
-// function _delete(id) {
-//     return dispatch => {
-//         dispatch(request(id));
-
-//         userService.delete(id)
-//             .then(
-//                 user => dispatch(success(id)),
-//                 error => dispatch(failure(id, error.toString()))
-//             );
-//     };
-
-//     function request(id) { return { type: userConstants.DELETE_REQUEST, id } }
-//     function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
-//     function failure(id, error) { return { type: userConstants.DELETE_FAILURE, id, error } }
-// }

@@ -21,6 +21,7 @@ class FAQPage extends React.Component {
         this.addNewFAQ = this.addNewFAQ.bind(this);
 
         this.fetchFAQs = this.fetchFAQs.bind(this);
+        this.faqDeleteById = this.faqDeleteById.bind(this);
     }
 
     componentDidMount() {
@@ -35,6 +36,11 @@ class FAQPage extends React.Component {
 
     fetchFAQs() {
         this.props.dispatch(faqActions.getAll());
+    }
+
+    faqDeleteById(deleteFaqId){
+        this.props.dispatch(faqActions.delete(deleteFaqId));
+        this.fetchFAQs();
     }
 
     faqEditId(faqEditId) {
@@ -77,7 +83,7 @@ class FAQPage extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
-                        <ListFAQ role={this.state.role} faqs={this.props.faqs} faqEditId={this.faqEditId} />
+                        <ListFAQ role={this.state.role} faqs={this.props.faqs} faqEditId={this.faqEditId} faqDeleteById={this.faqDeleteById} />
                     </div>
                 </div>
             </PageTemplate>

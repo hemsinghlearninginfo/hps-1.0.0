@@ -5,6 +5,7 @@ export const faqService = {
     create,
     update,
     getAll,
+    delete: _delete
     // login,
     // logout,
     // register,
@@ -37,6 +38,15 @@ function getAll() {
         headers: authHeader()
     };
     return fetch(`${config.apiUrl}/faqs`, requestOptions).then(handleResponse);
+}
+
+// prefixed function name with underscore because delete is a reserved word in javascript
+function _delete(id) {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    };
+    return fetch(`${config.apiUrl}/faqs/${id}`, requestOptions).then(handleResponse);
 }
 
 // function login(username, password) {
@@ -93,15 +103,6 @@ function getAll() {
 //     return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);;
 // }
 
-// // prefixed function name with underscore because delete is a reserved word in javascript
-// function _delete(id) {
-//     const requestOptions = {
-//         method: 'DELETE',
-//         headers: authHeader()
-//     };
-
-//     return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-// }
 
 // function handleResponse(response) {
 //     return response.text().then(text => {

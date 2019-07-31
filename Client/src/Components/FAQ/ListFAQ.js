@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Role, commonMethods } from '../../_helpers';
-import { ModalPopUpButton, Authorise } from '../../_controls'
+import { ModalPopUpButton, Authorise, ModalConfirm } from '../../_controls'
 import { Icon } from '../../_controls';
 
 class ListFAQ extends Component {
@@ -10,13 +10,25 @@ class ListFAQ extends Component {
         super(props);
         this.state = {
             faqs: [],
-            searchText: ''
+            searchText: '',
+            confirmDelete: false,
+            idToDelete : null
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleConfirm = this.handleConfirm.bind(this);
+        this.confirmDelete = this.confirmDelete.bind(this);
     }
 
     componentDidUpdate(prevProps, prevState) {
         commonMethods.scrollTop();
+    }
+
+    handleConfirm(idToDelete) {
+        this.setState({ confirmDelete: true, idToDelete });
+    }
+
+    confirmDelete(){
+        this.props.faqDeleteById(this.state.idToDelete);
     }
 
     handleChange(e) {
@@ -26,7 +38,7 @@ class ListFAQ extends Component {
 
     render() {
         const { searchText } = this.state;
-        const { faqs, role } = this.props;
+        const { faqs } = this.props;
         const isFaqsExists = (faqs.items && faqs.items.length > 0 ? true : false);
         let faqItems = (faqs.items && faqs.items.length > 0 ? faqs.items : null);
 
@@ -66,9 +78,16 @@ class ListFAQ extends Component {
                                                         <>
                                                             <ModalPopUpButton action={() => this.props.faqEditId(faq.id)}><Icon type='Edit' /> Edit</ModalPopUpButton>
                                                             {' '}
-                                                            <button type="button" className="btn btn-sm btn-danger"><Icon type='Delete' /> Delete</button>
+                                                            <button type="button"
+                                                                className="btn btn-sm btn-danger"
+                                                                data-toggle="modal"
+                                                                data-backdrop="static" data-keyboard="false"
+                                                                data-target="#modalPopUpConfirm"
+                                                                onClick={() => { this.handleConfirm(faq.id); return true; }}
+                                                            ><Icon type='Delete' /> Delete</button>
                                                         </>
                                                     </Authorise>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -91,6 +110,7 @@ class ListFAQ extends Component {
 
         return (
             <>
+                <ModalConfirm heading="Confirm Delete" message="Are you sure to delete this FAQ" callBack={this.confirmDelete} />
                 {faqs.loading && <em>Loading faqs...</em>}
                 {faqs.error && <span className="text-danger">ERROR: {faqs.error}</span>}
                 {isFaqsExists && searchControl}

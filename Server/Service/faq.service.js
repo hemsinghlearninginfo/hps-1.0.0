@@ -8,10 +8,11 @@ module.exports = {
     getAll,
     create,
     update,
+    delete: _delete
     // authenticate,
     // getById,
     // create,
-    // delete: _delete
+    // 
 };
 
 async function getAll() {
@@ -40,6 +41,11 @@ async function update(id, faqParam) {
     }
     Object.assign(faq, faqParam);
     await faq.save();
+}
+
+
+async function _delete(id) {
+    await FAQDb.findByIdAndRemove(id);
 }
 
 
@@ -95,8 +101,4 @@ async function update(id, faqParam) {
 //     Object.assign(user, userParam);
 
 //     await user.save();
-// }
-
-// async function _delete(id) {
-//     await User.findByIdAndRemove(id);
 // }
