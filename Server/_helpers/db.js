@@ -8,5 +8,6 @@ module.exports = {
 
     User: require('../Model/user.model'),
     FAQ: require('../Model/faq.model'),
-    NewsLetter : require('../Model/newsletter.model')  
+    NewsLetter: require('../Model/newsletter.model'),
+    WriteUp: require('../Model/writeup.model')
 };

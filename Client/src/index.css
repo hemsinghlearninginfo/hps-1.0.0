@@ -70,8 +70,8 @@ input.required-body {
   border: 1px solid #e0dede;
   border-radius: 5px;
   background: #f8f9fa;
-  margin-left: 10px !important;
-  margin-right: 10px !important;
+  margin: 10px !important;
+  padding: 10px 25px;
 }
 
 .page-content .heading {
@@ -409,7 +409,7 @@ ul {
   margin: 2rem;
 }
 
-.section-title h2 {
+.section-title h2, .pagetemplate-title h2 {
   position: relative;
   margin-bottom: 45px;
   display: inline-block;
@@ -418,7 +418,11 @@ ul {
   font-size: 35px;
 }
 
-.section-title h2::before {
+.pagetemplate-title h2 {
+  font-size: 30px !important;
+}
+
+.section-title h2::before,.pagetemplate-title h2::before {
   content: "";
   position: absolute;
   left: 0;
@@ -426,6 +430,10 @@ ul {
   height: 2px;
   background: #ff5e14;
   bottom: -25px;
+}
+
+.pagetemplate-title h2::before{
+  bottom: -15px !important;
 }
 
 .about-content {

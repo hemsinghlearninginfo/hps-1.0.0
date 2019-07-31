@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 
 class SlideWriteUps extends Component {
     constructor(props) {
@@ -41,7 +41,7 @@ class SlideWriteUps extends Component {
                                 </div>
                             </li>
                         </ul>
-                        <button className="btn btn-info">More Feedback...</button>
+                        <Link to="/writeup" className="btn btn-info">More Feedback...</Link>
                     </div>
                 </section>
             </>

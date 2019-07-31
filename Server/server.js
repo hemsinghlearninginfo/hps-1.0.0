@@ -67,6 +67,7 @@ function routes() {
     app.use('/users', require('./Controller/users.controller'));
     app.use('/faqs', require('./Controller/faqs.controller'));
     app.use('/extra', require('./Controller/extra.controller'));
+    app.use('/writeup', require('./Controller/writeups.controller'));
     app.use(errorHandler);
 }
 
