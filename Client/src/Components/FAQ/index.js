@@ -70,7 +70,7 @@ class FAQPage extends React.Component {
         return (
             <PageTemplate heading="FAQs">
                 <div className="row">
-                    <div className="col-lg-12 text-right p">
+                    <div className="col-lg-12 text-right">
                         <div className="form-group list-textBox add-Faq-Button">
                             <Authorise userroles={[Role.SuperAdmin, Role.Admin]}>
                                 <ModalPopUpButton action={this.addNewFAQ}><Icon type='add' /> Add FAQ</ModalPopUpButton>

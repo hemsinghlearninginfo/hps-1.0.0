@@ -6,7 +6,7 @@ import { NewsLetter } from './Extras/NewsLetter';
 
 import { Notifications, Expire, GoUp } from './Shared';
 import { SlideMasters } from './Master';
-import { SlideWriteUps, WriteUp } from './WriteUp';
+import { WriteUp, SlideWriteUps } from './WriteUp';
 
 export default class MyComponent {
     static Header = Header;

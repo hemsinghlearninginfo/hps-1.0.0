@@ -454,3 +454,14 @@ ul {
 .go-up:hover{
   color: #5ed7e4;
 }
+
+.write-up-description{
+  padding: 24px;
+    border-left: 3px solid #3dda55;
+}
+
+.write-up-form{
+  padding: 1rem;
+  background-color: #efefef;
+    border: 1px solid #37bf6c;
+}
