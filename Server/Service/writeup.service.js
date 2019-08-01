@@ -34,7 +34,7 @@ async function create(writeUpParam) {
 
 async function update(id, writeupParam) {
     const writeup = await WriteUpDb.findById(id);
-    if (!writeup) throw new Error(util.format(message.notfound, 'FAQ'));
+    if (!writeup) throw new Error(util.format(message.notfound, 'WriteUp'));
 
     if (writeup.description !== writeupParam.description && await WriteUpDb.findOne({ description: writeupParam.description })) {
         throw new Error(util.format(message.alreadyAdded, 'WriteUp', writeupParam.description));

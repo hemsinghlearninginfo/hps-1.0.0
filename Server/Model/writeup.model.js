@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const schema = new Schema({
     description: { type: String, required: true },
     createdDate: { type: Date, default: Date.now },
+    order: { type: Number, default: 0 },
     isActive: { type: Boolean, default: true },
     isApproved: { type: Boolean, default: false }
 });
