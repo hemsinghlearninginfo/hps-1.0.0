@@ -456,8 +456,10 @@ ul {
 }
 
 .write-up-description{
-  padding: 24px;
+  padding: 30px;
     border-left: 3px solid #3dda55;
+    border-radius: 100px;
+    border-right: 3px solid #3dda55;
 }
 
 .write-up-form{

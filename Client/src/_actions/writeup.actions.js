@@ -1,7 +1,8 @@
 import { writeupConstants } from '../_constants';
 import { writeupService } from '../_services';
 import { modalAlertActions, alertActions } from './';
-//import { history } from '../_helpers';
+import { commonMethods } from '../_helpers';
+import { write } from 'fs';
 
 export const writeupActions = {
     create,
@@ -16,18 +17,30 @@ export const writeupActions = {
 
 function create(writeup) {
     return dispatch => {
-        dispatch(request(writeup));
-        writeupService.create(writeup)
-            .then(
-                writeup => {
-                    dispatch(success(writeup));
-                    dispatch(alertActions.success('Thankyou for providing you valuable feedback.'));
-                },
-                error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(modalAlertActions.error(error.toString()));
-                }
-            );
+        const user = commonMethods.getCurrentUser();
+        if (user.currentUser != null) {
+            const objWriteUp = {
+                description : writeup.description,
+                username : user.currentUser._id,
+                displayName : user.currentUser.firstName
+            }
+            dispatch(request(objWriteUp));
+            writeupService.create(objWriteUp)
+                .then(
+                    writeup => {
+                        dispatch(success(writeup));
+                        dispatch(alertActions.success('Thankyou for providing you valuable feedback.'));
+                    },
+                    error => {
+                        dispatch(failure(error.toString()));
+                        dispatch(modalAlertActions.error(error.toString()));
+                    }
+                );
+        }
+        else {
+            dispatch(failure('User Not Found!!!'));
+            dispatch(modalAlertActions.error('User Not Found!!!'));
+        }
     };
 
     function request(writeup) { return { type: writeupConstants.POST_REQUEST, writeup: writeup } }

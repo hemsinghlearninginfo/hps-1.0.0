@@ -37,7 +37,7 @@ class ListWriteUp extends Component {
                             <div className="write-up-description">
                                 {writeup.description}
                             </div>
-                            <div className="text-muted font-italic">-- from hem</div>
+                            <div className="text-muted font-italic">-- from {writeup.displayName}</div>
                         </div>
                     )}
                     {!writeupItem && <div className="text-center text-danger">Not data found</div>}
