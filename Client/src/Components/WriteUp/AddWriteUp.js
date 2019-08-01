@@ -27,19 +27,18 @@ class AddWriteUp extends Component {
                 isError: false,
                 submitted: false
             });
-            //this.props.refreshList();
+            this.props.requireRefresh();
         }
         else if (nextProps.writeup.isPostingFail) {
             this.setState({ submitted: false });
-            //this.props.refreshList();
         }
         commonMethods.scrollTop();
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        this.setState({ submitted: true });
         if (this.state.description !== '') {
+            this.setState({ submitted: false });
             const { dispatch } = this.props;
             const { description } = this.state;
             dispatch(writeupActions.create({ description }));
