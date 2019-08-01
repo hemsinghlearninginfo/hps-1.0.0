@@ -56,6 +56,7 @@ class App extends Component {
                             <Route path="/register" component={RegisterPage} />
                             <Route path="/faq" component={FAQPage} />
                             <Route path="/writeup" component={MyComponents.WriteUp} />
+                            <PrivateRoute exact path="/profile" component={MyComponents.Profile} />
                             <Route path='/404' component={MyComponents.Error404} />
                             <Redirect path='*' to='/404' />
                         </Switch>

@@ -18,11 +18,11 @@ export class Header extends Component {
     componentDidMount() {
         this.setUser();
     }
-    componentWillReceiveProps(nextprops){
+    componentWillReceiveProps(nextprops) {
         this.setUser();
     }
 
-    setUser(){
+    setUser() {
         const user = commonMethods.getCurrentUser();
         if (user !== null) {
             this.setState({
@@ -91,9 +91,9 @@ export class Header extends Component {
                             {currentUser && <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown"><Icon type='loggedInUser' /> Hello {currentUser.firstName}</a>
                                 <div className="dropdown-menu dropdown-menu-right">
-                                    <a href="#" className="dropdown-item"><Icon type='profile' /> Profile</a>
-                                    <a href="#" className="dropdown-item"><Icon type='UserSetting' /> Settings</a>
-                                    <a className="dropdown-item" onClick={this.logout}><Icon type='logout' /> Logout</a>
+                                    <Link to="/profile" className="dropdown-item"><Icon type='profile' /> Profile</Link>
+                                    <Link to="#" className="dropdown-item"><Icon type='UserSetting' /> Settings</Link>
+                                    <Link className="dropdown-item" onClick={this.logout}><Icon type='logout' /> Logout</Link>
                                 </div>
                             </div>
                             }

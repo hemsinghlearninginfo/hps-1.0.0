@@ -7,6 +7,7 @@ import { NewsLetter } from './Extras/NewsLetter';
 import { Notifications, Expire, GoUp } from './Shared';
 import { SlideMasters } from './Master';
 import { WriteUp, SlideWriteUps } from './WriteUp';
+import {Profile} from './UserProfile';
 
 export default class MyComponent {
     static Header = Header;
@@ -26,4 +27,6 @@ export default class MyComponent {
     static SlideMasters = SlideMasters;
     static SlideWriteUps = SlideWriteUps;
     static WriteUp = WriteUp;
+
+    static Profile = Profile;
 }

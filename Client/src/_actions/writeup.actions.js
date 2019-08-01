@@ -29,7 +29,7 @@ function create(writeup) {
                 .then(
                     writeup => {
                         dispatch(success(writeup));
-                        dispatch(alertActions.success('Thankyou for providing you valuable feedback.'));
+                        dispatch(alertActions.success('Thankyou for providing you valuable feedback, its under the process for approval.'));
                     },
                     error => {
                         dispatch(failure(error.toString()));
@@ -38,8 +38,9 @@ function create(writeup) {
                 );
         }
         else {
-            dispatch(failure('User Not Found!!!'));
-            dispatch(modalAlertActions.error('User Not Found!!!'));
+            const errorMessage = 'Something went wrong with authentication, please re-login and submit your approval';
+            dispatch(failure(errorMessage));
+            dispatch(modalAlertActions.error(errorMessage));
         }
     };
 

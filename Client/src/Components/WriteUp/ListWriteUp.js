@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { writeupActions } from '../../_actions';
+import { InfoBox } from '../../_controls';
 
 class ListWriteUp extends Component {
 
     constructor(props) {
         super(props);
-        this.state ={
-            isRefresh : false
+        this.state = {
+            isRefresh: false
         }
         this.fetchWriteUp = this.fetchWriteUp.bind(this);
     }
@@ -17,7 +18,7 @@ class ListWriteUp extends Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        if(this.props.isRefresh !== nextProps.isRefresh){
+        if (this.props.isRefresh !== nextProps.isRefresh) {
             this.fetchWriteUp();
         }
     }
@@ -29,18 +30,24 @@ class ListWriteUp extends Component {
     render() {
         const { writeup } = this.props;
         let writeupItem = (writeup.items && writeup.items.length > 0 ? writeup.items : null);
+        if (writeupItem) {
+            writeupItem = writeupItem.filter(function (item) { return item.isApproved && item.isActive });
+        }
         return (
             <>
                 <div className="list-group">
-                    {writeupItem && writeupItem.map((writeup, index) =>
-                        <div className="list-group-item list-group-item-action p-5" key={writeup.id}>
-                            <div className="write-up-description">
+                    {writeupItem && writeupItem.length > 0 && writeupItem.map((writeup, index) =>
+                        <div className="list-group-item list-group-item-action p-4" key={writeup.id}>
+                            <div className="write-up-description text-justify">
                                 {writeup.description}
                             </div>
-                            <div className="text-muted font-italic">-- from {writeup.displayName}</div>
+                            <div className="text-muted font-italic pl-5">-- from {writeup.displayName}</div>
                         </div>
                     )}
-                    {!writeupItem && <div className="text-center text-danger">Not data found</div>}
+                    {
+                        (!writeupItem || writeupItem.length == 0) &&
+                        <InfoBox type='danger'>Opps, We don't have any write up about us, would you like to be first. Please login and post your writeup.</InfoBox>
+                    }
                 </div>
             </>
         );
