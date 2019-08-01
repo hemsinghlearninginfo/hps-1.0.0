@@ -7,6 +7,7 @@ import { alert } from './alert.reducer';
 import { modalAlert } from './modalAlert.reducer';
 import { faqs } from './faqs.reducer';
 import { extra } from './extra.reducer';
+import { writeup } from './writeup.reducer';
 
 const rootReducer = combineReducers({
   authentication,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   alert,
   modalAlert,
   faqs,
-  extra
+  extra,
+  writeup
 });
 
 export default rootReducer;
