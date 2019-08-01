@@ -467,3 +467,14 @@ ul {
   background-color: #efefef;
     border: 1px solid #37bf6c;
 }
+
+.login-icon svg{
+  height: 200px;
+    width: auto;
+    color: #378ab3;
+}
+
+.login-box{
+  border-left: 1px dashed #267786;
+    padding-left: 3rem;
+}

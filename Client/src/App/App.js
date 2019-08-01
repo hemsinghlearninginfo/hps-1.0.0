@@ -7,8 +7,6 @@ import { userService } from '../_services';
 import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_controls';
 import { HomePage } from '../Components/HomePage';
-import { LoginPage } from '../Components/LoginPage';
-import { RegisterPage } from '../Components/RegisterPage';
 import { FAQPage } from '../Components/FAQ';
 import MyComponents from '../Components/index';
 import Wrapper from '../Components/Shared/Wrapper';
@@ -52,8 +50,9 @@ class App extends Component {
                         }
                         <Switch>
                             <PrivateRoute exact path="/" component={HomePage} />
-                            <Route path="/login" component={LoginPage} />
-                            <Route path="/register" component={RegisterPage} />
+                            <Route path="/tac" component={MyComponents.TermsAndConditions} />
+                            <Route path="/login" component={MyComponents.Login} />
+                            <Route path="/register" component={MyComponents.Register} />
                             <Route path="/faq" component={FAQPage} />
                             <Route path="/writeup" component={MyComponents.WriteUp} />
                             <PrivateRoute exact path="/profile" component={MyComponents.Profile} />
