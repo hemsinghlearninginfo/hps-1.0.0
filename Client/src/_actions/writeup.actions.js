@@ -8,7 +8,8 @@ export const writeupActions = {
     create,
     update,
     getAll,
-    delete: _delete
+    delete: _delete,
+    get
     // login,
     // logout,
     // register,
@@ -20,9 +21,9 @@ function create(writeup) {
         const user = commonMethods.getCurrentUser();
         if (user.currentUser != null) {
             const objWriteUp = {
-                description : writeup.description,
-                username : user.currentUser._id,
-                displayName : user.currentUser.firstName
+                description: writeup.description,
+                username: user.currentUser._id,
+                displayName: user.currentUser.firstName
             }
             dispatch(request(objWriteUp));
             writeupService.create(objWriteUp)
@@ -77,6 +78,29 @@ function getAll() {
         writeupService.getAll()
             .then(
                 writeup => dispatch(success(writeup)),
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request() { return { type: writeupConstants.GETALL_REQUEST } }
+    function success(writeup) { return { type: writeupConstants.GETALL_SUCCESS, writeup } }
+    function failure(error) { return { type: writeupConstants.GETALL_FAILURE, error } }
+}
+
+function get(numberOfRecords) {
+    return dispatch => {
+        dispatch(request());
+
+        writeupService.getAll()
+            .then(
+                writeup => {
+                    if (writeup.length > 0) {
+                        writeup = writeup.filter(function (item) { return item.isApproved && item.isActive })
+                            .sort((a, b) => (a.order - b.order))
+                            .slice(0, numberOfRecords);
+                    }
+                    dispatch(success(writeup));
+                },
                 error => dispatch(failure(error.toString()))
             );
     };

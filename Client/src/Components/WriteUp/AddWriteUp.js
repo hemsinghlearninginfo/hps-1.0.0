@@ -64,7 +64,7 @@ class AddWriteUp extends Component {
             <form onSubmit={this.handleSubmit}>
                 <div className="modal-body text-left">
                     <div className="form-group">
-                        <textarea className="form-control required" name="writeup" rows="5" value={this.state.description} onChange={(e) => { this.setState({ description: e.target.value }) }} placeholder="Thankyou for providing best platform for trading...."></textarea>
+                        <textarea autoFocus className="form-control required" name="writeup" rows="5" value={this.state.description} onChange={(e) => { this.setState({ description: e.target.value }) }} placeholder="Thankyou for providing best platform for trading...."></textarea>
                         {submitted && <div className="help-block text-left">Please write few words for us.</div>}
                     </div>
                 </div>

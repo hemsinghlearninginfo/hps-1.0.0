@@ -93,7 +93,7 @@ export class Header extends Component {
                                 <div className="dropdown-menu dropdown-menu-right">
                                     <Link to="/profile" className="dropdown-item"><Icon type='profile' /> Profile</Link>
                                     <Link to="#" className="dropdown-item"><Icon type='UserSetting' /> Settings</Link>
-                                    <Link className="dropdown-item" onClick={this.logout}><Icon type='logout' /> Logout</Link>
+                                    <Link to="" className="dropdown-item" onClick={this.logout}><Icon type='logout' /> Logout</Link>
                                 </div>
                             </div>
                             }

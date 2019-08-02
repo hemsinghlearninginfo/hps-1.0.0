@@ -28,7 +28,9 @@ class ListWriteUp extends Component {
         const { writeup } = this.props;
         let writeupItem = (writeup.items && writeup.items.length > 0 ? writeup.items : null);
         if (writeupItem) {
-            writeupItem = writeupItem.filter(function (item) { return item.isApproved && item.isActive });
+            writeupItem = writeupItem
+                .filter(function (item) { return item.isApproved && item.isActive })
+                .sort((a, b) => (a.order - b.order));
         }
         return (
             <>
