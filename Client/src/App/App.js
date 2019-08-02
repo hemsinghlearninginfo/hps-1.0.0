@@ -6,7 +6,6 @@ import { history, Role, commonMethods } from '../_helpers';
 import { userService } from '../_services';
 import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_controls';
-import { HomePage } from '../Components/HomePage';
 import { FAQPage } from '../Components/FAQ';
 import MyComponents from '../Components/index';
 import Wrapper from '../Components/Shared/Wrapper';
@@ -49,7 +48,7 @@ class App extends Component {
                             </div></MyComponents.Expire>)
                         }
                         <Switch>
-                            <PrivateRoute exact path="/" component={HomePage} />
+                            <Route exact path="/" component={MyComponents.Home} />
                             <Route path="/tac" component={MyComponents.TermsAndConditions} />
                             <Route path="/login" component={MyComponents.Login} />
                             <Route path="/register" component={MyComponents.Register} />

@@ -15,6 +15,7 @@ function jwt() {
             '/faqs/create',
             '/faqs',
             '/extra/addnewsletterrequest',
+            '/writeup',
         ]
     });
 }

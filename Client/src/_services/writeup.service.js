@@ -35,7 +35,7 @@ function update(writeup) {
 function getAll() {
     const requestOptions = {
         method: 'GET',
-        headers: authHeader()
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
     };
     return fetch(`${config.apiUrl}/writeup`, requestOptions).then(handleResponse);
 }

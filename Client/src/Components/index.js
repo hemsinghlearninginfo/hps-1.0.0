@@ -7,16 +7,17 @@ import { NewsLetter, TermsAndConditions } from './Extras';
 import { Notifications, Expire, GoUp } from './Shared';
 import { SlideMasters } from './Master';
 import { WriteUp, SlideWriteUps } from './WriteUp';
-import {Login} from './Login';
-import {Register} from './Register';
-import {Profile} from './UserProfile';
+import { Home } from './Home';
+import { Login } from './Login';
+import { Register } from './Register';
+import { Profile } from './UserProfile';
 
 export default class MyComponent {
     static Header = Header;
     static Fotter = Fotter;
     static AboutUs = AboutUs;
 
-
+    static Home = Home;
     static FAQPage = FAQPage;
 
     static Error404 = Error404;

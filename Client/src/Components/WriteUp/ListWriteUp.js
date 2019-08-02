@@ -7,9 +7,6 @@ class ListWriteUp extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            isRefresh: false
-        }
         this.fetchWriteUp = this.fetchWriteUp.bind(this);
     }
 
