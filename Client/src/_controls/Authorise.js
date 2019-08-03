@@ -27,7 +27,7 @@ class Authorise extends Component {
             const user = commonMethods.getCurrentUser();
             this.setState({
                 isUserRolesAllowed: (param.userroles != undefined && user.role !== null && param.userroles.includes(user.role)),
-                isLoggedIn: (param.isLoggedIn && user.currentuser !== null),
+                isLoggedIn: (param.isLoggedIn && user.currentUser !== null),
                 isNonLoggedIn: (param.isNonLoggedIn && user.currentUser === null)
             });
         }
