@@ -94,3 +94,6 @@ class UploadFile extends Component {
 // export { connectedUploadFile as UploadFile }; 
 
 export { UploadFile }; 
+
+
+//https://steemit.com/utopian-io/@morningtundra/storing-and-retreiving-images-in-mongodb-with-nodejs
