@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/hemsinghlearninginfo/hps-trades#readme",
   "dependencies": {
-    "concurrently": "^4.1.1"
+    "concurrently": "^4.1.1",
+    "react-file-reader": "^1.1.4"
   }
 }

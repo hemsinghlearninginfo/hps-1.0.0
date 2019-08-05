@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactFileReader from 'react-file-reader';
 //import { commonMethods } from '../../_helpers';
 import { Icon, ModalPopUp } from '../../_controls';
 
@@ -13,7 +14,7 @@ class UploadFile extends Component {
             submitted: false,
             isFreeAdd: this.props.isFreeAdd
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFiles = this.handleFiles.bind(this);
     }
 
     componentDidMount() {
@@ -36,6 +37,12 @@ class UploadFile extends Component {
         // commonMethods.scrollTop();
     }
 
+    handleFiles = files => {
+        debugger;
+        console.log(files);
+        console.log(files.base64);
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         // if (this.state.description !== '') {
@@ -52,18 +59,17 @@ class UploadFile extends Component {
 
     render() {
         const uploadFormHTML = (
+
             <form action="/uploadpicture" method="POST" encType="multipart/form-data">
                 <div className="modal-body text-left">
                     <div className="form-group">
                         <div className="custom-file">
-                            <input type="file" className="custom-file-input" accept="application/x-zip-compressed,image/*" id="validatedCustomFile" required />
-                            <label className="custom-file-label" htmlFor="validatedCustomFile">Choose file...</label>
-                            <div className="invalid-feedback">Example invalid custom file feedback</div>
+                            <ReactFileReader base64={true} multipleFiles={true} handleFiles={this.handleFiles}>
+                                <button className='btn'>Upload</button>
+                            </ReactFileReader>
                         </div>
                     </div>
-                    {this.state.isFreeAdd && <div className="form-group">
-                        <button type="button" className="btn btn-sm btn-info"><Icon type='add' /> Add More file</button>
-                    </div>}
+                    
                 </div>
                 <div className="modal-footer">
                     <button type="submit" className="btn btn-primary btn-sm"><Icon type='upload' /> Upload</button>
@@ -93,7 +99,8 @@ class UploadFile extends Component {
 // const connectedUploadFile = connect(mapStateToProps)(UploadFile);
 // export { connectedUploadFile as UploadFile }; 
 
-export { UploadFile }; 
+export { UploadFile };
 
 
 //https://steemit.com/utopian-io/@morningtundra/storing-and-retreiving-images-in-mongodb-with-nodejs
+// https://www.npmjs.com/package/react-file-reader
