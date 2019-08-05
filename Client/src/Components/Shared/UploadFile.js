@@ -12,12 +12,9 @@ class UploadFile extends Component {
             file: null,
             isError: false,
             submitted: false,
-            isFreeAdd: this.props.isFreeAdd
+            uploadedFiles: [],
         }
         this.handleFiles = this.handleFiles.bind(this);
-    }
-
-    componentDidMount() {
     }
 
     componentWillReceiveProps(nextProps) {
@@ -38,9 +35,11 @@ class UploadFile extends Component {
     }
 
     handleFiles = files => {
-        debugger;
+        const { uploadedFiles } = this.state;
+        uploadedFiles.push(files);
+        this.setState({ uploadedFiles });
         console.log(files);
-        console.log(files.base64);
+        //fileTypes={[".csv",".zip"]} 
     }
 
     handleSubmit(e) {
@@ -58,25 +57,30 @@ class UploadFile extends Component {
 
 
     render() {
+        const { uploadedFiles } = this.state;
+        const displayFiles = uploadedFiles && uploadedFiles.length > 0 && uploadedFiles.map(function (item, index) {
+            return <img key={index} src={item.base64} className="display-file" />
+        });
         const uploadFormHTML = (
-
-            <form action="/uploadpicture" method="POST" encType="multipart/form-data">
+            <>
                 <div className="modal-body text-left">
                     <div className="form-group">
                         <div className="custom-file">
-                            <ReactFileReader base64={true} multipleFiles={true} handleFiles={this.handleFiles}>
-                                <button className='btn'>Upload</button>
+                            <ReactFileReader fileTypes={this.props.fileTypes} base64={true} multipleFiles={this.props.isAddMultiple} handleFiles={this.handleFiles}>
+                                <button className='btn btn-sm btn-info'><Icon type='file' /> Select Files</button>
                             </ReactFileReader>
                         </div>
+                        <div className="row">
+                            {displayFiles}
+                        </div>
                     </div>
-                    
                 </div>
                 <div className="modal-footer">
                     <button type="submit" className="btn btn-primary btn-sm"><Icon type='upload' /> Upload</button>
                     {' '}
                     <button id="closeWriteUp" type="button" className="btn btn-secondary btn-sm" onClick={() => this.setState({ submitted: false })} data-dismiss="modal"><Icon type='close' /> Close</button>
                 </div>
-            </form>
+            </>
         );
 
         return (

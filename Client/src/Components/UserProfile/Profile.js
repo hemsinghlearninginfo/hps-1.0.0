@@ -42,7 +42,7 @@ class Profile extends Component {
                                             {' '}Change Photo
                                             </ModalPopUpButton>
                                     </div>
-                                    <MyComponent.UploadFile heading="Upload New Picture" isFreeAdd={false} />
+                                    <MyComponent.UploadFile heading="Upload New Picture" isAddMultiple={false} fileTypes={[".jpg",".jpeg",".png"]} />
                                 </div>
                             </div>
                             <div className="col-md-6">
