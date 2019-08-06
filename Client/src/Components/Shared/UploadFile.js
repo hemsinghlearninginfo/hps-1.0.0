@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactFileReader from 'react-file-reader';
-//import { commonMethods } from '../../_helpers';
 import { Icon, ModalPopUp } from '../../_controls';
 
 class UploadFile extends Component {
@@ -36,7 +35,7 @@ class UploadFile extends Component {
 
     handleFiles = files => {
         const { uploadedFiles } = this.state;
-        uploadedFiles.push(files);
+        uploadedFiles.push({ base64: files.base64, fileList: files.fileList });
         this.setState({ uploadedFiles });
         console.log(files);
         //fileTypes={[".csv",".zip"]} 
@@ -59,8 +58,17 @@ class UploadFile extends Component {
     render() {
         const { uploadedFiles } = this.state;
         const displayFiles = uploadedFiles && uploadedFiles.length > 0 && uploadedFiles.map(function (item, index) {
-            return <img key={index} src={item.base64} className="display-file" />
+            return item.base64 && item.base64.map(function (itemBase, indexBase) {
+                return <div key={index + indexBase} className="col-lg-3 col-md-4 col-6">
+                    <a href="#" className="d-block mb-4 h-100 text-center">
+                        <img src={itemBase} className="img-fluid img-thumbnail" />
+                        {/* item.fileList[indexBase].name */}
+                    </a>
+                </div>
+            });
+
         });
+
         const uploadFormHTML = (
             <>
                 <div className="modal-body text-left">
@@ -70,9 +78,15 @@ class UploadFile extends Component {
                                 <button className='btn btn-sm btn-info'><Icon type='file' /> Select Files</button>
                             </ReactFileReader>
                         </div>
-                        <div className="row">
-                            {displayFiles}
-                        </div>
+                        {uploadedFiles && uploadedFiles.length > 0 && (<div className="row">
+                            <div className="container">
+                                <h2 className="font-weight-light text-center text-lg-left mt-4 mb-0">Attached Files</h2>
+                                <hr className="mt-2 mb-5" />
+                                <div className="row text-center text-lg-left">
+                                    {displayFiles}
+                                </div>
+                            </div>
+                        </div>)}
                     </div>
                 </div>
                 <div className="modal-footer">

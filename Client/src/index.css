@@ -569,3 +569,8 @@ ul {
     font-weight: 600;
     color: #0062cc;
 }
+
+.display-file img{
+  width: 30%;
+  height: auto;
+}
