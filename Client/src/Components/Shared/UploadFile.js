@@ -12,6 +12,7 @@ class UploadFile extends Component {
             isError: false,
             submitted: false,
             uploadedFiles: [],
+            isAddMultiple: this.props.isAddMultiple,
         }
         this.handleFiles = this.handleFiles.bind(this);
     }
@@ -34,10 +35,20 @@ class UploadFile extends Component {
     }
 
     handleFiles = files => {
-        const { uploadedFiles } = this.state;
-        uploadedFiles.push({ base64: files.base64, fileList: files.fileList });
+        const { uploadedFiles, isAddMultiple } = this.state;
+        if (!isAddMultiple && uploadedFiles.length > 0) {
+            uploadedFiles.splice(0, 1);
+        }
+        let filedetails = {};
+        for (let index = 0; index < files.fileList.length; index++) {
+            filedetails = {};
+            filedetails.image = isAddMultiple ? files.base64[index] : files.base64;
+            filedetails.name = files.fileList[index].name;
+            filedetails.size = files.fileList[index].size;
+            filedetails.type = files.fileList[index].type;
+            uploadedFiles.push(filedetails);
+        }
         this.setState({ uploadedFiles });
-        console.log(files);
         //fileTypes={[".csv",".zip"]} 
     }
 
@@ -56,17 +67,15 @@ class UploadFile extends Component {
 
 
     render() {
-        const { uploadedFiles } = this.state;
+        const { uploadedFiles, isAddMultiple } = this.state;
         const displayFiles = uploadedFiles && uploadedFiles.length > 0 && uploadedFiles.map(function (item, index) {
-            return item.base64 && item.base64.map(function (itemBase, indexBase) {
-                return <div key={index + indexBase} className="col-lg-3 col-md-4 col-6">
-                    <a href="#" className="d-block mb-4 h-100 text-center">
-                        <img src={itemBase} className="img-fluid img-thumbnail" />
-                        {/* item.fileList[indexBase].name */}
-                    </a>
+            return <div key={index} className={isAddMultiple ? "col-lg-3 col-md-4 col-6" : "col-lg-12 col-md-12 col-12"}>
+                <div className="d-block mb-4 h-100 text-center">
+                    <div className="text-danger"><Icon type='CIRCLECLOSE' /></div>
+                    <img src={item.image} className="img-fluid img-thumbnail" />
+                    {item.name}
                 </div>
-            });
-
+            </div>
         });
 
         const uploadFormHTML = (
@@ -80,8 +89,8 @@ class UploadFile extends Component {
                         </div>
                         {uploadedFiles && uploadedFiles.length > 0 && (<div className="row">
                             <div className="container">
-                                <h2 className="font-weight-light text-center text-lg-left mt-4 mb-0">Attached Files</h2>
-                                <hr className="mt-2 mb-5" />
+                                <h3 className="font-weight-light text-center text-lg-left mt-1 mb-0">Attached Files</h3>
+                                <hr className="mt-2 mb-3" />
                                 <div className="row text-center text-lg-left">
                                     {displayFiles}
                                 </div>
