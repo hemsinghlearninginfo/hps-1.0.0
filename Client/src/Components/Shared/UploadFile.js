@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactFileReader from 'react-file-reader';
 import { Icon, ModalPopUp } from '../../_controls';
+import { ZoomFile } from './';
 
 class UploadFile extends Component {
 
@@ -13,8 +14,10 @@ class UploadFile extends Component {
             submitted: false,
             uploadedFiles: [],
             isAddMultiple: this.props.isAddMultiple,
+            isFileZoom: false
         }
         this.handleFiles = this.handleFiles.bind(this);
+        this.handleZoomFile = this.handleZoomFile.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -65,9 +68,13 @@ class UploadFile extends Component {
         // }
     }
 
+    handleZoomFile() {
+        debugger;
+        this.setState({ isFileZoom: true });
+    }
 
     render() {
-        const { uploadedFiles, isAddMultiple } = this.state;
+        const { uploadedFiles, isAddMultiple, isFileZoom } = this.state;
         const displayFiles = uploadedFiles && uploadedFiles.length > 0 && uploadedFiles.map(function (item, index) {
             return <div key={index} className={isAddMultiple ? "col-lg-3 col-md-4 col-6" : "col-lg-12 col-md-12 col-12"}>
                 <div className="d-block mb-4 h-100 text-center">
@@ -75,12 +82,14 @@ class UploadFile extends Component {
                     <img src={item.image} className="img-fluid img-thumbnail" />
                     {item.name}
                 </div>
+                {isFileZoom && <ZoomFile filePath={item.image} />}
             </div>
         });
 
         const uploadFormHTML = (
             <>
                 <div className="modal-body text-left">
+
                     <div className="form-group">
                         <div className="custom-file">
                             <ReactFileReader fileTypes={this.props.fileTypes} base64={true} multipleFiles={this.props.isAddMultiple} handleFiles={this.handleFiles}>
