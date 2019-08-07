@@ -7,4 +7,3 @@ export * from './Expire';
 export * from './Notifications';
 export * from './GoUp';
 export * from './UploadFile';
-export * from './ZoomFile';

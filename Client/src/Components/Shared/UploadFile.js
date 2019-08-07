@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactFileReader from 'react-file-reader';
 import { Icon, ModalPopUp, ModalConfirm } from '../../_controls';
-import { ZoomFile } from './';
 
 class UploadFile extends Component {
 
@@ -14,8 +13,7 @@ class UploadFile extends Component {
             submitted: false,
             uploadedFiles: [],
             isAddMultiple: this.props.isAddMultiple,
-            isFileZoom: false,
-            idToDelete : null,
+            idToDelete: null,
             confirmDelete: false,
         }
         this.handleFiles = this.handleFiles.bind(this);
@@ -61,9 +59,12 @@ class UploadFile extends Component {
         this.setState({ confirmDelete: true, idToDelete });
     }
 
-    handleDelete(){
-        debugger;
-        console.log(this.state.idToDelete);
+    handleDelete() {
+        var uploadedFiles = [...this.state.uploadedFiles];
+        if (this.state.idToDelete !== -1) {
+            uploadedFiles.splice(this.state.idToDelete, 1);
+            this.setState({ uploadedFiles });
+        }
     }
 
 
@@ -81,13 +82,12 @@ class UploadFile extends Component {
     }
 
     render() {
-        const { uploadedFiles, isAddMultiple, isFileZoom } = this.state;
+        const { uploadedFiles, isAddMultiple } = this.state;
         const displayFiles = uploadedFiles.map((item, index) =>
             <div key={index} className={isAddMultiple ? "col-lg-3 col-md-4 col-6" : "col-lg-12 col-md-12 col-12"}>
                 <div className="d-block mb-4 h-100 text-center">
                     <a className="text-danger pointer"
                         data-toggle="modal"
-                        data-dismiss="modal"
                         data-backdrop="static" data-keyboard="false"
                         data-target="#modalPopUpConfirm"
                         onClick={() => { this.handleConfirm(index); return true; }}

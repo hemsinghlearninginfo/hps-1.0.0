@@ -7,9 +7,9 @@ class ModalConfirm extends Component {
     render() {
         return (
             <>
-                <div className="modal fade" id="modalPopUpConfirm" tabIndex="-1" role="dialog"
+                <div className="modal fade" id="modalPopUpConfirm" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-lg" role="document">
+                    <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title">{this.props.heading}</h5>
@@ -21,11 +21,11 @@ class ModalConfirm extends Component {
                                 {this.props.message}
                             </div>
                             <div className="modal-footer">
-                                <button type="submit" className="btn btn-primary btn-sm" onClick={()=> {this.props.callBack();$("#closeConfirm").click()}}>
-                                    <Icon type='save' /> {this.props.actionButtonText}
+                                <button type="submit" className="btn btn-primary btn-sm" onClick={() => { this.props.callBack(); $("#closeConfirm").click() }}>
+                                    {this.props.actionButtonText}
                                 </button>
                                 <button id="closeConfirm" type="button" className="btn btn-secondary btn-sm" data-dismiss="modal">
-                                    <Icon type='close' /> Close
+                                    Close
                                 </button>
                             </div>
                         </div>
