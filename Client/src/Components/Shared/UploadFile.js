@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactFileReader from 'react-file-reader';
-import { Icon, ModalPopUp } from '../../_controls';
+import { Icon, ModalPopUp, ModalConfirm } from '../../_controls';
 import { ZoomFile } from './';
 
 class UploadFile extends Component {
@@ -14,10 +14,12 @@ class UploadFile extends Component {
             submitted: false,
             uploadedFiles: [],
             isAddMultiple: this.props.isAddMultiple,
-            isFileZoom: false
+            isFileZoom: false,
+            idToDelete : null,
+            confirmDelete: false,
         }
         this.handleFiles = this.handleFiles.bind(this);
-        this.handleZoomFile = this.handleZoomFile.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -55,6 +57,16 @@ class UploadFile extends Component {
         //fileTypes={[".csv",".zip"]} 
     }
 
+    handleConfirm(idToDelete) {
+        this.setState({ confirmDelete: true, idToDelete });
+    }
+
+    handleDelete(){
+        debugger;
+        console.log(this.state.idToDelete);
+    }
+
+
     handleSubmit(e) {
         e.preventDefault();
         // if (this.state.description !== '') {
@@ -68,57 +80,51 @@ class UploadFile extends Component {
         // }
     }
 
-    handleZoomFile() {
-        debugger;
-        this.setState({ isFileZoom: true });
-    }
-
     render() {
         const { uploadedFiles, isAddMultiple, isFileZoom } = this.state;
-        const displayFiles = uploadedFiles && uploadedFiles.length > 0 && uploadedFiles.map(function (item, index) {
-            return <div key={index} className={isAddMultiple ? "col-lg-3 col-md-4 col-6" : "col-lg-12 col-md-12 col-12"}>
+        const displayFiles = uploadedFiles.map((item, index) =>
+            <div key={index} className={isAddMultiple ? "col-lg-3 col-md-4 col-6" : "col-lg-12 col-md-12 col-12"}>
                 <div className="d-block mb-4 h-100 text-center">
-                    <div className="text-danger"><Icon type='CIRCLECLOSE' /></div>
+                    <a className="text-danger pointer"
+                        data-toggle="modal"
+                        data-dismiss="modal"
+                        data-backdrop="static" data-keyboard="false"
+                        data-target="#modalPopUpConfirm"
+                        onClick={() => { this.handleConfirm(index); return true; }}
+                    ><Icon type='CIRCLECLOSE' /></a>
                     <img src={item.image} className="img-fluid img-thumbnail" />
                     {item.name}
                 </div>
-                {isFileZoom && <ZoomFile filePath={item.image} />}
             </div>
-        });
-
-        const uploadFormHTML = (
-            <>
-                <div className="modal-body text-left">
-
-                    <div className="form-group">
-                        <div className="custom-file">
-                            <ReactFileReader fileTypes={this.props.fileTypes} base64={true} multipleFiles={this.props.isAddMultiple} handleFiles={this.handleFiles}>
-                                <button className='btn btn-sm btn-info'><Icon type='file' /> Select Files</button>
-                            </ReactFileReader>
-                        </div>
-                        {uploadedFiles && uploadedFiles.length > 0 && (<div className="row">
-                            <div className="container">
-                                <h3 className="font-weight-light text-center text-lg-left mt-1 mb-0">Attached Files</h3>
-                                <hr className="mt-2 mb-3" />
-                                <div className="row text-center text-lg-left">
-                                    {displayFiles}
-                                </div>
-                            </div>
-                        </div>)}
-                    </div>
-                </div>
-                <div className="modal-footer">
-                    <button type="submit" className="btn btn-primary btn-sm"><Icon type='upload' /> Upload</button>
-                    {' '}
-                    <button id="closeWriteUp" type="button" className="btn btn-secondary btn-sm" onClick={() => this.setState({ submitted: false })} data-dismiss="modal"><Icon type='close' /> Close</button>
-                </div>
-            </>
         );
 
         return (
             <>
+                <ModalConfirm heading="Confirm Delete" message="Are you sure to delete this?" callBack={this.handleDelete} actionButtonText="Delete" />
                 <ModalPopUp heading={this.props.heading}>
-                    {uploadFormHTML}
+                    <div className="modal-body text-left">
+                        <div className="form-group">
+                            <div className="custom-file">
+                                <ReactFileReader fileTypes={this.props.fileTypes} base64={true} multipleFiles={this.props.isAddMultiple} handleFiles={this.handleFiles}>
+                                    <button className='btn btn-sm btn-info'><Icon type='file' /> Select Files</button>
+                                </ReactFileReader>
+                            </div>
+                            {uploadedFiles && uploadedFiles.length > 0 && (<div className="row">
+                                <div className="container">
+                                    <h3 className="font-weight-light text-center text-lg-left mt-1 mb-0">Attached Files</h3>
+                                    <hr className="mt-2 mb-3" />
+                                    <div className="row text-center text-lg-left">
+                                        {displayFiles}
+                                    </div>
+                                </div>
+                            </div>)}
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="submit" className="btn btn-primary btn-sm"><Icon type='upload' /> Upload</button>
+                        {' '}
+                        <button id="closeWriteUp" type="button" className="btn btn-secondary btn-sm" onClick={() => this.setState({ submitted: false })} data-dismiss="modal"><Icon type='close' /> Close</button>
+                    </div>
                 </ModalPopUp>
             </>
         );

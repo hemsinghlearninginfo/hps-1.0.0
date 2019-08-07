@@ -22,7 +22,7 @@ class ModalConfirm extends Component {
                             </div>
                             <div className="modal-footer">
                                 <button type="submit" className="btn btn-primary btn-sm" onClick={()=> {this.props.callBack();$("#closeConfirm").click()}}>
-                                    <Icon type='save' /> Save FAQ
+                                    <Icon type='save' /> {this.props.actionButtonText}
                                 </button>
                                 <button id="closeConfirm" type="button" className="btn btn-secondary btn-sm" data-dismiss="modal">
                                     <Icon type='close' /> Close
