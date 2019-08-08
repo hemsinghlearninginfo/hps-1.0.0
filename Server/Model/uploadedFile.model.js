@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-    image: { type: BinaryData, required: true },
+    image: { type: Buffer, required: true },
     name: { type: String, required: true },
     description: { type: String },
     size: { type: Number, required: true },

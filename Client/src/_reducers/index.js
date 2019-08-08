@@ -8,6 +8,7 @@ import { modalAlert } from './modalAlert.reducer';
 import { faqs } from './faqs.reducer';
 import { extra } from './extra.reducer';
 import { writeup } from './writeup.reducer';
+import { uploadFiles } from './uploadFile.reducer';
 
 const rootReducer = combineReducers({
   authentication,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   modalAlert,
   faqs,
   extra,
-  writeup
+  writeup,
+  uploadFiles
 });
 
 export default rootReducer;

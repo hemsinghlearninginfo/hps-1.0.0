@@ -32,7 +32,7 @@ class Profile extends Component {
         return (
             <>
                 <PageTemplate heading="User Profile">
-                    <MyComponent.UploadFile heading="Upload New Picture" isAddMultiple={true} fileTypes={[".jpg", ".jpeg", ".png"]} />
+                    <MyComponent.UploadFile heading="Upload New Picture" isAddMultiple={false} fileTypes={[".jpg", ".jpeg", ".png"]} />
                     <div className="container emp-profile shadow-sm">
                         <div className="row">
                             <div className="col-md-4">

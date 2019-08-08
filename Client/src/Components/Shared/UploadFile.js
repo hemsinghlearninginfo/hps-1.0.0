@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactFileReader from 'react-file-reader';
 import { Icon, ModalPopUp, ModalConfirm } from '../../_controls';
+import { uploadFileActions } from '../../_actions';
 
 class UploadFile extends Component {
 
@@ -18,6 +19,7 @@ class UploadFile extends Component {
         }
         this.handleFiles = this.handleFiles.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -45,7 +47,7 @@ class UploadFile extends Component {
         let filedetails = {};
         for (let index = 0; index < files.fileList.length; index++) {
             filedetails = {};
-            filedetails.image = isAddMultiple ? files.base64[index] : files.base64;
+           // filedetails.image = isAddMultiple ? files.base64[index] : files.base64;
             filedetails.name = files.fileList[index].name;
             filedetails.size = files.fileList[index].size;
             filedetails.type = files.fileList[index].type;
@@ -70,6 +72,10 @@ class UploadFile extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        const { dispatch } = this.props;
+        const { uploadedFiles } = this.state;
+        dispatch(uploadFileActions.create({ uploadedFiles }));
+
         // if (this.state.description !== '') {
         //     this.setState({ submitted: false });
         //     const { dispatch } = this.props;
@@ -121,7 +127,7 @@ class UploadFile extends Component {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="submit" className="btn btn-primary btn-sm"><Icon type='upload' /> Upload</button>
+                        <button type="submit" className="btn btn-primary btn-sm" onClick={this.handleSubmit}><Icon type='upload' /> Upload</button>
                         {' '}
                         <button id="closeWriteUp" type="button" className="btn btn-secondary btn-sm" onClick={() => this.setState({ submitted: false })} data-dismiss="modal"><Icon type='close' /> Close</button>
                     </div>
@@ -131,18 +137,15 @@ class UploadFile extends Component {
     }
 }
 
-// function mapStateToProps(state) {
-//     const { uploadfile } = state;
-//     return {
-//         uploadfile
-//     };
-// }
+function mapStateToProps(state) {
+    const { uploadfile } = state;
+    return {
+        uploadfile
+    };
+}
 
-// const connectedUploadFile = connect(mapStateToProps)(UploadFile);
-// export { connectedUploadFile as UploadFile }; 
-
-export { UploadFile };
-
+const connectedUploadFile = connect(mapStateToProps)(UploadFile);
+export { connectedUploadFile as UploadFile };
 
 //https://steemit.com/utopian-io/@morningtundra/storing-and-retreiving-images-in-mongodb-with-nodejs
 // https://www.npmjs.com/package/react-file-reader
