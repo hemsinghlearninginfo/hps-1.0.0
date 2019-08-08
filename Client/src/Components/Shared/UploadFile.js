@@ -149,3 +149,6 @@ export { connectedUploadFile as UploadFile };
 
 //https://steemit.com/utopian-io/@morningtundra/storing-and-retreiving-images-in-mongodb-with-nodejs
 // https://www.npmjs.com/package/react-file-reader
+
+// https://programmingwithmosh.com/javascript/react-file-upload-proper-server-side-nodejs-easy/
+// https://malcoded.com/posts/react-file-upload/
