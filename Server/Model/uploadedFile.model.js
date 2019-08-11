@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-    image: { type: Buffer, required: true },
+    image: { type: String, required: true },
     name: { type: String, required: true },
     description: { type: String },
     size: { type: Number, required: true },
@@ -13,4 +13,4 @@ const schema = new Schema({
 
 schema.set('toJSON', { virtuals: true });
 
-module.exports = mongoose.model('UploadedFile.model', schema);
+module.exports = mongoose.model('UploadedFile', schema);

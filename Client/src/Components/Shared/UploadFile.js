@@ -47,7 +47,7 @@ class UploadFile extends Component {
         let filedetails = {};
         for (let index = 0; index < files.fileList.length; index++) {
             filedetails = {};
-           // filedetails.image = isAddMultiple ? files.base64[index] : files.base64;
+            filedetails.image = isAddMultiple ? files.base64[index] : files.base64;
             filedetails.name = files.fileList[index].name;
             filedetails.size = files.fileList[index].size;
             filedetails.type = files.fileList[index].type;
@@ -98,7 +98,7 @@ class UploadFile extends Component {
                         data-target="#modalPopUpConfirm"
                         onClick={() => { this.handleConfirm(index); return true; }}
                     ><Icon type='CIRCLECLOSE' /></a>
-                    <img src={item.image} className="img-fluid img-thumbnail" />
+                    {/* <img src={item.image} className="img-fluid img-thumbnail" /> */}
                     {item.name}
                 </div>
             </div>

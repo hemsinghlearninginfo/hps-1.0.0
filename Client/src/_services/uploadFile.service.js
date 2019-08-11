@@ -15,22 +15,28 @@ export const uploadFileService = {
 };
 
 
-function create(faq) {
+function create(data) {
+    let header = new Headers({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'multipart/form-data'
+    });
     const requestOptions = {
         method: 'POST',
-        headers: { ...authHeader(),'Content-Type': 'application/json' },
-        body: JSON.stringify(faq)
+        headers: { ...authHeader(), header },
+        body: JSON.stringify(data),
+        mode: 'cors',
     };
+    debugger;
     return fetch(`${config.apiUrl}/uploadfiles/create`, requestOptions).then(handleResponse);
 }
 
-function update(faq) {
+function update(data) {
     const requestOptions = {
         method: 'PUT',
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(faq)
+        body: JSON.stringify(data)
     };
-    return fetch(`${config.apiUrl}/uploadfiles/${faq.id}`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/uploadfiles/${data.id}`, requestOptions).then(handleResponse);
 }
 
 function getAll() {
