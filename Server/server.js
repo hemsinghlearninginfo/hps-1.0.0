@@ -36,29 +36,41 @@ const errorHandler = require('_helpers/error-handler');
 // else 
 {
 
+    // Set up a whitelist and check against it:
+    var whitelist = ['http://localhost:3000']
+    var corsOptions = {
+        origin: function (origin, callback) {
+            if (whitelist.indexOf(origin) !== -1) {
+                callback(null, true)
+            } else {
+                callback(new Error('Not allowed by CORS'))
+            }
+        }
+    }
+    app.use(cors(corsOptions));
     app.use('/uploads', express.static('uploads'));
-    app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(bodyParser.json());
-    app.use(cors());
+    app.use(bodyParser.json({limit: '50mb'}));
+    app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 
     // use JWT auth to secure the api
     app.use(jwt());
 
-    // app.use(function (req, res, next) {
-    //     res.header("Access-Control-Allow-Headers", "*");
-    //     res.header('Access-Control-Allow-Credentials', true);
-    //     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    //     res.header('Access-Control-Allow-Origin', req.headers.origin);
-    //     next();
-    // });
-
-    app.use((req, res, next) => {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    app.use(function (req, res, next) {
+        //res.setHeader('Access-Control-Allow-Origin', '*');
+        res.header("Access-Control-Allow-Headers", "*");
         res.header('Access-Control-Allow-Credentials', true);
-        res.header('Access-Control-Allow-Methods', '*');  // enables all the methods to take place
-        return next();
-      });
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+        next();
+    });
+
+    // app.use((req, res, next) => {
+    //     res.setHeader('Access-Control-Allow-Origin', '*');
+    //     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    //     res.header('Access-Control-Allow-Credentials', true);
+    //     res.header('Access-Control-Allow-Methods', '*');  // enables all the methods to take place
+    //     return next();
+    //   });
 
     routes();
 

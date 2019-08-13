@@ -79,12 +79,14 @@ ImageRouter.route("/uploadbase")
             .catch((err) => next(err));
     });
 
+    ImageRouter.post('/create', create);
+
 module.exports = ImageRouter;
 
 
 // const express = require('express');
 // const router = express.Router();
-// const uploadedFileService = require('../Service/uploadedFile.service');
+const uploadedFileService = require('../Service/uploadedFile.service');
 
 // // routes
 // router.get('/', getAll);
@@ -98,7 +100,7 @@ module.exports = ImageRouter;
 // // router.put('/:id', update);
 // // 
 
-// module.exports = router;
+ //module.exports = router;
 
 // function getAll(req, res, next) {
 //     uploadedFileService.getAll()
@@ -112,11 +114,11 @@ module.exports = ImageRouter;
 //         .catch(err => next(err));
 // }
 
-// function create(req, res, next) {
-//     uploadedFileService.create(req.body)
-//         .then(() => res.json({}))
-//         .catch(err => { next(err); });
-// }
+function create(req, res, next) {
+    uploadedFileService.create(req.body)
+        .then(() => res.json({}))
+        .catch(err => { next(err); });
+}
 
 // function update(req, res, next) {
 //     uploadedFileService.update(req.params.id, req.body)

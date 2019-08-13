@@ -77,32 +77,28 @@ class UploadFile extends Component {
         e.preventDefault();
         const { dispatch } = this.props;
         const { uploadedFiles } = this.state;
-        debugger;
 
         let imageObj = {
             imageName: "base-image-" + Date.now(),
             imageData: uploadedFiles[0].image.toString()
         };
+        dispatch(uploadFileActions.create(imageObj));
 
-        let headers = {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json'
-        };
-        axios.post(`${config.apiUrl}/uploadfiles/uploadbase`, imageObj, headers)
-            .then((data) => {
-                if (data.data.success) {
-                    alert("Image has been successfully uploaded using base64 format");
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                alert("Error while uploading image using base64 format")
-            });
+        // axios.post(`${config.apiUrl}/uploadfiles/uploadbase`, imageObj)
+        //     .then((data) => {
+        //         if (data.data.success) {
+        //             alert("Image has been successfully uploaded using base64 format");
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //         alert("Error while uploading image using base64 format")
+        //     });
 
-        // let imageFormObj = new FormData();
-        // imageFormObj.append("imageName", "multer-image-" + Date.now());
-        // imageFormObj.append("imageData", uploadedFiles[0].file);
-        // //dispatch(uploadFileActions.create(imageFormObj));
+        let imageFormObj = new FormData();
+        imageFormObj.append("imageName", "multer-image-" + Date.now());
+        imageFormObj.append("imageData", uploadedFiles[0].file);
+        //dispatch(uploadFileActions.create(imageFormObj));
 
         // axios.post(`${config.apiUrl}/uploadfiles/uploadmulter`, imageFormObj)
         //     .then((data) => {

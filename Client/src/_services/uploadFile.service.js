@@ -22,11 +22,11 @@ function create(data) {
     // });
     const requestOptions = {
         method: 'POST',
-        headers: { ...authHeader(), 'Content-type': 'application/json', 'Content-Type': 'multipart/form-data' },
-        body: data,
+        headers: { ...authHeader(), 'Content-type': 'application/json'},
+        body: JSON.stringify(data),
     };
     debugger;
-    return fetch(`${config.apiUrl}/uploadfiles/uploadmulter`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/uploadfiles/create`, requestOptions).then(handleResponse);
 }
 
 function update(data) {
