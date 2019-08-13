@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import ReactFileReader from 'react-file-reader';
 import { Icon, ModalPopUp, ModalConfirm } from '../../_controls';
 import { uploadFileActions } from '../../_actions';
+import config from 'config';
+import axios from 'axios';
 
 class UploadFile extends Component {
 
@@ -51,6 +53,7 @@ class UploadFile extends Component {
             filedetails.name = files.fileList[index].name;
             filedetails.size = files.fileList[index].size;
             filedetails.type = files.fileList[index].type;
+            filedetails.file = files.fileList[index];
             uploadedFiles.push(filedetails);
         }
         this.setState({ uploadedFiles });
@@ -74,7 +77,42 @@ class UploadFile extends Component {
         e.preventDefault();
         const { dispatch } = this.props;
         const { uploadedFiles } = this.state;
-        dispatch(uploadFileActions.create({ uploadedFiles }));
+        debugger;
+
+        let imageObj = {
+            imageName: "base-image-" + Date.now(),
+            imageData: uploadedFiles[0].image.toString()
+        };
+
+        let headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+        };
+        axios.post(`${config.apiUrl}/uploadfiles/uploadbase`, imageObj, headers)
+            .then((data) => {
+                if (data.data.success) {
+                    alert("Image has been successfully uploaded using base64 format");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("Error while uploading image using base64 format")
+            });
+
+        // let imageFormObj = new FormData();
+        // imageFormObj.append("imageName", "multer-image-" + Date.now());
+        // imageFormObj.append("imageData", uploadedFiles[0].file);
+        // //dispatch(uploadFileActions.create(imageFormObj));
+
+        // axios.post(`${config.apiUrl}/uploadfiles/uploadmulter`, imageFormObj)
+        //     .then((data) => {
+        //         if (data.data.success) {
+        //             alert("Image has been successfully uploaded using multer");
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         alert("Error while uploading image using multer");
+        //     });
 
         // if (this.state.description !== '') {
         //     this.setState({ submitted: false });

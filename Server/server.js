@@ -36,6 +36,7 @@ const errorHandler = require('_helpers/error-handler');
 // else 
 {
 
+    app.use('/uploads', express.static('uploads'));
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
     app.use(cors());
@@ -43,13 +44,21 @@ const errorHandler = require('_helpers/error-handler');
     // use JWT auth to secure the api
     app.use(jwt());
 
-    app.use(function (req, res, next) {
-        res.header("Access-Control-Allow-Headers", "*");
+    // app.use(function (req, res, next) {
+    //     res.header("Access-Control-Allow-Headers", "*");
+    //     res.header('Access-Control-Allow-Credentials', true);
+    //     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    //     res.header('Access-Control-Allow-Origin', req.headers.origin);
+    //     next();
+    // });
+
+    app.use((req, res, next) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         res.header('Access-Control-Allow-Credentials', true);
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        res.header('Access-Control-Allow-Origin', req.headers.origin);
-        next();
-    });
+        res.header('Access-Control-Allow-Methods', '*');  // enables all the methods to take place
+        return next();
+      });
 
     routes();
 

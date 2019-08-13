@@ -16,18 +16,17 @@ export const uploadFileService = {
 
 
 function create(data) {
-    let header = new Headers({
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'multipart/form-data'
-    });
+    // let header = new Headers({
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Content-Type': 'multipart/form-data'
+    // });
     const requestOptions = {
         method: 'POST',
-        headers: { ...authHeader(), header },
-        body: JSON.stringify(data),
-        mode: 'cors',
+        headers: { ...authHeader(), 'Content-type': 'application/json', 'Content-Type': 'multipart/form-data' },
+        body: data,
     };
     debugger;
-    return fetch(`${config.apiUrl}/uploadfiles/create`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/uploadfiles/uploadmulter`, requestOptions).then(handleResponse);
 }
 
 function update(data) {
