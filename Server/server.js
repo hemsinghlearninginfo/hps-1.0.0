@@ -11,6 +11,9 @@ const io = require('socket.io')(server);
 const jwt = require('_helpers/jwt');
 const errorHandler = require('_helpers/error-handler');
 
+const seed = require('./seed');
+seed.seedDB();
+
 // Seedind DB
 // const seed = require('./seed');
 // seed.seedDB();
@@ -78,6 +81,7 @@ function routes() {
     app.use('/extra', require('./Controller/extra.controller'));
     app.use('/writeup', require('./Controller/writeups.controller'));
     app.use('/uploadfiles', require('./Controller/uploadedFile.controller'));
+    app.use('/market', require('./Controller/market.controller'));
     app.use(errorHandler);
 }
 
