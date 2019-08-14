@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { PageTemplate, ModalPopUp, ModalPopUpButton, Loading, Authorise } from '../../_controls';
 import { Icon } from '../../_controls';
 
-class MarketPage extends React.Component {
+class MarketPage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            market: [],
+        };
+        this.fetchMarkets = this.fetchMarkets.bind(this);
+    }
+
+    componentDidMount() {
+        this.fetchMarkets();
+    }
+
+    fetchMarkets() {
+        //this.props.dispatch(faqActions.getAll());
+    }
+
     render() {
         return (
             <PageTemplate heading="Market">
