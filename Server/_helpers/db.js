@@ -10,5 +10,6 @@ module.exports = {
     FAQ: require('../Model/faq.model'),
     NewsLetter: require('../Model/newsletter.model'),
     WriteUp: require('../Model/writeup.model'),
-    UploadedFile: require('../Model/uploadedFile.model')
+    UploadedFile: require('../Model/uploadedFile.model'),
+    Market: require('../Model/market.model')
 };

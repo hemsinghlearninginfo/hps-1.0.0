@@ -7,6 +7,7 @@ import { NewsLetter, TermsAndConditions } from './Extras';
 import { Notifications, Expire, GoUp, UploadFile } from './Shared';
 import { SlideMasters } from './Master';
 import { WriteUp, SlideWriteUps } from './WriteUp';
+import { MarketPage } from './Market';
 import { Home } from './Home';
 import { Login } from './Login';
 import { Register } from './Register';
@@ -36,4 +37,6 @@ export default class MyComponent {
     static Login = Login;
     static Register = Register;
     static Profile = Profile;
+
+    static MarketPage = MarketPage;
 }
