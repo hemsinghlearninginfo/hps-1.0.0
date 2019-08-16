@@ -602,3 +602,22 @@ ul {
   z-index: 1051 !important;
   background-color: #6f6f6fb5;
 }
+
+.delete-attachment{
+  position: absolute;
+  right: 3px;
+    top: -12px;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: large;
+}
+
+.modal-footer, .modal-header{
+  background: #f3f3f3;
+  box-shadow: 0 -0.1rem 0.3rem rgba(0,0,0,.15)!important;
+}
+
+.modal-footer-confirm{
+  padding: .5rem !important;
+  background: #f0ebfd !important;
+}

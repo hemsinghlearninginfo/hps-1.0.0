@@ -4,7 +4,7 @@ import { Error404 } from './Error';
 
 import { NewsLetter, TermsAndConditions } from './Extras';
 
-import { Notifications, Expire, GoUp, UploadFile } from './Shared';
+import { Notifications, GoUp, UploadFile } from './Shared';
 import { SlideMasters } from './Master';
 import { WriteUp, SlideWriteUps } from './WriteUp';
 import { MarketPage } from './Market';
@@ -26,7 +26,6 @@ export default class MyComponent {
     static TermsAndConditions = TermsAndConditions;
 
     static Notifications = Notifications;
-    static Expire = Expire;
     static GoUp = GoUp;
     static UploadFile = UploadFile;
 

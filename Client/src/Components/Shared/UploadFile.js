@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactFileReader from 'react-file-reader';
+import uuid from "uuid";
+
 import { Icon, ModalPopUp, ModalConfirm } from '../../_controls';
-import { uploadFileActions } from '../../_actions';
-import config from 'config';
-import axios from 'axios';
+import { modalAlertActions, uploadFileActions } from '../../_actions';
+// import config from 'config';
+// import axios from 'axios';
 
 class UploadFile extends Component {
 
@@ -49,12 +51,20 @@ class UploadFile extends Component {
         let filedetails = {};
         for (let index = 0; index < files.fileList.length; index++) {
             filedetails = {};
-            filedetails.image = isAddMultiple ? files.base64[index] : files.base64;
-            filedetails.name = files.fileList[index].name;
-            filedetails.size = files.fileList[index].size;
-            filedetails.type = files.fileList[index].type;
-            filedetails.file = files.fileList[index];
-            uploadedFiles.push(filedetails);
+            if (files.fileList[index].size < 10000000) {
+                filedetails.id = uuid.v4();
+                filedetails.image = isAddMultiple ? files.base64[index] : files.base64;
+                filedetails.name = files.fileList[index].name;
+                filedetails.size = files.fileList[index].size;
+                filedetails.type = files.fileList[index].type;
+                filedetails.file = files.fileList[index];
+                filedetails.isUploaded = false;
+                uploadedFiles.push(filedetails);
+            }
+            else {
+                const { dispatch } = this.props;
+                dispatch(modalAlertActions.error("File size more than 10mb is not allowed, please selecte another file."));
+            }
         }
         this.setState({ uploadedFiles });
         //fileTypes={[".csv",".zip"]} 
@@ -65,19 +75,19 @@ class UploadFile extends Component {
     }
 
     handleDelete() {
-        var uploadedFiles = [...this.state.uploadedFiles];
-        if (this.state.idToDelete !== -1) {
-            uploadedFiles.splice(this.state.idToDelete, 1);
-            this.setState({ uploadedFiles });
-        }
+        const { idToDelete } = this.state;
+        this.setState({
+            uploadedFiles: this.state.uploadedFiles.filter(function (file) {
+                return file.id !== idToDelete;
+            })
+        });
     }
-
 
     handleSubmit(e) {
         e.preventDefault();
         const { dispatch } = this.props;
         const { uploadedFiles } = this.state;
-
+        debugger;
         let imageObj = {
             imageName: "base-image-" + Date.now(),
             imageData: uploadedFiles[0].image.toString()
@@ -124,16 +134,16 @@ class UploadFile extends Component {
     render() {
         const { uploadedFiles, isAddMultiple } = this.state;
         const displayFiles = uploadedFiles.map((item, index) =>
-            <div key={index} className={isAddMultiple ? "col-lg-3 col-md-4 col-6" : "col-lg-12 col-md-12 col-12"}>
+            <div key={item.id} className={isAddMultiple ? "col-lg-3 col-md-4 col-6" : "col-lg-12 col-md-12 col-12"}>
                 <div className="d-block mb-4 h-100 text-center">
-                    <a className="text-danger pointer"
+                    <a className="text-danger pointer delete-attachment"
                         data-toggle="modal"
                         data-backdrop="static" data-keyboard="false"
                         data-target="#modalPopUpConfirm"
-                        onClick={() => { this.handleConfirm(index); return true; }}
+                        onClick={() => { this.handleConfirm(item.id); return true; }}
                     ><Icon type='CIRCLECLOSE' /></a>
-                    {/* <img src={item.image} className="img-fluid img-thumbnail" /> */}
-                    {item.name}
+                    <img src={item.image} className="img-fluid img-thumbnail" />
+                    {item.isUploaded && <Icon type='cloudupload' />} <span className="font-small">{item.name}</span>
                 </div>
             </div>
         );
@@ -151,7 +161,7 @@ class UploadFile extends Component {
                             </div>
                             {uploadedFiles && uploadedFiles.length > 0 && (<div className="row">
                                 <div className="container">
-                                    <h3 className="font-weight-light text-center text-lg-left mt-1 mb-0">Attached Files</h3>
+                                    <h5 className="font-weight-light text-center text-lg-left mt-1 mb-0">Attached Files</h5>
                                     <hr className="mt-2 mb-3" />
                                     <div className="row text-center text-lg-left">
                                         {displayFiles}

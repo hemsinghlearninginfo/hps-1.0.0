@@ -14,10 +14,6 @@ const errorHandler = require('_helpers/error-handler');
 const seed = require('./seed');
 seed.seedDB();
 
-// Seedind DB
-// const seed = require('./seed');
-// seed.seedDB();
-
 // const cluster = require("cluster");
 // const numCPUs = require("os").cpus().length;
 

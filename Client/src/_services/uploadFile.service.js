@@ -16,16 +16,11 @@ export const uploadFileService = {
 
 
 function create(data) {
-    // let header = new Headers({
-    //     'Access-Control-Allow-Origin': '*',
-    //     'Content-Type': 'multipart/form-data'
-    // });
     const requestOptions = {
         method: 'POST',
         headers: { ...authHeader(), 'Content-type': 'application/json'},
         body: JSON.stringify(data),
     };
-    debugger;
     return fetch(`${config.apiUrl}/uploadfiles/create`, requestOptions).then(handleResponse);
 }
 

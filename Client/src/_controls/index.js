@@ -8,3 +8,4 @@ export * from './ModalPopUpButon';
 export * from './Icon';
 export * from './Authorise';
 export * from './InfoBox';
+export * from './Expire';

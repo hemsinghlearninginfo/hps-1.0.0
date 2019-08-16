@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { history, Role, commonMethods } from '../_helpers';
 import { userService } from '../_services';
 import { alertActions } from '../_actions';
-import { PrivateRoute } from '../_controls';
+import { PrivateRoute, Expire } from '../_controls';
 import { FAQPage } from '../Components/FAQ';
 import MyComponents from '../Components/index';
 import Wrapper from '../Components/Shared/Wrapper';
@@ -43,9 +43,9 @@ class App extends Component {
                         <MyComponents.Notifications />
                         <MyComponents.Header />
                         {alert.message &&
-                            (<MyComponents.Expire delay={8}><div id="globalAlert" className="global-alert row justify-content-center align-items-center">
+                            (<Expire delay={8}><div id="globalAlert" className="global-alert row justify-content-center align-items-center">
                                 <div className={`alert ${alert.type}`}>{alert.message}</div>
-                            </div></MyComponents.Expire>)
+                            </div></Expire>)
                         }
                         <Switch>
                             <Route exact path="/" component={MyComponents.Home} />

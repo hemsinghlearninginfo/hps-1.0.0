@@ -11,16 +11,10 @@ class ModalConfirm extends Component {
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">{this.props.heading}</h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
                             <div className="modal-body text-left">
                                 {this.props.message}
                             </div>
-                            <div className="modal-footer">
+                            <div className="modal-footer modal-footer-confirm">
                                 <button type="submit" className="btn btn-primary btn-sm" onClick={() => { this.props.callBack(); $("#closeConfirm").click() }}>
                                     {this.props.actionButtonText}
                                 </button>

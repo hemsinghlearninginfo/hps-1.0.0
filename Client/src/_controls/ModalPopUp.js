@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Expire } from './';
 
 class ModalPopUp extends Component {
     render() {
@@ -9,7 +10,7 @@ class ModalPopUp extends Component {
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-lg" role="document">
                         <div className="modal-content">
-                            <div className="modal-header">
+                            <div className="modal-header shadow-sm">
                                 <h5 className="modal-title" id="exampleModalLabel">{this.props.heading}</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -17,7 +18,9 @@ class ModalPopUp extends Component {
                             </div>
                             <div className="modal-alert">
                                 {this.props.modalAlert.message &&
-                                    <div className={`modal-alert-padding alert ${this.props.modalAlert.type}`}>{this.props.modalAlert.message}</div>
+                                    <Expire delay={5}>
+                                        <div className={`modal-alert-padding alert ${this.props.modalAlert.type}`}>{this.props.modalAlert.message}</div>
+                                    </Expire>
                                 }
                             </div>
                             {this.props.children}
@@ -38,7 +41,7 @@ function mapStateToProps(state) {
 }
 
 const connectedModalPopUp = connect(mapStateToProps)(ModalPopUp);
-export { connectedModalPopUp as ModalPopUp }; 
+export { connectedModalPopUp as ModalPopUp };
 
 // import React from 'react';
 // export const ModalPopUp = (props) => (
