@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { PageTemplate, Icon, ModalPopUpButton } from '../../_controls';
 import { commonMethods } from '../../_helpers';
+import { ModalPopUp } from '../../_controls';
 import MyComponent from '../';
+import userAvatar from '../../Resources/images/userAvatar.jpg';
 
 class Profile extends Component {
 
@@ -10,9 +12,11 @@ class Profile extends Component {
         this.state = {
             user: null,
             isUploadPhoto: false,
+            userFile: null,
         }
         this.getUser = this.getUser.bind(this);
         this.uploadPhoto = this.uploadPhoto.bind(this);
+        this.getUploadedFile = this.getUploadedFile.bind(this);
     }
 
     componentDidMount() {
@@ -20,24 +24,32 @@ class Profile extends Component {
     }
 
     getUser() {
-        this.setState({ user: commonMethods.getCurrentUser() });
+        let user = commonMethods.getCurrentUser();
+        user.profileImage = userAvatar;
+        this.setState({ user });
     }
 
     uploadPhoto() {
         this.setState({ isUploadPhoto: true });
     }
 
+    getUploadedFile(uploadedFile) {
+        let { user } = this.state;
+        user.profileImage = uploadedFile[0].image;
+        this.setState({ user, isUploadPhoto: false });
+    }
+
     render() {
-        const { user } = this.state;
+        const { user, isUploadPhoto } = this.state;
         return (
             <>
                 <PageTemplate heading="User Profile">
-                    <MyComponent.UploadFile heading="Upload New Picture" isAddMultiple={true} fileTypes={[".jpg", ".jpeg", ".png"]} />
+                    <ModalPopUp heading="Upload Picture">{isUploadPhoto && <MyComponent.UploadFile heading="Upload New Picture" isAddMultiple={false} fileTypes={[".jpg", ".jpeg", ".png"]} callbackMethod={this.getUploadedFile} />}</ModalPopUp>
                     <div className="container emp-profile shadow-sm">
                         <div className="row">
                             <div className="col-md-4">
                                 <div className="profile-img">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
+                                    {user && user.profileImage && <img src={user.profileImage} alt="Profile" />}
                                     <div className="file btn btn-lg">
                                         <ModalPopUpButton action={this.uploadPhoto} iconType='upload' >
                                             {' '}Change Photo

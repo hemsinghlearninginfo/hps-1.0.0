@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import ReactFileReader from 'react-file-reader';
 import uuid from "uuid";
 
-import { Icon, ModalPopUp, ModalConfirm } from '../../_controls';
+import { Icon } from '../../_controls';
 import { modalAlertActions, uploadFileActions } from '../../_actions';
-// import config from 'config';
-// import axios from 'axios';
+import { commonMethods } from '../../_helpers';
 
 class UploadFile extends Component {
 
@@ -22,25 +21,15 @@ class UploadFile extends Component {
             confirmDelete: false,
         }
         this.handleFiles = this.handleFiles.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-        // if (nextProps.writeup.isPosted) {
-        //     commonMethods.callClick('closeWriteUp');
-        //     this.setState({
-        //         isAdd: false,
-        //         description: '',
-        //         isError: false,
-        //         submitted: false
-        //     });
-        //     this.props.requireRefresh();
-        // }
-        // else if (nextProps.writeup.isPostingFail) {
-        //     this.setState({ submitted: false });
-        // }
-        // commonMethods.scrollTop();
+        if (nextProps.uploadFiles.list.length > 0 && this.state.uploadedFiles.length && nextProps.uploadFiles.list.length === this.state.uploadedFiles.length) {
+            this.props.callbackMethod(this.state.uploadedFiles);
+            commonMethods.callClick('closeUploadFile');
+            commonMethods.scrollTop();;
+        }
     }
 
     handleFiles = files => {
@@ -52,7 +41,7 @@ class UploadFile extends Component {
         for (let index = 0; index < files.fileList.length; index++) {
             filedetails = {};
             if (files.fileList[index].size < 10000000) {
-                filedetails.id = uuid.v4();
+                filedetails.imageId = uuid.v4();
                 filedetails.image = isAddMultiple ? files.base64[index] : files.base64;
                 filedetails.name = files.fileList[index].name;
                 filedetails.size = files.fileList[index].size;
@@ -71,45 +60,25 @@ class UploadFile extends Component {
     }
 
     handleConfirm(idToDelete) {
-        this.setState({ confirmDelete: true, idToDelete });
-    }
-
-    handleDelete() {
-        const { idToDelete } = this.state;
-        this.setState({
-            uploadedFiles: this.state.uploadedFiles.filter(function (file) {
-                return file.id !== idToDelete;
-            })
-        });
+        let response = window.confirm('Are you sure want to delete?');
+        if (response) {
+            this.setState({
+                uploadedFiles: this.state.uploadedFiles.filter(function (file) {
+                    return file.id !== idToDelete;
+                })
+            });
+        }
     }
 
     handleSubmit(e) {
         e.preventDefault();
         const { dispatch } = this.props;
         const { uploadedFiles } = this.state;
-        debugger;
-        let imageObj = {
-            imageName: "base-image-" + Date.now(),
-            imageData: uploadedFiles[0].image.toString()
-        };
-        dispatch(uploadFileActions.create(imageObj));
+        dispatch(uploadFileActions.create({ ...uploadedFiles }));
 
-        // axios.post(`${config.apiUrl}/uploadfiles/uploadbase`, imageObj)
-        //     .then((data) => {
-        //         if (data.data.success) {
-        //             alert("Image has been successfully uploaded using base64 format");
-        //         }
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //         alert("Error while uploading image using base64 format")
-        //     });
-
-        let imageFormObj = new FormData();
-        imageFormObj.append("imageName", "multer-image-" + Date.now());
-        imageFormObj.append("imageData", uploadedFiles[0].file);
-        //dispatch(uploadFileActions.create(imageFormObj));
-
+        // let imageFormObj = new FormData();
+        // imageFormObj.append("imageName", "multer-image-" + Date.now());
+        // imageFormObj.append("imageData", uploadedFiles[0].file);
         // axios.post(`${config.apiUrl}/uploadfiles/uploadmulter`, imageFormObj)
         //     .then((data) => {
         //         if (data.data.success) {
@@ -119,27 +88,14 @@ class UploadFile extends Component {
         //     .catch((err) => {
         //         alert("Error while uploading image using multer");
         //     });
-
-        // if (this.state.description !== '') {
-        //     this.setState({ submitted: false });
-        //     const { dispatch } = this.props;
-        //     const { description } = this.state;
-        //     dispatch(writeupActions.create({ description }));
-        // }
-        // else {
-        //     this.setState({ submitted: true });
-        // }
     }
 
     render() {
         const { uploadedFiles, isAddMultiple } = this.state;
         const displayFiles = uploadedFiles.map((item, index) =>
-            <div key={item.id} className={isAddMultiple ? "col-lg-3 col-md-4 col-6" : "col-lg-12 col-md-12 col-12"}>
+            <div key={item.imageId} className={isAddMultiple ? "col-lg-3 col-md-4 col-6" : "col-lg-12 col-md-12 col-12"}>
                 <div className="d-block mb-4 h-100 text-center">
                     <a className="text-danger pointer delete-attachment"
-                        data-toggle="modal"
-                        data-backdrop="static" data-keyboard="false"
-                        data-target="#modalPopUpConfirm"
                         onClick={() => { this.handleConfirm(item.id); return true; }}
                     ><Icon type='CIRCLECLOSE' /></a>
                     <img src={item.image} className="img-fluid img-thumbnail" />
@@ -150,41 +106,41 @@ class UploadFile extends Component {
 
         return (
             <>
-                <ModalConfirm heading="Confirm Delete" message="Are you sure to delete this?" callBack={this.handleDelete} actionButtonText="Delete" />
-                <ModalPopUp heading={this.props.heading}>
-                    <div className="modal-body text-left">
-                        <div className="form-group">
-                            <div className="custom-file">
-                                <ReactFileReader fileTypes={this.props.fileTypes} base64={true} multipleFiles={this.props.isAddMultiple} handleFiles={this.handleFiles}>
-                                    <button className='btn btn-sm btn-info'><Icon type='file' /> Select Files</button>
-                                </ReactFileReader>
+                <div className="modal-body text-left">
+                    <div className="form-group">
+                        <div className="custom-file">
+                            <div className="font-sm text-mute">
+                                Allowed files types:- {this.props.fileTypes.toString().replace(/,./g,', .')}
                             </div>
-                            {uploadedFiles && uploadedFiles.length > 0 && (<div className="row">
-                                <div className="container">
-                                    <h5 className="font-weight-light text-center text-lg-left mt-1 mb-0">Attached Files</h5>
-                                    <hr className="mt-2 mb-3" />
-                                    <div className="row text-center text-lg-left">
-                                        {displayFiles}
-                                    </div>
-                                </div>
-                            </div>)}
+                            <ReactFileReader fileTypes={this.props.fileTypes} base64={true} multipleFiles={this.props.isAddMultiple} handleFiles={this.handleFiles}>
+                                <button className='btn btn-sm btn-info'><Icon type='file' /> Select Files</button>
+                            </ReactFileReader>
                         </div>
+                        {uploadedFiles && uploadedFiles.length > 0 && (<div className="row">
+                            <div className="container">
+                                <h5 className="font-weight-light text-center text-lg-left mt-1 mb-0">Attached Files</h5>
+                                <hr className="mt-2 mb-3" />
+                                <div className="row text-center text-lg-left">
+                                    {displayFiles}
+                                </div>
+                            </div>
+                        </div>)}
                     </div>
-                    <div className="modal-footer">
-                        <button type="submit" className="btn btn-primary btn-sm" onClick={this.handleSubmit}><Icon type='upload' /> Upload</button>
-                        {' '}
-                        <button id="closeWriteUp" type="button" className="btn btn-secondary btn-sm" onClick={() => this.setState({ submitted: false })} data-dismiss="modal"><Icon type='close' /> Close</button>
-                    </div>
-                </ModalPopUp>
+                </div>
+                <div className="modal-footer">
+                    <button type="submit" className="btn btn-primary btn-sm" onClick={this.handleSubmit}><Icon type='upload' /> Upload</button>
+                    {' '}
+                    <button id="closeUploadFile" type="button" className="btn btn-secondary btn-sm" onClick={() => this.setState({ submitted: false })} data-dismiss="modal"><Icon type='close' /> Close</button>
+                </div>
             </>
         );
     }
 }
 
 function mapStateToProps(state) {
-    const { uploadfile } = state;
+    const { uploadFiles } = state;
     return {
-        uploadfile
+        uploadFiles
     };
 }
 

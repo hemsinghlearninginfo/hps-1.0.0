@@ -7,7 +7,7 @@ class ModalConfirm extends Component {
     render() {
         return (
             <>
-                <div className="modal fade" id="modalPopUpConfirm" role="dialog"
+                <div className="modal fade hide" id="modalPopUpConfirm" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">

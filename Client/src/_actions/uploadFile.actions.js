@@ -14,20 +14,23 @@ export const uploadFileActions = {
     // delete: _delete
 };
 
-function create(uploadFile) {
+function create(uploadedFiles) {
     return dispatch => {
-        dispatch(request(uploadFile));
-        uploadFileService.create(uploadFile)
-            .then(
-                uploadFile => {
-                    dispatch(success(uploadFile));
-                    dispatch(alertActions.success('File has been uploaded successfully'));
-                },
-                error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(modalAlertActions.error(error.toString()));
-                }
-            );
+        for (let index in uploadedFiles) {
+            let file = uploadedFiles[index];
+            dispatch(request(file));
+            uploadFileService.create(file)
+                .then(
+                    uploadedFile => {
+                        file.isUploaded = true;
+                        dispatch(success(file));
+                    },
+                    error => {
+                        dispatch(failure(error.toString()));
+                        dispatch(modalAlertActions.error(error.toString()));
+                    }
+                );
+        }
     };
 
     function request(uploadFile) { return { type: uploadFileConstants.POST_REQUEST, uploadFile: uploadFile } }
