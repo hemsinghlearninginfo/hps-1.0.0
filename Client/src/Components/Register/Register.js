@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import queryString from 'query-string'
 import { PageTemplate, Icon, Loading } from '../../_controls';
 import { userActions } from '../../_actions';
 
@@ -13,13 +14,22 @@ class Register extends React.Component {
                 firstName: '',
                 lastName: '',
                 username: '',
-                password: ''
+                password: '',
+                referralCode: '',
             },
             submitted: false
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        const value = queryString.parse(this.props.location.search);
+        const referralCode = value.rc;
+        if (referralCode !== undefined) {
+            this.setState({ user: { referralCode: referralCode } });
+        }
     }
 
     handleChange(event) {
@@ -85,9 +95,9 @@ class Register extends React.Component {
                                             <div className="help-block">Password is required</div>
                                         }
                                     </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" name="termsandcondition" id="termsandcondition" />
-                                        <label class="form-check-label" for="termsandcondition">I accept the <Link target="_blank" to='/tac'>Terms and Condition</Link></label>
+                                    <div className="form-check">
+                                        <input type="checkbox" className="form-check-input" name="termsandcondition" id="termsandcondition" />
+                                        <label className="form-check-label" htmlFor="termsandcondition">I accept the <Link target="_blank" to='/tac'>Terms and Condition</Link></label>
                                     </div>
                                     <br />
                                     <div className="form-group">

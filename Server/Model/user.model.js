@@ -7,6 +7,8 @@ const schema = new Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     role: { type: String, default: 'User' },
+    image: { type: String, default: "none", required: true },
+    referralCode: { type: String, default: "none", required: true },
     createdDate: { type: Date, default: Date.now }
 });
 
