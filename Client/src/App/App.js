@@ -51,6 +51,7 @@ class App extends Component {
                             <Route exact path="/" component={MyComponents.Home} />
                             <Route path="/tac" component={MyComponents.TermsAndConditions} />
                             <Route path="/login" component={MyComponents.Login} />
+                            <Route path="/fp" component={MyComponents.ForgotPassword} />
                             <Route path="/register" component={MyComponents.Register} />
                             <Route path="/faq" component={FAQPage} />
                             <Route path="/writeup" component={MyComponents.WriteUp} />

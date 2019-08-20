@@ -9,7 +9,7 @@ import { SlideMasters } from './Master';
 import { WriteUp, SlideWriteUps } from './WriteUp';
 import { MarketPage } from './Market';
 import { Home } from './Home';
-import { Login } from './Login';
+import { Login, ForgotPassword } from './Login';
 import { Register } from './Register';
 import { Profile } from './UserProfile';
 
@@ -34,6 +34,7 @@ export default class MyComponent {
     static WriteUp = WriteUp;
 
     static Login = Login;
+    static ForgotPassword = ForgotPassword;
     static Register = Register;
     static Profile = Profile;
 

@@ -3,7 +3,7 @@ import {
     FaRegEdit, FaPlusSquare, FaSave, FaWindowClose, FaEnvelope, FaUserTie,
     FaSignOutAlt, FaSignInAlt, FaAddressCard, FaUserCog, FaQuestion, FaHeart,
     FaTrash, FaCaretSquareUp, FaUserPlus, FaFacebook, FaLinkedin, FaUpload,
-    FaFile, FaTimesCircle, FaTools, FaCloudUploadAlt
+    FaFile, FaTimesCircle, FaTools, FaCloudUploadAlt, FaKey
 } from 'react-icons/fa';
 export const Icon = (props) => (
     <>{getIcon(props.type)}</>
@@ -55,6 +55,8 @@ function getIcon(type) {
             return <FaTools />
         case 'CLOUDUPLOAD':
             return <FaCloudUploadAlt />
+        case 'KEY':
+            return <FaKey />
         default:
             return <></>;
     }

@@ -5,7 +5,7 @@ import { Icon, PageTemplate, Loading } from '../../_controls';
 
 import { userActions } from '../../_actions';
 
-class Login extends React.Component {
+class ForgotPassword extends React.Component {
     constructor(props) {
         super(props);
 
@@ -14,7 +14,6 @@ class Login extends React.Component {
 
         this.state = {
             username: '',
-            password: '',
             submitted: false
         };
 
@@ -31,23 +30,23 @@ class Login extends React.Component {
         e.preventDefault();
 
         this.setState({ submitted: true });
-        const { username, password } = this.state;
+        const { username } = this.state;
         const { dispatch } = this.props;
-        if (username && password) {
-            dispatch(userActions.login(username, password));
+        if (username) {
+            dispatch(userActions.login(username));
         }
     }
 
     render() {
         const { loggingIn } = this.props;
-        const { username, password, submitted } = this.state;
+        const { username, submitted } = this.state;
         return (
-            <PageTemplate heading="Sing in">
+            <PageTemplate heading="Forgot Password">
                 <div className="p-5 d-flex justify-content-center">
                     <div className="col-md-4 col-md-offset-3 login-icon">
-                        <Icon type='LOGGEDINUSER' />
+                        <Icon type='Key' />
                     </div>
-                    <div className="col-md-4 col-md-offset-3 login-box">
+                    <div className="col-md-4 col-md-offset-3 login-box p-5 m-3">
                         <form name="form" onSubmit={this.handleSubmit}>
                             <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
                                 <label htmlFor="username">Username</label>
@@ -57,19 +56,9 @@ class Login extends React.Component {
                                     <div className="help-block">Username is required</div>
                                 }
                             </div>
-                            <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-                                <label htmlFor="password">Password</label>
-                                <input type="password" className="form-control required" name="password" value={password} onChange={this.handleChange} placeholder="********" />
-                                {submitted && !password &&
-                                    <div className="help-block">Password is required</div>
-                                }
-                            </div>
                             <div className="form-group">
-                                <button className="btn btn-primary">Login</button>
+                                <button className="btn btn-primary">Send Link</button>
                                 {loggingIn && <Loading />}
-                                <Link to="/register" className="btn btn-link">Register</Link>
-                                {'\n'}
-                                <Link to="/fp" className="btn btn-link">Forgot Password</Link>
                             </div>
                         </form>
                     </div>
@@ -87,5 +76,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedLogin = connect(mapStateToProps)(Login);
-export { connectedLogin as Login }; 
+const connectedForgotPassword = connect(mapStateToProps)(ForgotPassword);
+export { connectedForgotPassword as ForgotPassword }; 
