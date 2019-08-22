@@ -1,4 +1,4 @@
-import { userService } from '../_services';
+import { userService } from '_services';
 
 export function handleResponse(response) {
     return response.text().then(text => {

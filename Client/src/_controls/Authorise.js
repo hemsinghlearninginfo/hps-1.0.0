@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { commonMethods } from '../_helpers';
+import { commonMethods } from '_helpers';
 
 class Authorise extends Component {
     constructor(props) {

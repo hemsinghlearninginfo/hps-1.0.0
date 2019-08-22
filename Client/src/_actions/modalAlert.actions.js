@@ -1,4 +1,4 @@
-import { modalAlertConstants } from '../_constants';
+import { modalAlertConstants } from '_constants';
 
 export const modalAlertActions = {
     success,

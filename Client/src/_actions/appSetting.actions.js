@@ -1,5 +1,5 @@
-import { appSettingConstants } from '../_constants';
-import { appSettingService } from '../_services';
+import { appSettingConstants } from '_constants';
+import { appSettingService } from '_services';
 //import { alertActions, modalAlertActions } from '.';
 
 export const appSettingActions = {

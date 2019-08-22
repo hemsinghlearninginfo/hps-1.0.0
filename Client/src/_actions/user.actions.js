@@ -1,14 +1,15 @@
-import { userConstants } from '../_constants';
-import { userService } from '../_services';
-import { alertActions } from './';
-import { history } from '../_helpers';
+import { userConstants } from '_constants';
+import { userService } from '_services';
+import { alertActions, modalAlertActions } from './';
+import { history } from '_helpers';
 
 export const userActions = {
     login,
     logout,
     register,
     getAll,
-    delete: _delete
+    delete: _delete,
+    update,
 };
 
 function login(username, password) {
@@ -92,4 +93,30 @@ function _delete(id) {
     function request(id) { return { type: userConstants.DELETE_REQUEST, id } }
     function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
     function failure(id, error) { return { type: userConstants.DELETE_FAILURE, id, error } }
+}
+
+
+function update(user) {
+    return dispatch => {
+        dispatch(request(user));
+
+        userService.update(user)
+            .then(
+                user => { 
+                    dispatch(success());
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    dispatch(modalAlertActions.success('Record updated successful'));
+                    dispatch(alertActions.success('Record updated successful'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(modalAlertActions.success('Record updated successful'));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request(user) { return { type: userConstants.UPDATE_REQUEST, user } }
+    function success() { return { type: userConstants.UPDATE_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.UPDATE_FAILURE, error } }
 }

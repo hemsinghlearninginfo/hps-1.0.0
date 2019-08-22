@@ -1,4 +1,4 @@
-import { uploadFileConstants } from '../_constants';
+import { uploadFileConstants } from '_constants';
 
 const INITIAL_STATE = {
   list: [],

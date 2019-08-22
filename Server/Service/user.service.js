@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
 const User = db.User;
+const UploadedFile = db.UploadedFile;
 
 module.exports = {
     authenticate,
@@ -10,6 +11,7 @@ module.exports = {
     getById,
     create,
     update,
+    uploadPhoto,
     delete: _delete
 };
 
@@ -63,6 +65,15 @@ async function update(id, userParam) {
     if (userParam.password) {
         userParam.hash = bcrypt.hashSync(userParam.password, 10);
     }
+
+    // copy userParam properties to user
+    Object.assign(user, userParam);
+
+    await user.save();
+}
+
+async function uploadPhoto(id, userParam) {
+    const user = await User.findById(id);
 
     // copy userParam properties to user
     Object.assign(user, userParam);

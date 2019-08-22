@@ -1,6 +1,6 @@
 
 import $ from 'jquery';
-import { userService } from '../_services';
+import { userService } from '_services';
 
 export const commonMethods = {
     getCurrentUser,

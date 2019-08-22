@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { PageTemplate, Icon, ModalPopUpButton } from '../../_controls';
-import { commonMethods } from '../../_helpers';
-import { ModalPopUp } from '../../_controls';
-import MyComponent from '../';
-import userAvatar from '../../Resources/images/userAvatar.jpg';
+import { connect } from 'react-redux';
+
+import { PageTemplate, Icon, ModalPopUpButton, ModalPopUp } from '_controls';
+import { userActions } from '_actions';
+import MyComponent from 'Components/';
+//import userAvatar from '../../Resources/images/userAvatar.jpg';
+import userAvatar from 'Resources/images/userAvatar.jpg';
 
 class Profile extends Component {
 
@@ -24,9 +26,13 @@ class Profile extends Component {
     }
 
     getUser() {
-        let user = commonMethods.getCurrentUser();
-        user.profileImage = userAvatar;
-        this.setState({ user });
+        let { user } = this.props;
+        if (user !== null) {
+            if (user.image === "none" || !user.image) {
+                user.image = userAvatar;
+            }
+            this.setState({ user });
+        }
     }
 
     uploadPhoto() {
@@ -34,9 +40,11 @@ class Profile extends Component {
     }
 
     getUploadedFile(uploadedFile) {
-        let { user } = this.state;
-        user.profileImage = uploadedFile[0].image;
+        let { user } = this.props;
+        user.image = uploadedFile[0].image;
         this.setState({ user, isUploadPhoto: false });
+        const { dispatch } = this.props;
+        dispatch(userActions.update(user));
     }
 
     render() {
@@ -49,11 +57,11 @@ class Profile extends Component {
                         <div className="row">
                             <div className="col-md-4">
                                 <div className="profile-img">
-                                    {user && user.profileImage && <img src={user.profileImage} alt="Profile" />}
+                                    {user && user.image && <img src={user.image} alt="Profile" />}
                                     <div className="file btn btn-lg">
                                         <ModalPopUpButton action={this.uploadPhoto} iconType='upload' >
                                             {' '}Change Photo
-                                            </ModalPopUpButton>
+                                        </ModalPopUpButton>
                                     </div>
                                 </div>
                             </div>
@@ -129,5 +137,12 @@ class Profile extends Component {
     }
 }
 
-export { Profile };
+function mapStateToProps(state) {
+    const { loggingIn, user } = state.authentication;
+    return {
+        loggingIn, user
+    };
+}
 
+const connectedProfile = connect(mapStateToProps)(Profile);
+export { connectedProfile as Profile }; 

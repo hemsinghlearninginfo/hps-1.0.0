@@ -1,4 +1,4 @@
-import { writeupConstants } from '../_constants';
+import { writeupConstants } from '_constants';
 
 export function writeup(state = {}, action) {
   switch (action.type) {

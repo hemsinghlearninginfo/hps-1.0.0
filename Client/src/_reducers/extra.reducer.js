@@ -1,4 +1,4 @@
-import { extraConstants } from '../_constants';
+import { extraConstants } from '_constants';
 
 export function extra(state = {}, action) {
   switch (action.type) {

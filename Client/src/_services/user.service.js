@@ -76,8 +76,9 @@ function update(user) {
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-    return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);;
+    return fetch(`${config.apiUrl}/users/${user._id}`, requestOptions).then(handleResponse);;
 }
+
 
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {

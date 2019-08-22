@@ -1,8 +1,7 @@
-import { writeupConstants } from '../_constants';
-import { writeupService } from '../_services';
+import { writeupConstants } from '_constants';
+import { writeupService } from '_services';
 import { modalAlertActions, alertActions } from './';
-import { commonMethods } from '../_helpers';
-import { write } from 'fs';
+import { commonMethods } from '_helpers';
 
 export const writeupActions = {
     create,

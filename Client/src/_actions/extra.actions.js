@@ -1,6 +1,6 @@
-import { extraConstants } from '../_constants';
-import { extraService } from '../_services';
-import { alertActions, modalAlertActions } from '.';
+import { extraConstants } from '_constants';
+import { extraService } from '_services';
+import { alertActions } from '.';
 
 export const extraActions = {
     addNewsLetterRequest,

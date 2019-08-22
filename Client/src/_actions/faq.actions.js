@@ -1,7 +1,7 @@
-import { faqConstants } from '../_constants';
-import { faqService } from '../_services';
+import { faqConstants } from '_constants';
+import { faqService } from '_services';
 import { modalAlertActions, alertActions } from './';
-//import { history } from '../_helpers';
+//import { history } from '_helpers';
 
 export const faqActions = {
     create,
