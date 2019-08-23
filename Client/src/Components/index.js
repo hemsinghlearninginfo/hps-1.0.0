@@ -1,17 +1,18 @@
 import { Header, Fotter, AboutUs } from './Shared/index';
-import { FAQPage } from './FAQ';
-import { Error404 } from './Error';
+import { FAQPage } from 'Components/FAQ';
+import { Error404 } from 'Components/Error';
 
-import { NewsLetter, TermsAndConditions } from './Extras';
+import { NewsLetter, TermsAndConditions } from 'Components/Extras';
 
-import { Notifications, GoUp, UploadFile } from './Shared';
-import { SlideMasters } from './Master';
-import { WriteUp, SlideWriteUps } from './WriteUp';
-import { MarketPage } from './Market';
-import { Home } from './Home';
-import { Login, ForgotPassword } from './Login';
-import { Register } from './Register';
-import { Profile } from './UserProfile';
+import { Notifications, GoUp, UploadFile } from 'Components/Shared';
+import { SlideMasters } from 'Components/Master';
+import { WriteUp, SlideWriteUps } from 'Components/WriteUp';
+import { MarketPage } from 'Components/Market';
+import { Home } from 'Components/Home';
+import { Login, ForgotPassword } from 'Components/Login';
+import { Register } from 'Components/Register';
+import { Profile } from 'Components/UserProfile';
+import { Messages } from 'Components/Messages'
 
 export default class MyComponent {
     static Header = Header;
@@ -39,4 +40,6 @@ export default class MyComponent {
     static Profile = Profile;
 
     static MarketPage = MarketPage;
+
+    static Messages = Messages;
 }

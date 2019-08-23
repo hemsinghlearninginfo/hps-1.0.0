@@ -56,14 +56,18 @@ export class Header extends Component {
                         <Link to="/faq" className="nav-item nav-link active"><Icon type='faq' /> FAQ</Link>
                         {/* <a href="#" className="nav-item nav-link active">Home</a>
                         <a href="#" className="nav-item nav-link">Profile</a> */}
-                        <div className="nav-item dropdown">
+                        <Authorise isLoggedIn={true}>
+                            <Link to="/msg" className="nav-item nav-link active"><Icon type='message' /> Messages</Link>
+                        </Authorise>
+
+                        {/* <div className="nav-item dropdown">
                             <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Messages</a>
                             <div className="dropdown-menu">
                                 <a href="#" className="dropdown-item">Inbox</a>
                                 <a href="#" className="dropdown-item">Sent</a>
                                 <a href="#" className="dropdown-item">Drafts</a>
                             </div>
-                        </div>
+                        </div> */}
                         <Authorise userroles={[Role.SuperAdmin, Role.Admin]}>
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown"><Icon type='tool' /> App Setting</a>

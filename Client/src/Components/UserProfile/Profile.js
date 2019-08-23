@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { PageTemplate, Icon, ModalPopUpButton, ModalPopUp } from '_controls';
 import { userActions } from '_actions';
 import MyComponent from 'Components/';
-//import userAvatar from '../../Resources/images/userAvatar.jpg';
+import { ProfilePic } from './';
 import userAvatar from 'Resources/images/userAvatar.jpg';
 
 class Profile extends Component {
@@ -13,57 +13,22 @@ class Profile extends Component {
         super(props);
         this.state = {
             user: null,
-            isUploadPhoto: false,
-            userFile: null,
         }
-        this.getUser = this.getUser.bind(this);
-        this.uploadPhoto = this.uploadPhoto.bind(this);
-        this.getUploadedFile = this.getUploadedFile.bind(this);
     }
 
     componentDidMount() {
-        this.getUser();
     }
 
-    getUser() {
-        let { user } = this.props;
-        if (user !== null) {
-            if (user.image === "none" || !user.image) {
-                user.image = userAvatar;
-            }
-            this.setState({ user });
-        }
-    }
-
-    uploadPhoto() {
-        this.setState({ isUploadPhoto: true });
-    }
-
-    getUploadedFile(uploadedFile) {
-        let { user } = this.props;
-        user.image = uploadedFile[0].image;
-        this.setState({ user, isUploadPhoto: false });
-        const { dispatch } = this.props;
-        dispatch(userActions.update(user));
-    }
 
     render() {
-        const { user, isUploadPhoto } = this.state;
+        const { user } = this.state;
         return (
             <>
                 <PageTemplate heading="User Profile">
-                    <ModalPopUp heading="Upload Picture">{isUploadPhoto && <MyComponent.UploadFile heading="Upload New Picture" isAddMultiple={false} fileTypes={[".jpg", ".jpeg", ".png"]} callbackMethod={this.getUploadedFile} />}</ModalPopUp>
                     <div className="container emp-profile shadow-sm">
                         <div className="row">
                             <div className="col-md-4">
-                                <div className="profile-img">
-                                    {user && user.image && <img src={user.image} alt="Profile" />}
-                                    <div className="file btn btn-lg">
-                                        <ModalPopUpButton action={this.uploadPhoto} iconType='upload' >
-                                            {' '}Change Photo
-                                        </ModalPopUpButton>
-                                    </div>
-                                </div>
+                                <ProfilePic />
                             </div>
                             <div className="col-md-6">
                                 <div className="profile-head">

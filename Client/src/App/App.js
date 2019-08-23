@@ -7,6 +7,8 @@ import { userService } from '../_services';
 import { alertActions } from '../_actions';
 import { PrivateRoute, Expire } from '../_controls';
 import { FAQPage } from '../Components/FAQ';
+import { userConstants } from '_constants';
+
 import MyComponents from '../Components/index';
 import Wrapper from '../Components/Shared/Wrapper';
 
@@ -26,12 +28,18 @@ class App extends Component {
     }
 
     componentDidMount() {
-        userService.currentUser.subscribe(x => this.setState({
-            currentUser: x,
-            isAdmin: x && x.role === Role.Admin
-        }));
+        userService.currentUser.subscribe(x => {
+            this.setState({
+                currentUser: x,
+                isAdmin: x && x.role === Role.Admin
+            });
+            const { dispatch } = this.props;
+            dispatch(success(x));
+        });
         commonMethods.globalLoader(false);
         commonMethods.gotop();
+
+        function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
     }
 
     render() {
@@ -57,6 +65,7 @@ class App extends Component {
                             <Route path="/writeup" component={MyComponents.WriteUp} />
                             <PrivateRoute exact path="/profile" component={MyComponents.Profile} />
                             <PrivateRoute exact path="/market" component={MyComponents.MarketPage} />
+                            <PrivateRoute exact path="/msg" component={MyComponents.Messages} />
                             <Route path='/404' component={MyComponents.Error404} />
                             <Redirect path='*' to='/404' />
                         </Switch>
