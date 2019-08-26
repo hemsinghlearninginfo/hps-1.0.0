@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { PageTemplate, ModalPopUp, ModalPopUpButton, Loading, Authorise } from '../../_controls';
-import { Icon } from '../../_controls';
+import { PageTemplate, Icon, ModalPopUp, ModalPopUpButton, Loading, Authorise } from '_controls';
+import { Role } from '_helpers';
 
 class MarketPage extends Component {
 
@@ -25,13 +25,15 @@ class MarketPage extends Component {
     render() {
         return (
             <PageTemplate heading="Market">
-                <div className="row">
-                    <div className="col-lg-12 text-right">
-                        <div className="form-group list-textBox add-Faq-Button">
-                            Market Actions Buttons List
+                <Authorise userroles={[Role.SuperAdmin, Role.Admin]}>
+                    <div className="row">
+                        <div className="col-lg-12 text-right">
+                            <div className="form-group list-textBox add-Faq-Button">
+                                <button className="btn btn-sm btn-primary" type="button"><Icon type="add" /> Add New</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Authorise>
                 <div className="row">
                     <div className="col-lg-12">
                         Market List
@@ -42,18 +44,15 @@ class MarketPage extends Component {
     }
 }
 
-// function mapStateToProps(state) {
-//     const { faqs } = state;
-//     const { loggingIn } = state.authentication;
-//     return {
-//         loggingIn,
-//         faqs,
-//     };
-// }
+function mapStateToProps(state) {
+    const { markets } = state;
+    const { loggingIn } = state.authentication;
+    return {
+        loggingIn,
+        markets,
+    };
+}
 
-// const connectedFAQPage = connect(mapStateToProps)(FAQPage);
-// export { connectedFAQPage as FAQPage };
+const connectedMarketPage = connect(mapStateToProps)(MarketPage);
+export { connectedMarketPage as MarketPage };
 
-export { MarketPage };
-
-//export * from './FAQPage';
