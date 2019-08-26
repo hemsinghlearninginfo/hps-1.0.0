@@ -1,7 +1,7 @@
 import config from 'config';
 import { authHeader, handleResponse } from '../_helpers';
 
-export const appSettingService = {
+export const masterService = {
     getAllMarket,
 };
 
@@ -12,4 +12,5 @@ function getAllMarket() {
     };
     return fetch(`${config.apiUrl}/market/getall`, requestOptions).then(handleResponse);
 }
+
 
