@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { PageTemplate, Icon, ModalPopUp, ModalPopUpButton, Loading, Authorise } from '_controls';
 import { Role } from '_helpers';
 import { masterActions } from '_actions';
+import { MarketList } from './MarketList';
 
 class MarketPage extends Component {
 
@@ -30,7 +31,8 @@ class MarketPage extends Component {
     }
 
     render() {
-        const { markets } = this.props;
+        const { market } = this.props;
+        const heading = ['name|Name', 'description|Description', 'isActive|Active'];
         return (
             <PageTemplate heading="Market">
                 <Authorise userroles={[Role.SuperAdmin, Role.Admin]}>
@@ -47,8 +49,7 @@ class MarketPage extends Component {
                 </Authorise>
                 <div className="row">
                     <div className="col-lg-12">
-                        {markets && markets.loading && <Loading />}
-                        Market List
+                        <MarketList data={market} heading={heading} />
                     </div>
                 </div>
             </PageTemplate>
@@ -57,11 +58,10 @@ class MarketPage extends Component {
 }
 
 function mapStateToProps(state) {
-    const { markets } = state;
-    const { loggingIn } = state.authentication;
+    const { market, loading } = state;
     return {
-        loggingIn,
-        markets,
+        loading,
+        market,
     };
 }
 

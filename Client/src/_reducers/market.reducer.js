@@ -8,7 +8,7 @@ export function market(state = {}, action) {
       };
     case masterConstants.MASTER_MARKET_GETALL_SUCCESS:
       return {
-        items: action.writeup
+        items: action.market
       };
     case masterConstants.MASTER_MARKET_GETALL_FAILURE:
       return {
@@ -18,25 +18,25 @@ export function market(state = {}, action) {
     case masterConstants.MASTER_MARKET_DELETE_REQUEST:
       return {
         ...state,
-        items: state.items.map(writeup =>
-          writeup.id === action.id
-            ? { ...writeup, deleting: true }
-            : writeup
+        items: state.items.map(market =>
+          market.id === action.id
+            ? { ...market, deleting: true }
+            : market
         )
       };
     case masterConstants.MASTER_MARKET_DELETE_SUCCESS:
       return {
-        items: state.items.filter(writeup => writeup.id !== action.id)
+        items: state.items.filter(market => market.id !== action.id)
       };
     case masterConstants.MASTER_MARKET_DELETE_FAILURE:
       return {
         ...state,
-        items: state.items.map(writeup => {
-          if (writeup.id === action.id) {
-            const { deleting, ...writeupCopy } = writeup;
-            return { ...writeupCopy, deleteError: action.error };
+        items: state.items.map(market => {
+          if (market.id === action.id) {
+            const { deleting, ...marketCopy } = market;
+            return { ...marketCopy, deleteError: action.error };
           }
-          return writeup;
+          return market;
         })
       };
 
