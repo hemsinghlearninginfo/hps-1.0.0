@@ -3,10 +3,12 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
 const User = db.User;
+const UserLoginTrack = db.UserLoginTrack;
 const UploadedFile = db.UploadedFile;
 
 module.exports = {
     authenticate,
+    authenticateTrack,
     getAll,
     getById,
     create,
@@ -25,6 +27,12 @@ async function authenticate({ username, password }) {
             token
         };
     }
+}
+
+async function authenticateTrack(browser, data) {
+    const userTrack = new UserLoginTrack(data);
+    userTrack.browser = browser;
+    await userTrack.save();
 }
 
 async function getAll() {

@@ -5,6 +5,7 @@ import { history } from '_helpers';
 
 export const userActions = {
     login,
+    loginTrack,
     logout,
     register,
     getAll,
@@ -18,7 +19,7 @@ function login(username, password) {
 
         userService.login(username, password)
             .then(
-                user => { 
+                user => {
                     dispatch(success(user));
                     history.push('/');
                 },
@@ -34,6 +35,22 @@ function login(username, password) {
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
 
+function loginTrack(username) {
+    let data = {
+        username,
+    }
+    return dispatch => {
+        userService.loginTrack(data)
+            .then(
+                user => { },
+                error => {
+                    debugger;
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+}
+
 function logout() {
     userService.logout();
     return { type: userConstants.LOGOUT };
@@ -45,7 +62,7 @@ function register(user) {
 
         userService.register(user)
             .then(
-                user => { 
+                user => {
                     dispatch(success());
                     history.push('/login');
                     dispatch(alertActions.success('Registration successful'));
@@ -102,7 +119,7 @@ function update(user) {
 
         userService.update(user)
             .then(
-                user => { 
+                user => {
                     dispatch(success());
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     dispatch(modalAlertActions.success('Record updated successful'));

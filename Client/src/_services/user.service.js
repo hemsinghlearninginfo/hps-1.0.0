@@ -6,6 +6,7 @@ const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('
 
 export const userService = {
     login,
+    loginTrack,
     logout,
     register,
     getAll,
@@ -34,6 +35,16 @@ function login(username, password) {
             }
             return user;
         });
+}
+
+function loginTrack(data) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    };
+    return fetch(`${config.apiUrl}/users/authenticatetrack`, requestOptions)
+        .then(handleResponse)
 }
 
 function logout() {

@@ -11,6 +11,7 @@ function jwt() {
             // public routes that don't require authentication
             '/errors/create',
             '/users/authenticate',
+            '/users/authenticatetrack',
             '/users/register',
             '/faqs/create',
             '/faqs',
