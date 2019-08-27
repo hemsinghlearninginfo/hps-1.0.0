@@ -11,5 +11,6 @@ module.exports = {
     NewsLetter: require('../Model/newsletter.model'),
     WriteUp: require('../Model/writeup.model'),
     UploadedFile: require('../Model/uploadedFile.model'),
-    Market: require('../Model/market.model')
+    Market: require('../Model/market.model'),
+    ChatMessage: require('../Model/chatMessage.model')
 };

@@ -4,7 +4,7 @@ import {
     FaSignOutAlt, FaSignInAlt, FaAddressCard, FaUserCog, FaQuestion, FaHeart,
     FaTrash, FaCaretSquareUp, FaUserPlus, FaFacebook, FaLinkedin, FaUpload,
     FaFile, FaTimesCircle, FaTools, FaCloudUploadAlt, FaKey, FaInfo, FaEnvelopeSquare,
-    FaPaperPlane
+    FaPaperPlane, FaSearchPlus
 } from 'react-icons/fa';
 export const Icon = (props) => (
     <>{getIcon(props.type)}</>
@@ -64,6 +64,8 @@ function getIcon(type) {
             return <FaEnvelopeSquare />
         case 'SENDMESSAGE':
             return <FaPaperPlane />
+        case 'SEARCHADD':
+            return <FaSearchPlus />
         default:
             return <></>;
     }
