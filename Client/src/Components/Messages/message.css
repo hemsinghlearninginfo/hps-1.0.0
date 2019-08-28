@@ -19,6 +19,7 @@ img {
     border: 1px solid #c4c4c4;
     clear: both;
     overflow: hidden;
+    margin: 0 0 50px 0;
 }
 
 .top_spac {
@@ -183,6 +184,7 @@ img {
     font-size: 15px;
     min-height: 48px;
     width: 100%;
+    padding: 0 40px 0 8px;
 }
 
 .type_msg {
@@ -199,13 +201,9 @@ img {
     font-size: 17px;
     height: 33px;
     position: absolute;
-    right: 0;
-    top: 11px;
+    right: 3px;
+    top: 8px;
     width: 33px;
-}
-
-.messaging {
-    padding: 0 0 50px 0;
 }
 
 .msg_history {
