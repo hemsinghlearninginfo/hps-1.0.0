@@ -42,7 +42,7 @@ class List extends Component {
     }
 
     render() {
-        const { data, heading } = this.props;
+        const { data, heading, actionItem } = this.props;
         const { searchText, sortKey, order } = this.state;
 
         let headingForTable = heading ? ['action|Action', ...heading] : heading;
@@ -67,8 +67,8 @@ class List extends Component {
             return <tr key={item.id}>{
                 headingForTable.map((itemHeading, index) => {
                     return itemHeading.split('|')[0] === 'action' ? <td key={index}>
-                        <button className="btn btn-sm btn-warning"><Icon type="edit" /></button>{' '}
-                        <button className="btn btn-sm btn-danger"><Icon type="delete" /></button>
+                        <button className="btn btn-sm btn-warning" onClick={() => actionItem('Edit', item.id)}><Icon type="edit" /></button>{' '}
+                        <button className="btn btn-sm btn-danger" onClick={() => actionItem('Delete', item.id)}><Icon type="delete" /></button>
                     </td> :
                         <td key={index}>{item[itemHeading.split('|')[0]] !== undefined ? item[itemHeading.split('|')[0]].toString() : ''}</td>;
                 })}

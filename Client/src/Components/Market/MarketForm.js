@@ -4,12 +4,12 @@ import { Loading, Icon, ModalPopUpButton } from '_controls';
 import { commonMethods } from '_helpers';
 import { faqActions } from '_actions';
 
-class FAQForm extends Component {
+class MarketForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             id: null,
-            market: '',
+            name: '',
             description: '',
             isActive: true,
             submitted: false,
@@ -22,38 +22,38 @@ class FAQForm extends Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        if (nextProps.faqObject != null && nextProps.faqObject._id !== null && nextProps.action === 'Edit') {
-            this.setState({
-                id: nextProps.faqObject._id,
-                market: nextProps.faqObject.market,
-                description: nextProps.faqObject.description,
-                isActive: nextProps.faqObject.isActive,
-                submitted: false,
-                isLoading: false
-            });
-        }
-        else if (nextProps.action === 'Add') {
-            this.setState({ id: null, market: '', description: '', isActive: true, submitted: false, isLoading: false });
-        }
-        this.closeModal(nextProps);
+        // if (nextProps.faqObject != null && nextProps.faqObject._id !== null && nextProps.action === 'Edit') {
+        //     this.setState({
+        //         id: nextProps.faqObject._id,
+        //         market: nextProps.faqObject.market,
+        //         description: nextProps.faqObject.description,
+        //         isActive: nextProps.faqObject.isActive,
+        //         submitted: false,
+        //         isLoading: false
+        //     });
+        // }
+        // else if (nextProps.action === 'Add') {
+        //     this.setState({ id: null, market: '', description: '', isActive: true, submitted: false, isLoading: false });
+        // }
+        // this.closeModal(nextProps);
     }
 
     closeModal = (nextProps) => {
-        if (nextProps.faqs.isPosted) {
-            commonMethods.callClick('closePopUp');
-            this.setState({
-                market: '',
-                description: '',
-                isActive: true,
-                submitted: false,
-                isLoading: false
-            });
-            this.props.refreshList();
-        }
-        else if (nextProps.faqs.isPostingFail) {
-            this.setState({ submitted: false, isLoading: false });
-            this.props.refreshList();
-        }
+        // if (nextProps.faqs.isPosted) {
+        //     commonMethods.callClick('closePopUp');
+        //     this.setState({
+        //         market: '',
+        //         description: '',
+        //         isActive: true,
+        //         submitted: false,
+        //         isLoading: false
+        //     });
+        //     this.props.refreshList();
+        // }
+        // else if (nextProps.faqs.isPostingFail) {
+        //     this.setState({ submitted: false, isLoading: false });
+        //     this.props.refreshList();
+        // }
     }
 
     handleChange(e) {
@@ -69,33 +69,33 @@ class FAQForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.setState({ submitted: true });
-        const { id, market, description, isActive } = this.state;
-        if (market && description) {
+        const { id, name, description, isActive } = this.state;
+        if (name && description) {
             this.setState({ isLoading: true });
             const { dispatch } = this.props;
             if (id === undefined) {
-                dispatch(faqActions.create({ market, description, isActive }));
+                dispatch(faqActions.create({ name, description, isActive }));
             }
             else {
-                dispatch(faqActions.update({ id, market, description, isActive }));
+                dispatch(faqActions.update({ id, name, description, isActive }));
             }
         }
     }
 
     render() {
-        const { market, description, isActive, submitted, isLoading } = this.state;
+        const { name, description, isActive, submitted, isLoading } = this.state;
         return (
             <>
                 {isLoading && <Loading />}
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className="modal-body text-left">
-                        <div className={'form-group' + (submitted && !market ? ' has-error' : '')}>
-                            <label htmlFor="Market">Market</label>
-                            <input type="type" className="form-control required" name="market" placeholder="market"
-                                value={market} onChange={this.handleChange}
+                        <div className={'form-group' + (submitted && !name ? ' has-error' : '')}>
+                            <label htmlFor="name">Market</label>
+                            <input type="type" className="form-control required" name="name" placeholder="market"
+                                value={name} onChange={this.handleChange}
                             />
-                            {submitted && !market &&
-                                <div className="help-block">Market is required.</div>
+                            {submitted && !name &&
+                                <div className="help-block">Market Name is required.</div>
                             }
                         </div>
                         <div className={'form-group' + (submitted && !description ? ' has-error' : '')}>
@@ -114,8 +114,8 @@ class FAQForm extends Component {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="submit" className="btn btn-primary btn-sm"><Icon type='save' /> Save FAQ</button>
-                        <button id="closePopUp" type="button" className="btn btn-secondary btn-sm" data-dismiss="modal"><Icon type='close' /> Close</button>
+                        <button type="submit" className="btn btn-primary btn-sm"><Icon type='save' /> Save</button>
+                        <button id="closePopUp" type="button" className="btn btn-secondary btn-sm" data-dismiss="modal" onClick={this.props.cancelModal}><Icon type='close' /> Close</button>
                     </div>
                 </form>
             </>
@@ -123,14 +123,4 @@ class FAQForm extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    const { loggingIn } = state.authentication;
-    const { market } = state;
-    return {
-        loggingIn,
-        market
-    };
-}
-
-const connectedFAQForm = connect(mapStateToProps)(FAQForm);
-export { connectedFAQForm as FAQForm }; 
+export { MarketForm }; 

@@ -44,7 +44,7 @@ class Authorise extends Component {
 
     render() {
         const { isUserRolesAllowed, isLoggedIn, isNonLoggedIn, notAuthorizeMessage } = this.state;
-        const notAuthorizeMessageHTML = <div className="alert alert-danger" role="alert">
+        const notAuthorizeMessageHTML = <div className="m-5 p-5 card alert alert-danger" role="alert">
             <strong>Oh snap!</strong> Something went wrong, we are working on this module please try again some other time.
             <div> <Link to="/" className="alert-link">HPS-Trades Home page</Link></div>
         </div>
