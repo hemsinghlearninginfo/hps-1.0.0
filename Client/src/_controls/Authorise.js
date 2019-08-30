@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { commonMethods } from '_helpers';
+import { Link } from 'react-router-dom';
 
 class Authorise extends Component {
     constructor(props) {
@@ -9,6 +10,7 @@ class Authorise extends Component {
             isUserRolesAllowed: false,
             isLoggedIn: false,
             isNonLoggedIn: false,
+            notAuthorizeMessage: false,
         };
         this.refreshAuth = this.refreshAuth.bind(this);
     }
@@ -30,26 +32,29 @@ class Authorise extends Component {
                 isLoggedIn: (param.isLoggedIn && user.currentUser !== null),
                 isNonLoggedIn: (param.isNonLoggedIn && user.currentUser === null)
             });
+            this.setState({
+                notAuthorizeMessage: (param.isNotMessage && (
+                    (param.userroles && !this.state.isUserRolesAllowed) ||
+                    (param.isLoggedIn && !this.state.isLoggedIn) ||
+                    (param.isNonLoggedIn && !this.state.isNonLoggedIn)
+                ))
+            });
         }
     }
 
     render() {
-        const { isUserRolesAllowed, isLoggedIn, isNonLoggedIn } = this.state;
+        const { isUserRolesAllowed, isLoggedIn, isNonLoggedIn, notAuthorizeMessage } = this.state;
+        const notAuthorizeMessageHTML = <div className="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> Something went wrong, we are working on this module please try again some other time.
+            <div> <Link to="/" className="alert-link">HPS-Trades Home page</Link></div>
+        </div>
         return (
             <>
                 {(isUserRolesAllowed || isLoggedIn || isNonLoggedIn) && this.props.children}
+                {notAuthorizeMessage && notAuthorizeMessageHTML}
             </>
         );
     }
 }
 
-
-function mapStateToProps(state) {
-    const { modalAlert } = state;
-    return {
-        modalAlert
-    };
-}
-
-const connectedAuthorise = connect(mapStateToProps)(Authorise);
-export { connectedAuthorise as Authorise }; 
+export { Authorise }; 

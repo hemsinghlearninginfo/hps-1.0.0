@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { PageTemplate, Icon, ModalPopUp, ModalPopUpButton, Loading, Authorise } from '_controls';
+import { PageTemplate, Icon, ModalPopUp, ModalPopUpButton, Loading, Authorise, List } from '_controls';
 import { Role } from '_helpers';
 import { masterActions } from '_actions';
-import { MarketList } from './MarketList';
 
 class MarketPage extends Component {
 
@@ -35,7 +34,7 @@ class MarketPage extends Component {
         const heading = ['name|Name', 'description|Description', 'isActive|Active'];
         return (
             <PageTemplate heading="Market">
-                <Authorise userroles={[Role.SuperAdmin, Role.Admin]}>
+                <Authorise isNotMessage={true} userroles={[Role.SuperAdmin, Role.Admin]}>
                     <div className="row">
                         <div className="col-lg-12 text-right">
                             <div className="form-group list-textBox add-Faq-Button">
@@ -46,12 +45,12 @@ class MarketPage extends Component {
                             </div>
                         </div>
                     </div>
-                </Authorise>
-                <div className="row">
-                    <div className="col-lg-12">
-                        <MarketList data={market} heading={heading} />
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <List data={market} heading={heading} />
+                        </div>
                     </div>
-                </div>
+                </Authorise>
             </PageTemplate>
         );
     }
