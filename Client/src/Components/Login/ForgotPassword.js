@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Icon, PageTemplate, Loading } from '../../_controls';
+import { Icon, PageTemplate, Loading } from '_controls';
 
-import { userActions } from '../../_actions';
+import { userActions } from '_actions';
 
 class ForgotPassword extends React.Component {
     constructor(props) {

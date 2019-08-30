@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { writeupActions } from '../../_actions';
-import { commonMethods } from '../../_helpers';
-import { Icon, Authorise, ModalPopUp, ModalPopUpButton } from '../../_controls';
+import { writeupActions } from '_actions';
+import { commonMethods } from '_helpers';
+import { Icon, Authorise, ModalPopUp, ModalPopUpButton } from '_controls';
 
 class AddWriteUp extends Component {
 

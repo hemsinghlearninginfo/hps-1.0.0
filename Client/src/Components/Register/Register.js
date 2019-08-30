@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import queryString from 'query-string'
-import { PageTemplate, Icon, Loading } from '../../_controls';
-import { userActions } from '../../_actions';
+import { PageTemplate, Icon, Loading } from '_controls';
+import { userActions } from '_actions';
 
 class Register extends React.Component {
     constructor(props) {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Loading } from '../../_controls';
-import { commonMethods } from '../../_helpers';
-import { faqActions } from '../../_actions';
-import { Icon } from '../../_controls';
+import { Loading } from '_controls';
+import { commonMethods } from '_helpers';
+import { faqActions } from '_actions';
+import { Icon } from '_controls';
 
 class FAQForm extends Component {
     constructor(props) {

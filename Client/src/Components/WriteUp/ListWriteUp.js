@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { writeupActions } from '../../_actions';
-import { InfoBox } from '../../_controls';
+import { writeupActions } from '_actions';
+import { InfoBox } from '_controls';
 
 class ListWriteUp extends Component {
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Role, commonMethods } from '../../_helpers';
-import { ModalPopUpButton, Authorise, ModalConfirm } from '../../_controls'
-import { Icon } from '../../_controls';
+import { Role, commonMethods } from '_helpers';
+import { ModalPopUpButton, Authorise, ModalConfirm } from '_controls'
+import { Icon } from '_controls';
 
 class ListFAQ extends Component {
 

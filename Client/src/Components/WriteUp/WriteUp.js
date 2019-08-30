@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PageTemplate } from '../../_controls/index';
+import { PageTemplate } from '_controls/index';
 import { ListWriteUp, AddWriteUp } from './';
 
 class WriteUp extends Component {

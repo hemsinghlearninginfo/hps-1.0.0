@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import ReactFileReader from 'react-file-reader';
 import uuid from "uuid";
 
-import { Icon } from '../../_controls';
-import { modalAlertActions, uploadFileActions } from '../../_actions';
-import { commonMethods } from '../../_helpers';
+import { Icon } from '_controls';
+import { modalAlertActions, uploadFileActions } from '_actions';
+import { commonMethods } from '_helpers';
 
 class UploadFile extends Component {
 

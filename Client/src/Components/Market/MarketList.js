@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 //import { connect } from 'react-redux';
-import { InlineLoader } from '../../_controls';
-import { Icon } from '../../_controls';
+import { InlineLoader } from '_controls';
+import { Icon } from '_controls';
 
 
-// import { Role, commonMethods } from '../../_helpers';
+// import { Role, commonMethods } from '_helpers';
 
 class MarketList extends Component {
 

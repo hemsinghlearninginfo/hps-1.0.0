@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { Router, Route, HashRouter, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { history, Role, commonMethods } from '../_helpers';
-import { userService } from '../_services';
-import { alertActions } from '../_actions';
-import { PrivateRoute, Expire } from '../_controls';
-import { FAQPage } from '../Components/FAQ';
+import { history, Role, commonMethods } from '_helpers';
+import { userService } from '_services';
+import { alertActions } from '_actions';
+import { PrivateRoute, Expire } from '_controls';
+import { FAQPage } from 'Components/FAQ';
 import { userConstants } from '_constants';
 
-import MyComponents from '../Components/index';
-import Wrapper from '../Components/Shared/Wrapper';
+import MyComponents from 'Components/index';
+import Wrapper from 'Components/Shared/Wrapper';
 
 class App extends Component {
     constructor(props) {

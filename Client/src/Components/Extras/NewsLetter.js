@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { extraActions } from '../../_actions';
-import { Icon } from '../../_controls';
-import { commonMethods } from '../../_helpers';
+import { extraActions } from '_actions';
+import { Icon } from '_controls';
+import { commonMethods } from '_helpers';
 
 class NewsLetter extends Component {
     constructor(props) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { messageService } from '../../_services';
+import { messageService } from '_services';
 
 // @use - messageService.sendMessage(commonMethods.getMessage('info','Message from Home Page Component to App Component!'));
 export class Notifications extends Component {

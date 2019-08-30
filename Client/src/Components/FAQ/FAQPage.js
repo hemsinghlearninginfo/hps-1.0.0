@@ -1,12 +1,12 @@
 // import React from 'react';
 // import { connect } from 'react-redux';
 
-// import { PageTemplate, ModalPopUp, ModalPopUpButton, Loading } from '../../_controls/index';
+// import { PageTemplate, ModalPopUp, ModalPopUpButton, Loading } from '_controls/index';
 // import { FAQForm } from './FAQForm';
 // import { ListFAQ } from './ListFAQ';
-// import { Role, commonMethods } from '../../_helpers';
-// import { faqActions } from '../../_actions';
-// import {Icon} from '../../_controls';
+// import { Role, commonMethods } from '_helpers';
+// import { faqActions } from '_actions';
+// import {Icon} from '_controls';
 
 // class FAQPage extends React.Component {
 

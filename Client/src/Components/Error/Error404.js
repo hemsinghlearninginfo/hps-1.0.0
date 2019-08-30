@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './error.css';
-import { PageTemplate } from '../../_controls/index'
+import { PageTemplate } from '_controls/index'
 
 
 export const Error404 = () => (<PageTemplate heading="Error">

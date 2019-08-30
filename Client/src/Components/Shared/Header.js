@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { history, Role, commonMethods } from '../../_helpers';
-import { userService } from '../../_services';
-import { Logo, Icon, Authorise } from '../../_controls';
+import { history, Role, commonMethods } from '_helpers';
+import { userService } from '_services';
+import { Logo, Icon, Authorise } from '_controls';
 
 export class Header extends Component {
     constructor(props) {
