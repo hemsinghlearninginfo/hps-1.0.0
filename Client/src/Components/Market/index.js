@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { PageTemplate, Icon, ModalPopUp, ModalPopUpButton, Loading, Authorise, List } from '_controls';
-import { Role } from '_helpers';
+import { Role, Action } from '_helpers';
 import { masterActions } from '_actions';
 import { MarketForm } from './MarketForm';
 
@@ -13,10 +13,8 @@ class MarketPage extends Component {
         super(props);
         this.state = {
             dataObject: null,
-            action: 'Add',
+            action: Action.Add,
             isOpenModal: false,
-            isEdit: false,
-            isDelete: false,
             editDeleteItemId: null,
         };
         this.fetchData = this.fetchData.bind(this);
@@ -45,7 +43,7 @@ class MarketPage extends Component {
 
     actionItem(action, id) {
         this.setState({
-            action,
+            action: (action.toUpperCase() === Action.Edit) ? Action.Edit : ((action.toUpperCase() === Action.Delete) ? Action.Delete : ''),
             editDeleteItemId: id,
             isOpenModal: true
         });
@@ -53,7 +51,7 @@ class MarketPage extends Component {
 
     render() {
         const { market } = this.props;
-        const { action, isOpenModal } = this.state;
+        const { action, isOpenModal, dataObject } = this.state;
         const heading = ['name|Name', 'description|Description', 'isActive|Active'];
         return (
             <Authorise isNotMessage={true} userroles={[Role.SuperAdmin, Role.Admin]}>
@@ -62,8 +60,11 @@ class MarketPage extends Component {
                         <div className="col-lg-12 text-right">
                             <div className="form-group list-textBox add-Faq-Button">
                                 <ModalPopUpButton action={this.addNew}><Icon type='add' /> Add New</ModalPopUpButton>
-                                <ModalPopUp heading={this.state.dataObject === null ? "Add" : "Edit"}>
-                                    {action === 'Add' && isOpenModal && <MarketForm cancelModal={this.cancelModal} />}
+                                <ModalPopUp heading={dataObject === null ? "Add" : "Edit"}>
+                                    {
+                                        (isOpenModal && action === Action.Add && <MarketForm cancelModal={this.cancelModal} />) ||
+                                        (isOpenModal && action === Action.Edit && <MarketForm cancelModal={this.cancelModal} />)
+                                    }
                                 </ModalPopUp>
                             </div>
                         </div>

@@ -91,7 +91,7 @@ class MarketForm extends Component {
                     <div className="modal-body text-left">
                         <div className={'form-group' + (submitted && !name ? ' has-error' : '')}>
                             <label htmlFor="name">Market</label>
-                            <input type="type" className="form-control required" name="name" placeholder="market"
+                            <input type="type" className="form-control required" name="name" placeholder="Market"
                                 value={name} onChange={this.handleChange}
                             />
                             {submitted && !name &&
