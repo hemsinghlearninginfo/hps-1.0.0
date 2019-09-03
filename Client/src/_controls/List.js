@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Icon, Authorise, InlineLoader } from '_controls';
-import { Role } from '_helpers';
+import { Icon, Authorise, InlineLoader, ModalPopUpButton } from '_controls';
+import { Action } from '_helpers';
 
 class List extends Component {
 
@@ -67,8 +67,8 @@ class List extends Component {
             return <tr key={item.id}>{
                 headingForTable.map((itemHeading, index) => {
                     return itemHeading.split('|')[0] === 'action' ? <td key={index}>
-                        <button className="btn btn-sm btn-warning" onClick={() => actionItem('Edit', item.id)}><Icon type="edit" /></button>{' '}
-                        <button className="btn btn-sm btn-danger" onClick={() => actionItem('Delete', item.id)}><Icon type="delete" /></button>
+                        <ModalPopUpButton action={() => actionItem(Action.Edit, item.id)}><Icon type="edit" /></ModalPopUpButton>{' '}
+                        <button className="btn btn-sm btn-danger" onClick={() => actionItem(Action.Delete, item.id)}><Icon type="delete" /></button>
                     </td> :
                         <td key={index}>{item[itemHeading.split('|')[0]] !== undefined ? item[itemHeading.split('|')[0]].toString() : ''}</td>;
                 })}

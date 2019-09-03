@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Loading, Icon, ModalPopUpButton } from '_controls';
-import { commonMethods } from '_helpers';
+import { commonMethods, Action } from '_helpers';
 import { faqActions } from '_actions';
 
 class MarketForm extends Component {
@@ -16,25 +16,35 @@ class MarketForm extends Component {
             isLoading: false
         };
 
+        this.loadDataObject = this.loadDataObject.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
 
+    componentDidMount() {
+        this.loadDataObject(this.props);;
+    }
+
+    loadDataObject(dataProps) {
+        if (dataProps.dataObject != null && dataProps.dataObject._id !== null && dataProps.action === Action.Edit) {
+            this.setState({
+                id: dataProps.dataObject._id,
+                name: dataProps.dataObject.name,
+                description: dataProps.dataObject.description,
+                isActive: dataProps.dataObject.isActive,
+                submitted: false,
+                isLoading: false
+            });
+        }
+        else if (dataProps.action === Action.Add) {
+            this.setState({ id: null, name: '', description: '', isActive: true, submitted: false, isLoading: false });
+        }
+    }
+
     componentWillReceiveProps = (nextProps) => {
-        // if (nextProps.faqObject != null && nextProps.faqObject._id !== null && nextProps.action === 'Edit') {
-        //     this.setState({
-        //         id: nextProps.faqObject._id,
-        //         market: nextProps.faqObject.market,
-        //         description: nextProps.faqObject.description,
-        //         isActive: nextProps.faqObject.isActive,
-        //         submitted: false,
-        //         isLoading: false
-        //     });
-        // }
-        // else if (nextProps.action === 'Add') {
-        //     this.setState({ id: null, market: '', description: '', isActive: true, submitted: false, isLoading: false });
-        // }
+        debugger;
+        this.loadDataObject(nextProps);
         // this.closeModal(nextProps);
     }
 
@@ -55,6 +65,8 @@ class MarketForm extends Component {
         //     this.props.refreshList();
         // }
     }
+
+
 
     handleChange(e) {
         const { name, value } = e.target;

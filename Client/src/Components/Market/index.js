@@ -32,7 +32,7 @@ class MarketPage extends Component {
     }
 
     addNew() {
-        this.setState({ dataObject: null, isOpenModal: true, action: 'Add' });
+        this.setState({ dataObject: null, isOpenModal: true, action: Action.Add });
     }
 
     cancelModal() {
@@ -43,9 +43,12 @@ class MarketPage extends Component {
 
     actionItem(action, id) {
         this.setState({
-            action: (action.toUpperCase() === Action.Edit) ? Action.Edit : ((action.toUpperCase() === Action.Delete) ? Action.Delete : ''),
+            action: (action === Action.Edit) ? Action.Edit : ((action === Action.Delete) ? Action.Delete : ''),
             editDeleteItemId: id,
-            isOpenModal: true
+            isOpenModal: true,
+            dataObject: this.props.market.items.filter(function (item) {
+                return item._id === id;
+            })[0]
         });
     }
 
@@ -62,8 +65,8 @@ class MarketPage extends Component {
                                 <ModalPopUpButton action={this.addNew}><Icon type='add' /> Add New</ModalPopUpButton>
                                 <ModalPopUp heading={dataObject === null ? "Add" : "Edit"}>
                                     {
-                                        (isOpenModal && action === Action.Add && <MarketForm cancelModal={this.cancelModal} />) ||
-                                        (isOpenModal && action === Action.Edit && <MarketForm cancelModal={this.cancelModal} />)
+                                        (isOpenModal && (action === Action.Add || action === Action.Edit) &&
+                                            <MarketForm action={action} dataObject={dataObject} cancelModal={this.cancelModal} />)
                                     }
                                 </ModalPopUp>
                             </div>
