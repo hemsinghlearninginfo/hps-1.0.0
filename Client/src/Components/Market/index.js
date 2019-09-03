@@ -66,7 +66,7 @@ class MarketPage extends Component {
                                 <ModalPopUp heading={dataObject === null ? "Add" : "Edit"}>
                                     {
                                         (isOpenModal && (action === Action.Add || action === Action.Edit) &&
-                                            <MarketForm action={action} dataObject={dataObject} cancelModal={this.cancelModal} />)
+                                            <MarketForm action={action} dataObject={dataObject} cancelModal={this.cancelModal} refreshList={this.fetchData} />)
                                     }
                                 </ModalPopUp>
                             </div>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Loading, Icon, ModalPopUpButton } from '_controls';
-import { commonMethods, Action } from '_helpers';
-import { faqActions } from '_actions';
+import { Loading, Icon } from '_controls';
+import { Action, commonMethods } from '_helpers';
+import { masterActions } from '_actions';
 
 class MarketForm extends Component {
     constructor(props) {
@@ -16,17 +16,12 @@ class MarketForm extends Component {
             isLoading: false
         };
 
-        this.loadDataObject = this.loadDataObject.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.closeModal = this.closeModal.bind(this);
     }
 
     componentDidMount() {
-        this.loadDataObject(this.props);;
-    }
-
-    loadDataObject(dataProps) {
+        const dataProps = this.props;
         if (dataProps.dataObject != null && dataProps.dataObject._id !== null && dataProps.action === Action.Edit) {
             this.setState({
                 id: dataProps.dataObject._id,
@@ -43,30 +38,16 @@ class MarketForm extends Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        debugger;
-        this.loadDataObject(nextProps);
-        // this.closeModal(nextProps);
+        if (nextProps.market.isPosted) {
+            commonMethods.callClick('closePopUp');
+        }
+
+        if(nextProps.market.isPostingFail || nextProps.market.isPosted){
+            this.setState({ submitted: false, isLoading: false });
+            this.props.refreshList();
+            this.props.cancelModal();
+        }
     }
-
-    closeModal = (nextProps) => {
-        // if (nextProps.faqs.isPosted) {
-        //     commonMethods.callClick('closePopUp');
-        //     this.setState({
-        //         market: '',
-        //         description: '',
-        //         isActive: true,
-        //         submitted: false,
-        //         isLoading: false
-        //     });
-        //     this.props.refreshList();
-        // }
-        // else if (nextProps.faqs.isPostingFail) {
-        //     this.setState({ submitted: false, isLoading: false });
-        //     this.props.refreshList();
-        // }
-    }
-
-
 
     handleChange(e) {
         const { name, value } = e.target;
@@ -80,16 +61,16 @@ class MarketForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.setState({ submitted: true });
+        this.setState({ submitted: true, isLoading: true });
         const { id, name, description, isActive } = this.state;
         if (name && description) {
             this.setState({ isLoading: true });
             const { dispatch } = this.props;
-            if (id === undefined) {
-                dispatch(faqActions.create({ name, description, isActive }));
+            if (id === undefined || id === null) {
+                dispatch(masterActions.createMarket({ name, description, isActive }));
             }
             else {
-                dispatch(faqActions.update({ id, name, description, isActive }));
+                dispatch(masterActions.updateMarket({ id, name, description, isActive }));
             }
         }
     }
@@ -103,7 +84,7 @@ class MarketForm extends Component {
                     <div className="modal-body text-left">
                         <div className={'form-group' + (submitted && !name ? ' has-error' : '')}>
                             <label htmlFor="name">Market</label>
-                            <input type="type" className="form-control required" name="name" placeholder="Market"
+                            <input autoFocus type="type" className="form-control required" name="name" placeholder="Market"
                                 value={name} onChange={this.handleChange}
                             />
                             {submitted && !name &&
@@ -135,4 +116,14 @@ class MarketForm extends Component {
     }
 }
 
-export { MarketForm }; 
+
+function mapStateToProps(state) {
+    const { market } = state;
+    return {
+        market,
+    };
+}
+const connectedMarketForm = connect(mapStateToProps)(MarketForm);
+export { connectedMarketForm as MarketForm };
+
+//export {  MarketForm }; 

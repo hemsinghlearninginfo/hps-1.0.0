@@ -37,7 +37,7 @@ async function update(id, data) {
     const market = await MarketDb.findById(id);
     if (!market) throw new Error(util.format(message.notfound, 'Market'));
 
-    if (market.name !== data.name && await WriteUpDb.findOne({ name: data.name })) {
+    if (market.name !== data.name && await MarketDb.findOne({ name: data.name })) {
         throw new Error(util.format(message.alreadyAdded, 'Market', data.name));
     }
     Object.assign(market, data);
@@ -46,5 +46,5 @@ async function update(id, data) {
 
 
 async function _delete(id) {
-    await WriteUpDb.findByIdAndRemove(id);
+    await MarketDb.findByIdAndRemove(id);
 }
