@@ -51,6 +51,7 @@
     "query-string": "^6.8.2",
     "react": "^16.9.0",
     "react-app-polyfill": "^1.0.2",
+    "react-bootstrap-typeahead": "^3.4.6",
     "react-dev-utils": "^9.0.3",
     "react-dom": "^16.9.0",
     "react-file-reader": "^1.1.4",
