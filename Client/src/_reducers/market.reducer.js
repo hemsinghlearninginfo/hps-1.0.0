@@ -26,6 +26,7 @@ export function market(state = {}, action) {
       };
     case masterConstants.MASTER_MARKET_DELETE_SUCCESS:
       return {
+        ...state,
         items: state.items.filter(market => market.id !== action.id)
       };
     case masterConstants.MASTER_MARKET_DELETE_FAILURE:

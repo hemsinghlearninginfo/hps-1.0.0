@@ -5,7 +5,8 @@ import { alertActions } from '.';
 export const masterActions = {
     getAllMarket,
     createMarket,
-    updateMarket
+    updateMarket,
+    deleteMarket,
 };
 
 function getAllMarket() {
@@ -70,5 +71,24 @@ function updateMarket(data) {
     function request(data) { return { type: masterConstants.MASTER_MARKET_POST_REQUEST, data: data } }
     function success(data) { return { type: masterConstants.MASTER_MARKET_POST_SUCCESS, data: data } }
     function failure(error) { return { type: masterConstants.MASTER_MARKET_POST_FAILURE, error } }
+}
+
+function deleteMarket(id) {
+    return dispatch => {
+        dispatch(request(id));
+
+        masterService.deleteMarket(id)
+            .then(
+                data => {
+                    dispatch(success(id));
+                    dispatch(alertActions.success('Market deleted successful'));
+                },
+                error => dispatch(failure(id, error.toString()))
+            );
+    };
+
+    function request(id) { return { type: masterConstants.MASTER_MARKET_DELETE_REQUEST, id } }
+    function success(id) { return { type: masterConstants.MASTER_MARKET_DELETE_SUCCESS, id } }
+    function failure(id, error) { return { type: masterConstants.MASTER_MARKET_DELETE_FAILURE, id, error } }
 }
 

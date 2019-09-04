@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { PageTemplate, Icon, ModalPopUp, ModalPopUpButton, Loading, Authorise, List } from '_controls';
+import { PageTemplate, Icon, ModalPopUp, ModalPopUpButton, ModalConfirm, Authorise, List } from '_controls';
 import { Role, Action } from '_helpers';
 import { masterActions } from '_actions';
 import { MarketForm } from './MarketForm';
@@ -21,6 +21,7 @@ class MarketPage extends Component {
         this.addNew = this.addNew.bind(this);
         this.actionItem = this.actionItem.bind(this);
         this.cancelModal = this.cancelModal.bind(this);
+        this.confirmDelete = this.confirmDelete.bind(this);
     }
 
     componentDidMount() {
@@ -52,12 +53,20 @@ class MarketPage extends Component {
         });
     }
 
+    confirmDelete() {
+        if (this.state.action === Action.Delete) {
+            this.props.dispatch(masterActions.deleteMarket(this.state.editDeleteItemId));
+            this.fetchData();
+        }
+    }
+
     render() {
         const { market } = this.props;
         const { action, isOpenModal, dataObject } = this.state;
         const heading = ['name|Name', 'description|Description', 'isActive|Active'];
         return (
             <Authorise isNotMessage={true} userroles={[Role.SuperAdmin, Role.Admin]}>
+                <ModalConfirm heading="Confirm Delete" message="Are you sure to delete this Market Type" callBack={this.confirmDelete} actionButtonText="Delete" />
                 <PageTemplate heading="Market">
                     <div className="row">
                         <div className="col-lg-12 text-right">

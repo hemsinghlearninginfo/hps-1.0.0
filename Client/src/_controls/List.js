@@ -67,8 +67,8 @@ class List extends Component {
             return <tr key={item.id}>{
                 headingForTable.map((itemHeading, index) => {
                     return itemHeading.split('|')[0] === 'action' ? <td key={index}>
-                        <ModalPopUpButton action={() => actionItem(Action.Edit, item.id)}><Icon type="edit" /></ModalPopUpButton>{' '}
-                        <button className="btn btn-sm btn-danger" onClick={() => actionItem(Action.Delete, item.id)}><Icon type="delete" /></button>
+                        <ModalPopUpButton buttonType='warning' action={() => actionItem(Action.Edit, item.id)}><Icon type="edit" /></ModalPopUpButton>{' '}
+                        <ModalPopUpButton modalPopUp='#modalPopUpConfirm' buttonType='danger' action={() => actionItem(Action.Delete, item.id)}><Icon type="delete" /></ModalPopUpButton>
                     </td> :
                         <td key={index}>{item[itemHeading.split('|')[0]] !== undefined ? item[itemHeading.split('|')[0]].toString() : ''}</td>;
                 })}

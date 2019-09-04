@@ -1,6 +1,6 @@
 ﻿const express = require('express');
 const router = express.Router();
-const writeUpService = require('../Service/market.service');
+const marketService = require('../Service/market.service');
 
 // routes
 router.get('/', get);
@@ -12,31 +12,31 @@ router.delete('/:id', _delete);
 module.exports = router;
 
 function get(req, res, next) {
-    writeUpService.get()
+    marketService.get()
         .then(faqs => { res.json(faqs) })
         .catch(err => { next(err) });
 }
 
 function getAll(req, res, next) {
-    writeUpService.getAll()
+    marketService.getAll()
         .then(faqs => { res.json(faqs) })
         .catch(err => { next(err) });
 }
 
 function create(req, res, next) {
-    writeUpService.create(req.body)
+    marketService.create(req.body)
         .then(() => res.json({}))
         .catch(err => { next(err); });
 }
 
 function update(req, res, next) {
-    writeUpService.update(req.params.id, req.body)
+    marketService.update(req.params.id, req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
 }
 
 function _delete(req, res, next) {
-    writeUpService.delete(req.params.id)
+    marketService.delete(req.params.id)
         .then(() => res.json({}))
         .catch(err => next(err));
 }
