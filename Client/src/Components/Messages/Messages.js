@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { PageTemplate } from '_controls';
 import { UserList, MessagesList, MessagePost, AddNewUser } from './';
@@ -7,9 +7,9 @@ import './message.css';
 
 class Messages extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    // }
+    constructor(props) {
+        super(props);
+    }
 
     render() {
         return (
@@ -47,13 +47,12 @@ class Messages extends Component {
     }
 }
 
-// function mapStateToProps(state) {
-//     const { loggingIn, user } = state.authentication;
-//     return {
-//         loggingIn, user
-//     };
-// }
+function mapStateToProps(state) {
+    const { messages } = state;
+    return {
+        messages
+    };
+}
 
-// const connectedMessages = connect(mapStateToProps)(Messages);
-// export { connectedMessages as Messages }; 
-export { Messages }; 
+const connectedMessages = connect(mapStateToProps)(Messages);
+export { connectedMessages as Messages }; 

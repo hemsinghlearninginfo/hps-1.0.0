@@ -15,6 +15,7 @@ export const commonMethods = {
     getMessage,
     gotop,
     isNullOrUndefined,
+    runQuotes,
 };
 
 function getCurrentUser() {
@@ -111,4 +112,11 @@ function decryptText(cipherText) {
 
 function isNullOrUndefined(object) {
     return object === null || object === undefined;
+}
+
+function runQuotes() {
+    $('#quote-carousel').carousel({
+        pause: true,
+        interval: 4000,
+    });
 }

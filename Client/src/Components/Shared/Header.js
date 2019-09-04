@@ -51,7 +51,7 @@ export class Header extends Component {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div className="collapse navbar-collapse justify-content-end" id="navbarCollapse">
                     <div className="navbar-nav">
                         <Link to="/faq" className="nav-item nav-link active"><Icon type='faq' /> FAQ</Link>
                         {/* <a href="#" className="nav-item nav-link active">Home</a>
@@ -70,7 +70,7 @@ export class Header extends Component {
                         </div> */}
                         <Authorise userroles={[Role.SuperAdmin, Role.Admin]}>
                             <div className="nav-item dropdown">
-                                <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown"><Icon type='tool' /> App Setting</a>
+                                <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown"><Icon type='TOOLS' /> App Setting</a>
                                 <div className="dropdown-menu">
                                     <Link to="/market" className="dropdown-item"> Market</Link>
                                 </div>

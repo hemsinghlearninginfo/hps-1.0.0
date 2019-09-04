@@ -10,6 +10,7 @@ import { extra } from './extra.reducer';
 import { writeup } from './writeup.reducer';
 import { uploadFiles } from './uploadFile.reducer';
 import { market } from './market.reducer';
+import { messages } from './messages.reducer';
 
 const rootReducer = combineReducers({
   authentication,
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   extra,
   writeup,
   uploadFiles,
-  market
+  market,
+  messages
 });
 
 export default rootReducer;

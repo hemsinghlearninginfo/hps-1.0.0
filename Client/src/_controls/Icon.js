@@ -4,7 +4,7 @@ import {
     FaSignOutAlt, FaSignInAlt, FaAddressCard, FaUserCog, FaQuestion, FaHeart,
     FaTrash, FaCaretSquareUp, FaUserPlus, FaFacebook, FaLinkedin, FaUpload,
     FaFile, FaTimesCircle, FaTools, FaCloudUploadAlt, FaKey, FaInfo, FaEnvelopeSquare,
-    FaPaperPlane, FaCaretUp, FaCaretDown, FaSearchPlus
+    FaPaperPlane, FaCaretUp, FaCaretDown, FaSearchPlus, FaToolbox
 } from 'react-icons/fa';
 export const Icon = (props) => (
     <>{getIcon(props.type)}</>
@@ -70,6 +70,8 @@ function getIcon(type) {
             return <FaCaretDown />
         case 'SEARCHADD':
             return <FaSearchPlus />
+        case 'SETTING':
+            return <FaToolbox />
         default:
             return <></>;
     }

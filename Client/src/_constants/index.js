@@ -6,3 +6,4 @@ export * from './writeup.constants';
 export * from './extras.constants';
 export * from './uploadFile.constants';
 export * from './master.constants';
+export * from './message.constants';
