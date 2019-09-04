@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { PageTemplate, Icon, ModalPopUpButton, ModalPopUp } from '_controls';
-import { userActions } from '_actions';
-import MyComponent from 'Components/';
+import { PageTemplate, Icon } from '_controls';
 import { ProfilePic } from './';
-import userAvatar from 'Resources/images/userAvatar.jpg';
 
 class Profile extends Component {
 

@@ -1,4 +1,4 @@
-import { faqConstants as faqConstants } from '_constants';
+import { faqConstants } from '_constants';
 
 export function faqs(state = {}, action) {
   switch (action.type) {

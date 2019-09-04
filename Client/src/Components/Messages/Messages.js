@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 
-import { PageTemplate, Icon } from '_controls';
+import { PageTemplate } from '_controls';
 import { UserList, MessagesList, MessagePost, AddNewUser } from './';
 import './message.css';
 
 class Messages extends Component {
 
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     render() {
         return (

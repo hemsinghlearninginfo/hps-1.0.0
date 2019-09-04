@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-import { PageTemplate, Icon } from '_controls';
+//import { connect } from 'react-redux';
 import './message.css';
 
 class UserList extends Component {
 
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     render() {
         return (

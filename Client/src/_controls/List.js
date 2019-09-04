@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Authorise, InlineLoader, ModalPopUpButton } from '_controls';
+import { Icon, InlineLoader, ModalPopUpButton } from '_controls';
 import { Action } from '_helpers';
 
 class List extends Component {

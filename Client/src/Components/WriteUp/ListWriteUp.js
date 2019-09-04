@@ -44,7 +44,7 @@ class ListWriteUp extends Component {
                         </div>
                     )}
                     {
-                        (!writeupItem || writeupItem.length == 0) &&
+                        (!writeupItem || writeupItem.length === 0) &&
                         <InfoBox type='danger'>Opps, We don't have any write up about us, would you like to be first. Please login and post your writeup.</InfoBox>
                     }
                 </div>

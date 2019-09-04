@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { commonMethods } from '_helpers';
 import { Link } from 'react-router-dom';
 
@@ -28,7 +27,7 @@ class Authorise extends Component {
             this.setState({ isUserRolesAllowed: false, isLoggedIn: false, isNonLoggedIn: false });
             const user = commonMethods.getCurrentUser();
             this.setState({
-                isUserRolesAllowed: (param.userroles != undefined && user.role !== null && param.userroles.includes(user.role)),
+                isUserRolesAllowed: (param.userroles !== undefined && user.role !== null && param.userroles.includes(user.role)),
                 isLoggedIn: (param.isLoggedIn && user.currentUser !== null),
                 isNonLoggedIn: (param.isNonLoggedIn && user.currentUser === null)
             });

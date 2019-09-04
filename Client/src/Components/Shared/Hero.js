@@ -11,7 +11,7 @@ const Hero = () => (
                         <h1>We are Traders</h1>
                         <h3>Get start your next awesome tradding</h3>
                     </hgroup>
-                    <button className="btn btn-hero btn-lg" role="button">Try</button>
+                    <button className="btn btn-hero btn-lg">Try</button>
                 </div>
             </div>
         </div>

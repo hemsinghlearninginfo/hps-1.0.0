@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 import { Icon } from '_controls';
 import './message.css';
 
 class MessagePost extends Component {
 
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     render() {
         return (
