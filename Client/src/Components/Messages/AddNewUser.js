@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Typeahead } from 'react-bootstrap-typeahead';
+import { userActions } from '_actions';
+import { commonMethods } from '_helpers';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-
-import { Icon } from '_controls';
 import './message.css';
 
 class AddNewUser extends Component {
@@ -17,22 +17,32 @@ class AddNewUser extends Component {
     }
 
     componentDidMount() {
-        var users = [
-            {id: 1, name: 'John'},
-            {id: 2, name: 'Miles'},
-            {id: 3, name: 'Charles'},
-            {id: 4, name: 'Herbie'},
-          ];
-        this.setState({ users });
+        this.props.dispatch(userActions.getAll());
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        if (nextProps.users.items != null && nextProps.users.items.length > 0) {
+            const currentUser = commonMethods.getCurrentUser().currentUser;
+            this.setState({
+                users: nextProps.users.items
+                    .filter(key => currentUser._id !== key._id)
+                    .map(function (item) {
+                        return { id: item._id, name: item.firstName + ' ' + item.lastName };
+                    })
+            });
+        }
     }
 
     render() {
+        const { users } = this.state;
         return (
             <>
                 <div className="stylish-input-group">
                     <Typeahead id="typeUsers"
+                        bsSize="small"
+                        minLength={2}
                         labelKey="name"
-                        options={this.state.users}
+                        options={users}
                         placeholder="Search User..."
                     />
                 </div>
@@ -41,14 +51,12 @@ class AddNewUser extends Component {
     }
 }
 
-// function mapStateToProps(state) {
-//     const { loggingIn, user } = state.authentication;
-//     return {
-//         loggingIn, user
-//     };
-// }
+function mapStateToProps(state) {
+    const { users } = state;
+    return {
+        users
+    };
+}
 
-// const connectedAddNewUser = connect(mapStateToProps)(AddNewUser);
-// export { connectedAddNewUser as AddNewUser }; 
-
-export { AddNewUser }; 
+const connectedAddNewUser = connect(mapStateToProps)(AddNewUser);
+export { connectedAddNewUser as AddNewUser };
