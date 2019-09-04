@@ -14,6 +14,7 @@ export const commonMethods = {
     globalLoader,
     getMessage,
     gotop,
+    isNullOrUndefined,
 };
 
 function getCurrentUser() {
@@ -80,7 +81,7 @@ function gotop() {
 }
 
 
-function getQueryString(props, queryStringName){
+function getQueryString(props, queryStringName) {
     let result = '';
     const hash = (props.location.hash).toString().replace('#/', '');
     if (hash !== '') {
@@ -92,17 +93,22 @@ function getQueryString(props, queryStringName){
     return result;
 }
 
-function encryptText(plainText){
+function encryptText(plainText) {
     let b64 = CryptoJS.AES.encrypt(plainText, 'A').toString();
     let e64 = CryptoJS.enc.Base64.parse(b64);
     let eHex = e64.toString(CryptoJS.enc.Hex);
     return eHex;
 }
 
-function decryptText(cipherText){
+function decryptText(cipherText) {
     let reb64 = CryptoJS.enc.Hex.parse(cipherText);
     let bytes = reb64.toString(CryptoJS.enc.Base64);
     let decrypt = CryptoJS.AES.decrypt(bytes, 'A');
     let plain = decrypt.toString(CryptoJS.enc.Utf8);
     return plain;
+}
+
+
+function isNullOrUndefined(object) {
+    return object === null || object === undefined;
 }

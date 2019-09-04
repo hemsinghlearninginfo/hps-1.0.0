@@ -1,6 +1,6 @@
 import { faqConstants } from '_constants';
 import { faqService } from '_services';
-import { modalAlertActions, alertActions } from './';
+import { alertActions } from './';
 //import { history } from '_helpers';
 
 export const faqActions = {
@@ -25,7 +25,7 @@ function create(faq) {
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(modalAlertActions.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
@@ -46,7 +46,7 @@ function update(faq) {
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(modalAlertActions.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };

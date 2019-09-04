@@ -46,6 +46,7 @@ class MarketForm extends Component {
             this.setState({ submitted: false, isLoading: false });
             this.props.refreshList();
             this.props.cancelModal();
+            commonMethods.scrollTop();
         }
     }
 

@@ -1,19 +1,19 @@
-import { modalAlertConstants } from '_constants';
+// import { modalAlertConstants } from '_constants';
 
-export const modalAlertActions = {
-    success,
-    error,
-    clear
-};
+// export const modalAlertActions = {
+//     success,
+//     error,
+//     clear
+// };
 
-function success(message) {
-    return { type: modalAlertConstants.SUCCESS, message };
-}
+// function success(message) {
+//     return { type: modalAlertConstants.SUCCESS, message };
+// }
 
-function error(message) {
-    return { type: modalAlertConstants.ERROR, message };
-}
+// function error(message) {
+//     return { type: modalAlertConstants.ERROR, message };
+// }
 
-function clear() {
-    return { type: modalAlertConstants.CLEAR };
-}
+// function clear() {
+//     return { type: modalAlertConstants.CLEAR };
+// }

@@ -4,7 +4,7 @@ import ReactFileReader from 'react-file-reader';
 import uuid from "uuid";
 
 import { Icon } from '_controls';
-import { modalAlertActions, uploadFileActions } from '_actions';
+import { uploadFileActions } from '_actions';
 import { commonMethods } from '_helpers';
 
 class UploadFile extends Component {
@@ -52,7 +52,7 @@ class UploadFile extends Component {
             }
             else {
                 const { dispatch } = this.props;
-                dispatch(modalAlertActions.error("File size more than 10mb is not allowed, please selecte another file."));
+                dispatch(uploadFileActions.error("File size more than 10mb is not allowed, please selecte another file."));
             }
         }
         this.setState({ uploadedFiles });

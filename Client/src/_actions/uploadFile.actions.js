@@ -1,6 +1,6 @@
 import { uploadFileConstants } from '_constants';
 import { uploadFileService } from '_services';
-import { modalAlertActions, alertActions } from './';
+import { alertActions } from './';
 //import { history } from '_helpers';
 
 export const uploadFileActions = {
@@ -27,7 +27,7 @@ function create(uploadedFiles) {
                     },
                     error => {
                         dispatch(failure(error.toString()));
-                        dispatch(modalAlertActions.error(error.toString()));
+                        dispatch(alertActions.error(error.toString()));
                     }
                 );
         }
@@ -49,7 +49,7 @@ function update(uploadFile) {
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(modalAlertActions.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };

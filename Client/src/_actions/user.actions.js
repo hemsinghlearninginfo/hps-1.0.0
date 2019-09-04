@@ -1,6 +1,6 @@
 import { userConstants } from '_constants';
 import { userService } from '_services';
-import { alertActions, modalAlertActions } from './';
+import { alertActions } from './';
 import { history } from '_helpers';
 
 export const userActions = {
@@ -44,7 +44,6 @@ function loginTrack(username) {
             .then(
                 user => { },
                 error => {
-                    debugger;
                     dispatch(alertActions.error(error.toString()));
                 }
             );
@@ -122,12 +121,10 @@ function update(user) {
                 user => {
                     dispatch(success());
                     localStorage.setItem('currentUser', JSON.stringify(user));
-                    dispatch(modalAlertActions.success('Record updated successful'));
                     dispatch(alertActions.success('Record updated successful'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(modalAlertActions.success('Record updated successful'));
                     dispatch(alertActions.error(error.toString()));
                 }
             );

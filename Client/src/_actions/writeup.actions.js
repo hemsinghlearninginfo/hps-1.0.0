@@ -1,6 +1,6 @@
 import { writeupConstants } from '_constants';
 import { writeupService } from '_services';
-import { modalAlertActions, alertActions } from './';
+import { alertActions } from './';
 import { commonMethods } from '_helpers';
 
 export const writeupActions = {
@@ -33,14 +33,14 @@ function create(writeup) {
                     },
                     error => {
                         dispatch(failure(error.toString()));
-                        dispatch(modalAlertActions.error(error.toString()));
+                        dispatch(alertActions.error(error.toString()));
                     }
                 );
         }
         else {
             const errorMessage = 'Something went wrong with authentication, please re-login and submit your approval';
             dispatch(failure(errorMessage));
-            dispatch(modalAlertActions.error(errorMessage));
+            dispatch(alertActions.error(errorMessage));
         }
     };
 
@@ -60,7 +60,7 @@ function update(writeup) {
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(modalAlertActions.error(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
