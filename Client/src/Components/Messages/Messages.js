@@ -16,30 +16,31 @@ class Messages extends Component {
             <>
                 <PageTemplate heading="Messages">
                     <div className="container">
-                        <div className="inbox_msg">
-                            <div className="inbox_people">
-                                <div className="headind_srch">
-                                    <div className="recent_heading">
-                                        <h4>Recent</h4>
+                        <div className="shadow bg-white">
+                            <div className="inbox_msg">
+                                <div className="inbox_people">
+                                    <div className="headind_srch">
+                                        <div className="recent_heading">
+                                            <h4>Recent</h4>
+                                        </div>
+                                        <div className="srch_bar">
+                                            <AddNewUser />
+                                        </div>
                                     </div>
-                                    <div className="srch_bar">
-                                        <AddNewUser />
+                                    <div className="inbox_chat">
+                                        <UserList />
                                     </div>
                                 </div>
-                                <div className="inbox_chat">
-                                    <UserList />
-                                </div>
-                            </div>
-                            <div className="mesgs">
-                                <div className="msg_history">
-                                    <MessagesList />
-                                </div>
-                                <div className="type_msg">
-                                    <MessagePost />
+                                <div className="mesgs">
+                                    <div className="msg_history">
+                                        <MessagesList />
+                                    </div>
+                                    <div className="type_msg">
+                                        <MessagePost />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </PageTemplate>
             </>

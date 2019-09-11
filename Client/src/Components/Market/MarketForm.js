@@ -39,14 +39,14 @@ class MarketForm extends Component {
 
     componentWillReceiveProps = (nextProps) => {
         if (nextProps.market.isPosted) {
-            commonMethods.callClick('closePopUp');
-        }
-
-        if(nextProps.market.isPostingFail || nextProps.market.isPosted){
-            this.setState({ submitted: false, isLoading: false });
             this.props.refreshList();
             this.props.cancelModal();
+            commonMethods.callClick('closePopUp');
             commonMethods.scrollTop();
+        }
+        else if (nextProps.market.isPostingFail) {
+            this.setState({ submitted: false, isLoading: false });
+            //this.props.refreshList();
         }
     }
 
@@ -62,7 +62,7 @@ class MarketForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.setState({ submitted: true, isLoading: true });
+        this.setState({ submitted: true });
         const { id, name, description, isActive } = this.state;
         if (name && description) {
             this.setState({ isLoading: true });
