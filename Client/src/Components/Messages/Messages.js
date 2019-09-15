@@ -9,6 +9,14 @@ class Messages extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            newUser: null,
+        }
+        this.getNewUser = this.getNewUser.bind(this);
+    }
+
+    getNewUser(newUser) {
+        this.setState({ newUser });
     }
 
     render() {
@@ -24,11 +32,11 @@ class Messages extends Component {
                                             <h4>Recent</h4>
                                         </div>
                                         <div className="srch_bar">
-                                            <AddNewUser />
+                                            <AddNewUser selecteNewUser={this.getNewUser} />
                                         </div>
                                     </div>
                                     <div className="inbox_chat">
-                                        <UserList />
+                                        <UserList newUser={this.state.newUser} />
                                     </div>
                                 </div>
                                 <div className="mesgs">

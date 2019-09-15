@@ -14,10 +14,15 @@ class AddNewUser extends Component {
         this.state = {
             users: [],
         }
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
         this.props.dispatch(userActions.getAll());
+    }
+
+    handleChange(selectedOptions) {
+        this.props.selecteNewUser(selectedOptions[0]);
     }
 
     componentWillReceiveProps = (nextProps) => {
@@ -44,6 +49,7 @@ class AddNewUser extends Component {
                         labelKey="name"
                         options={users}
                         placeholder="Search User..."
+                        onChange={this.handleChange}
                     />
                 </div>
             </>
