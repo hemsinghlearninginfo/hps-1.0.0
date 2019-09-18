@@ -13,5 +13,6 @@ module.exports = {
     WriteUp: require('../Model/writeup.model'),
     UploadedFile: require('../Model/uploadedFile.model'),
     Market: require('../Model/market.model'),
-    ChatMessage: require('../Model/chatMessage.model')
+    ChatMessage: require('../Model/chatMessage.model'),
+    Stock: require('../Model/stock.model')
 };

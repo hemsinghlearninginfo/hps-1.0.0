@@ -13,6 +13,7 @@ import MyComponents from 'Components/index';
 import Wrapper from 'Components/Shared/Wrapper';
 
 class App extends Component {
+    
     constructor(props) {
         super(props);
         const { dispatch } = this.props;

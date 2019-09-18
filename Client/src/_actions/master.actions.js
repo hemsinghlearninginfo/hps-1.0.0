@@ -7,6 +7,11 @@ export const masterActions = {
     createMarket,
     updateMarket,
     deleteMarket,
+
+    getAllStock,
+    createStock,
+    updateStock,
+    deleteStock,
 };
 
 function getAllMarket() {
@@ -29,7 +34,6 @@ function getAllMarket() {
     function success(market) { return { type: masterConstants.MASTER_MARKET_GETALL_SUCCESS, market } }
     function failure(error) { return { type: masterConstants.MASTER_MARKET_GETALL_FAILURE, error } }
 }
-
 
 function createMarket(data) {
     return dispatch => {
@@ -90,5 +94,88 @@ function deleteMarket(id) {
     function request(id) { return { type: masterConstants.MASTER_MARKET_DELETE_REQUEST, id } }
     function success(id) { return { type: masterConstants.MASTER_MARKET_DELETE_SUCCESS, id } }
     function failure(id, error) { return { type: masterConstants.MASTER_MARKET_DELETE_FAILURE, id, error } }
+}
+
+
+function getAllStock() {
+    return dispatch => {
+        dispatch(request());
+
+        masterService.getAllStock()
+            .then(
+                stock => { 
+                    dispatch(success(stock)) 
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request() { return { type: masterConstants.MASTER_STOCK_GETALL_REQUEST } }
+    function success(market) { return { type: masterConstants.MASTER_STOCK_GETALL_SUCCESS, market } }
+    function failure(error) { return { type: masterConstants.MASTER_STOCK_GETALL_FAILURE, error } }
+}
+
+function createStock(data) {
+    return dispatch => {
+        dispatch(request(data));
+        masterService.createStock(data)
+            .then(
+                data => {
+                    dispatch(success(data));
+                    dispatch(alertActions.success('Stock added successful'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request(data) { return { type: masterConstants.MASTER_STOCK_POST_REQUEST, data: data} }
+    function success(data) { return { type: masterConstants.MASTER_STOCK_POST_SUCCESS, data: data } }
+    function failure(error) { return { type: masterConstants.MASTER_STOCK_POST_FAILURE, error } }
+}
+
+function updateStock(data) {
+    return dispatch => {
+        dispatch(request(data));
+        masterService.updateStock(data)
+            .then(
+                data => {
+                    dispatch(success(data));
+                    dispatch(alertActions.success('Stock updated successful'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request(data) { return { type: masterConstants.MASTER_STOCK_POST_REQUEST, data: data } }
+    function success(data) { return { type: masterConstants.MASTER_STOCK_POST_SUCCESS, data: data } }
+    function failure(error) { return { type: masterConstants.MASTER_STOCK_POST_FAILURE, error } }
+}
+
+function deleteStock(id) {
+    return dispatch => {
+        dispatch(request(id));
+
+        masterService.deleteStock(id)
+            .then(
+                data => {
+                    dispatch(success(id));
+                    dispatch(alertActions.success('Stock deleted successful'));
+                },
+                error => dispatch(failure(id, error.toString()))
+            );
+    };
+
+    function request(id) { return { type: masterConstants.MASTER_STOCK_DELETE_REQUEST, id } }
+    function success(id) { return { type: masterConstants.MASTER_STOCK_DELETE_SUCCESS, id } }
+    function failure(id, error) { return { type: masterConstants.MASTER_STOCK_DELETE_FAILURE, id, error } }
 }
 
