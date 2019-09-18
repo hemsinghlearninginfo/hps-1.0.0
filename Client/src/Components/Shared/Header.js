@@ -56,27 +56,20 @@ export class Header extends Component {
                         <Link to="/faq" className="nav-item nav-link active"><Icon type='faq' /> FAQ</Link>
                         {/* <a href="#" className="nav-item nav-link active">Home</a>
                         <a href="#" className="nav-item nav-link">Profile</a> */}
-                        <Authorise isLoggedIn={true}>
+                        {/* <Authorise isLoggedIn={true}>
                             <Link to="/msg" className="nav-item nav-link active"><Icon type='message' /> Messages</Link>
-                        </Authorise>
+                        </Authorise> */}
 
-                        {/* <div className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Messages</a>
-                            <div className="dropdown-menu">
-                                <a href="#" className="dropdown-item">Inbox</a>
-                                <a href="#" className="dropdown-item">Sent</a>
-                                <a href="#" className="dropdown-item">Drafts</a>
-                            </div>
-                        </div> */}
                         <Authorise userroles={[Role.SuperAdmin, Role.Admin]}>
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown"><Icon type='TOOLS' /> App Setting</a>
                                 <div className="dropdown-menu">
                                     <Link to="/market" className="dropdown-item"> Market</Link>
+                                    <Link to="/stocks" className="dropdown-item"> Stocks</Link>
                                 </div>
                             </div>
                         </Authorise>
-                        <Authorise userroles={[Role.SuperAdmin, Role.Admin, Role.Master]}>
+                        {/* <Authorise userroles={[Role.SuperAdmin, Role.Admin, Role.Master]}>
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Configurations</a>
                                 <div className="dropdown-menu">
@@ -85,7 +78,7 @@ export class Header extends Component {
                                     <a href="#" className="dropdown-item">Drafts</a>
                                 </div>
                             </div>
-                        </Authorise>
+                        </Authorise> */}
                     </div>
                     {/* <form className="form-inline">
                         <div className="input-group">

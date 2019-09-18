@@ -8,6 +8,7 @@ import { Notifications, GoUp, UploadFile, Quote } from 'Components/Shared';
 import { SlideMasters } from 'Components/Master';
 import { WriteUp, SlideWriteUps } from 'Components/WriteUp';
 import { MarketPage } from 'Components/Market';
+import { StockPage } from 'Components/Stocks';
 import { Home } from 'Components/Home';
 import { Login, ForgotPassword } from 'Components/Login';
 import { Register } from 'Components/Register';
@@ -41,6 +42,7 @@ export default class MyComponent {
     static Profile = Profile;
 
     static MarketPage = MarketPage;
+    static StockPage = StockPage;
 
     static Messages = Messages;
 }
