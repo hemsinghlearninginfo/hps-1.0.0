@@ -18,10 +18,10 @@ function getAllMarket() {
     return dispatch => {
         dispatch(request());
 
-        masterService.getAllMarket()
+        masterService.getAll(masterConstants.API_MARKET)
             .then(
-                market => { 
-                    dispatch(success(market)) 
+                market => {
+                    dispatch(success(market))
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -38,7 +38,7 @@ function getAllMarket() {
 function createMarket(data) {
     return dispatch => {
         dispatch(request(data));
-        masterService.createMarket(data)
+        masterService.create(data, masterConstants.API_MARKET)
             .then(
                 data => {
                     dispatch(success(data));
@@ -51,7 +51,7 @@ function createMarket(data) {
             );
     };
 
-    function request(data) { return { type: masterConstants.MASTER_MARKET_POST_REQUEST, data: data} }
+    function request(data) { return { type: masterConstants.MASTER_MARKET_POST_REQUEST, data: data } }
     function success(data) { return { type: masterConstants.MASTER_MARKET_POST_SUCCESS, data: data } }
     function failure(error) { return { type: masterConstants.MASTER_MARKET_POST_FAILURE, error } }
 }
@@ -59,7 +59,7 @@ function createMarket(data) {
 function updateMarket(data) {
     return dispatch => {
         dispatch(request(data));
-        masterService.updateMarket(data)
+        masterService.update(data, masterConstants.API_MARKET)
             .then(
                 data => {
                     dispatch(success(data));
@@ -81,7 +81,7 @@ function deleteMarket(id) {
     return dispatch => {
         dispatch(request(id));
 
-        masterService.deleteMarket(id)
+        masterService.delete(id, masterConstants.API_MARKET)
             .then(
                 data => {
                     dispatch(success(id));
@@ -101,10 +101,10 @@ function getAllStock() {
     return dispatch => {
         dispatch(request());
 
-        masterService.getAllStock()
+        masterService.getAll(masterConstants.API_STOCK)
             .then(
-                stock => { 
-                    dispatch(success(stock)) 
+                stock => {
+                    dispatch(success(stock))
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -121,7 +121,7 @@ function getAllStock() {
 function createStock(data) {
     return dispatch => {
         dispatch(request(data));
-        masterService.createStock(data)
+        masterService.create(data, masterConstants.API_STOCK)
             .then(
                 data => {
                     dispatch(success(data));
@@ -134,7 +134,7 @@ function createStock(data) {
             );
     };
 
-    function request(data) { return { type: masterConstants.MASTER_STOCK_POST_REQUEST, data: data} }
+    function request(data) { return { type: masterConstants.MASTER_STOCK_POST_REQUEST, data: data } }
     function success(data) { return { type: masterConstants.MASTER_STOCK_POST_SUCCESS, data: data } }
     function failure(error) { return { type: masterConstants.MASTER_STOCK_POST_FAILURE, error } }
 }
@@ -142,7 +142,7 @@ function createStock(data) {
 function updateStock(data) {
     return dispatch => {
         dispatch(request(data));
-        masterService.updateStock(data)
+        masterService.update(data, masterConstants.API_STOCK)
             .then(
                 data => {
                     dispatch(success(data));
@@ -164,7 +164,7 @@ function deleteStock(id) {
     return dispatch => {
         dispatch(request(id));
 
-        masterService.deleteStock(id)
+        masterService.delete(id, masterConstants.API_STOCK)
             .then(
                 data => {
                     dispatch(success(id));

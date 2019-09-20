@@ -39,12 +39,14 @@ class MarketForm extends Component {
 
     componentWillReceiveProps = (nextProps) => {
         if (nextProps.market.isPosted) {
+            debugger;
             this.props.refreshList();
             this.props.cancelModal();
             commonMethods.callClick('closePopUp');
             commonMethods.scrollTop();
         }
         else if (nextProps.market.isPostingFail) {
+            debugger;
             this.setState({ submitted: false, isLoading: false });
             //this.props.refreshList();
         }

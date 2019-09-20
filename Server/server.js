@@ -89,8 +89,8 @@ function routes() {
     app.use('/extra', require('./Controller/extra.controller'));
     app.use('/writeup', require('./Controller/writeups.controller'));
     app.use('/uploadfiles', require('./Controller/uploadedFile.controller'));
-    app.use('/market', require('./Controller/market.controller'));
     app.use('/cm', require('./Controller/chatMessage.controller'));
+    app.use('/market', require('./Controller/market.controller'));
     app.use('/stock', require('./Controller/stock.controller'));
     app.use(errorHandler);
 }

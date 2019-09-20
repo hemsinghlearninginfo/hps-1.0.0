@@ -29,6 +29,7 @@ class MarketPage extends Component {
     }
 
     fetchData() {
+        debugger;
         this.props.dispatch(masterActions.getAllMarket());
     }
 

@@ -44,7 +44,7 @@ export function market(state = {}, action) {
     case masterConstants.MASTER_MARKET_POST_REQUEST:
       return { isPosted: false, isPostingFail: false };
     case masterConstants.MASTER_MARKET_POST_SUCCESS:
-      return { isPosted: true };
+      return { isPosted: true, };
     case masterConstants.MASTER_MARKET_POST_FAILURE:
       return { isPostingFail: true };
 
