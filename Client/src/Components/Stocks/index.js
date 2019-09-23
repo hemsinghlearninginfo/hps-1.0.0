@@ -71,6 +71,7 @@ class StockPage extends Component {
                     <div className="row">
                         <div className="col-lg-12 text-right">
                             <div className="form-group list-textBox add-Faq-Button">
+                                <button type="button" className="btn btn-sm btn-info"><Icon type='upload' /> Import Stocks</button>{' '}
                                 <ModalPopUpButton action={this.addNew}><Icon type='add' /> Add New</ModalPopUpButton>
                                 <ModalPopUp heading={dataObject === null ? "Add" : "Edit"}>
                                     {

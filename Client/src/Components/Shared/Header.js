@@ -46,7 +46,7 @@ export class Header extends Component {
         const { currentUser } = this.state;
         return (
             <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top shadow-sm">
-                <Link to="/" className="navbar-brand"><Logo />HPS-Trades</Link>
+                <Link to="/" className="navbar-brand navbar"> <Logo /> </Link>
                 <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span className="navbar-toggler-icon"></span>
                 </button>

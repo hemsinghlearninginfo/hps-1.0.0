@@ -12,6 +12,7 @@ import * as serviceWorker from './serviceWorker';
 // import Popper from 'popper.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'react-datepicker/dist/react-datepicker.css';
 
 // setup fake backend
 // import { configureFakeBackend } from './_helpers';
