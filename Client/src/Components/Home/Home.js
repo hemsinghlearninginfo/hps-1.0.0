@@ -7,7 +7,6 @@ class Home extends React.Component {
         return (
             <>
                 <Hero />
-                {/* <MyComponents.Quote /> */}
                 <MyComponents.AboutUs />
                 <MyComponents.SlideMasters />
                 <MyComponents.SlideWriteUps />

@@ -6,4 +6,3 @@ export * from './Hero';
 export * from './Notifications';
 export * from './GoUp';
 export * from './UploadFile';
-export * from './Quote';
