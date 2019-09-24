@@ -31,6 +31,7 @@ class StockForm extends Component {
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.fetchData = this.fetchData.bind(this);
+        this.getObject = this.getObject.bind(this);
     }
 
     fetchData() {
@@ -86,25 +87,48 @@ class StockForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        let isValid = true;
         const { name, description, symbol, expiryDate, currentStockType, marketType, derivateType, quantity, unit, isActive, submitted, isLoading } = this.state;
         this.setState({ submitted: true, isLoading: true });
         if (name && description && symbol && currentStockType && marketType && quantity && unit) {
-            if ((currentStockType.indexOf('isIndex') >= 0 || currentStockType.indexOf('isFuture') >= 0) && expiryDate && derivateType) {
-
+            if (currentStockType.indexOf('isIndex') >= 0 || currentStockType.indexOf('isFuture') >= 0) {
+                if (!(expiryDate && derivateType)) {
+                    isValid = false;
+                }
             }
-            else {
-                this.setState({ isLoading: false });
-            }
-            // const { dispatch } = this.props;
-            // if (id === undefined || id === null) {
-            //     dispatch(masterActions.createStock({ name, description, isActive }));
-            // }
-            // else {
-            //     dispatch(masterActions.updateStock({ id, name, description, isActive }));
-            // }
         }
         else {
-            this.setState({ isLoading: false });
+            isValid = false;
+        }
+
+        this.setState({ isLoading: isValid });
+        if (isValid) {
+            let data = this.getObject();
+            console.log(data);
+            const { dispatch } = this.props;
+            if (data.id === undefined || data.id === null) {
+                dispatch(masterActions.createStock(data));
+            }
+            else {
+                dispatch(masterActions.updateStock(data));
+            }
+        }
+    }
+
+    getObject() {
+        return {
+            id: this.state.id,
+            name: this.state.name,
+            description: this.state.description,
+            symbol: this.state.symbol,
+            marketType: this.state.market,
+            expiryDate: this.state.expiryDate,
+            isIndex: this.state.currentStockType === 'isIndex',
+            isFuture: this.state.currentStockType === 'isFuture',
+            isCash: this.state.currentStockType === 'isCash',
+            derivateType: this.state.derivateType !== "" ? this.state.derivateType : undefined,
+            quantity: this.state.quantity,
+            unit: this.state.unit,
         }
     }
 
@@ -163,13 +187,13 @@ class StockForm extends Component {
                 <div className="form-row">
                     <div className={'form-group col-md-6' + (submitted && !derivateType ? ' help-block' : '')}>
                         <label htmlFor="description">Derivate Type</label>
-                        <select className="form-control required">
+                        <select name="derivateType" className="form-control required" onChange={this.handleChange} value={derivateType}>
                             <option key="">Select</option>
                             {Constants.DerivateTypes && Constants.DerivateTypes.map((e, key) => {
                                 return <option key={key} value={e.Key}>{e.Value}</option>
                             })};
                         </select>
-                        {submitted && !derivateType && <div className="help-block">Stock Type is required.</div>}
+                        {submitted && !derivateType && <div className="help-block">Derivate Type is required.</div>}
                     </div>
                     <div className={'form-group col-md-6' + (submitted && !expiryDate ? ' help-block' : '')} >
                         <label htmlFor="expiryDate">Expiry Date</label>
@@ -197,7 +221,7 @@ class StockForm extends Component {
                     <label htmlFor="description">Unit</label>
                     <input type="text" className="form-control required" name="unit" placeholder="Unit"
                         value={unit} onChange={this.handleChange} />
-                    {submitted && !symbol && <div className="help-block">Unit is required.</div>}
+                    {submitted && !unit && <div className="help-block">Unit is required.</div>}
                 </div>
             </div>
             <div className="form-check">

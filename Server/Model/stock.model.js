@@ -12,8 +12,8 @@ const schema = new Schema({
 
     isIndex: { type: Boolean, default: false },
     isFuture: { type: Boolean, default: false },
-    isDerivates: { type: Boolean, default: false },
-    derivatesType: { type: String, default: '' },
+    isCash: { type: Boolean, default: false },
+    derivateType: { type: String, default: '' },
     
     market:
     {
