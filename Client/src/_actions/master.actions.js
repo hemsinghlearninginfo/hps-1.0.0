@@ -3,16 +3,39 @@ import { masterService } from '_services';
 import { alertActions } from '.';
 
 export const masterActions = {
+    getMarket,
     getAllMarket,
     createMarket,
     updateMarket,
     deleteMarket,
 
+    getStock,
     getAllStock,
     createStock,
     updateStock,
     deleteStock,
 };
+
+function getMarket() {
+    return dispatch => {
+        dispatch(request());
+
+        masterService.get(masterConstants.API_MARKET)
+            .then(
+                market => {
+                    dispatch(success(market))
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request() { return { type: masterConstants.MASTER_MARKET_GETALL_REQUEST } }
+    function success(market) { return { type: masterConstants.MASTER_MARKET_GETALL_SUCCESS, market } }
+    function failure(error) { return { type: masterConstants.MASTER_MARKET_GETALL_FAILURE, error } }
+}
 
 function getAllMarket() {
     return dispatch => {
@@ -96,6 +119,26 @@ function deleteMarket(id) {
     function failure(id, error) { return { type: masterConstants.MASTER_MARKET_DELETE_FAILURE, id, error } }
 }
 
+function getStock() {
+    return dispatch => {
+        dispatch(request());
+
+        masterService.get(masterConstants.API_STOCK)
+            .then(
+                market => {
+                    dispatch(success(market))
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request() { return { type: masterConstants.MASTER_MARKET_GETALL_REQUEST } }
+    function success(market) { return { type: masterConstants.MASTER_MARKET_GETALL_SUCCESS, market } }
+    function failure(error) { return { type: masterConstants.MASTER_MARKET_GETALL_FAILURE, error } }
+}
 
 function getAllStock() {
     return dispatch => {

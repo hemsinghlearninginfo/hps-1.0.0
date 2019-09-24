@@ -22,15 +22,23 @@ class StockForm extends Component {
             unit: '',
             isActive: true,
             submitted: false,
-            isLoading: false
+            isLoading: false,
+
+            markets: null,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.fetchData = this.fetchData.bind(this);
+    }
+
+    fetchData() {
+        this.props.dispatch(masterActions.getMarket());
     }
 
     componentDidMount() {
+        this.fetchData();
         // const dataProps = this.props;
         // if (dataProps.dataObject != null && dataProps.dataObject._id !== null && dataProps.action === Action.Edit) {
         //     this.setState({
@@ -66,7 +74,7 @@ class StockForm extends Component {
             this.setState({ [name]: e.target.checked });
         }
         else {
-            this.setState({ [name]: value });
+            this.setState({ [name]: value.toLowerCase() !== "select" ? value : "" });
         }
     }
 
@@ -78,21 +86,30 @@ class StockForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.setState({ submitted: true });
-        const { id, name, description, isActive } = this.state;
-        if (name && description) {
-            this.setState({ isLoading: true });
-            const { dispatch } = this.props;
-            if (id === undefined || id === null) {
-                dispatch(masterActions.createStock({ name, description, isActive }));
+        const { name, description, symbol, expiryDate, currentStockType, marketType, derivateType, quantity, unit, isActive, submitted, isLoading } = this.state;
+        this.setState({ submitted: true, isLoading: true });
+        if (name && description && symbol && currentStockType && marketType && quantity && unit) {
+            if ((currentStockType.indexOf('isIndex') >= 0 || currentStockType.indexOf('isFuture') >= 0) && expiryDate && derivateType) {
+
             }
             else {
-                dispatch(masterActions.updateStock({ id, name, description, isActive }));
+                this.setState({ isLoading: false });
             }
+            // const { dispatch } = this.props;
+            // if (id === undefined || id === null) {
+            //     dispatch(masterActions.createStock({ name, description, isActive }));
+            // }
+            // else {
+            //     dispatch(masterActions.updateStock({ id, name, description, isActive }));
+            // }
+        }
+        else {
+            this.setState({ isLoading: false });
         }
     }
 
     render() {
+        const { market } = this.props;
         const { name, description, symbol, expiryDate, currentStockType, marketType, derivateType, quantity, unit, isActive, submitted, isLoading } = this.state;
 
         const body = (<div>
@@ -115,66 +132,68 @@ class StockForm extends Component {
                 <label htmlFor="description">Description</label>
                 <textarea className="form-control required" name="description" placeholder="Description"
                     value={description} onChange={this.handleChange} />
-                {submitted && !description &&
-                    <div className="help-block">Description is required.</div>
-                }
+                {submitted && !description && <div className="help-block">Description is required.</div>}
             </div>
             <div className="form-row">
-                <div className={'form-group col-md-4' + (submitted && !marketType ? ' help-block' : '')}>
+                <div className={'form-group col-md-6' + (submitted && !marketType ? ' help-block' : '')}>
                     <label htmlFor="description">Market</label>
-                    <select className="form-control required">
+                    <select name="marketType" className="form-control required" onChange={this.handleChange} value={marketType}>
                         <option key="">Select</option>
-                        <option key="isNSE">NSE</option>
-                        <option key="isMCX">MCX</option>
+                        {market && market.items && market.items.map((e, key) => {
+                            return <option key={e.id} value={e.id}>{e.name}</option>
+                        })}
                     </select>
-                    {submitted && !marketType &&
-                        <div className="help-block">Market is required.</div>
-                    }
+                    {submitted && !marketType && <div className="help-block">Market is required.</div>}
                 </div>
-                <div className={'form-group col-md-4' + (submitted && !currentStockType ? ' help-block' : '')}>
+                <div className={'form-group col-md-6' + (submitted && !currentStockType ? ' help-block' : '')}>
                     <label htmlFor="description">Stock Type</label>
-                    <select className="form-control required">
+                    <select name="currentStockType" className="form-control required" onChange={this.handleChange} value={currentStockType}>
                         <option key="">Select</option>
                         {Constants.StockTypes && Constants.StockTypes.map((e, key) => {
                             return <option key={key} value={e.Key}>{e.Value}</option>
-                        })};
+                        })}
                     </select>
-                    {submitted && !currentStockType &&
-                        <div className="help-block">Stock Type is required.</div>
-                    }
-                </div>
-                <div className={'form-group col-md-4' + (submitted && !derivateType ? ' help-block' : '')}>
-                    <label htmlFor="description">Derivate Type</label>
-                    <select className="form-control required">
-                        <option key="">Select</option>
-                        {Constants.DerivateTypes && Constants.DerivateTypes.map((e, key) => {
-                            return <option key={key} value={e.Key}>{e.Value}</option>
-                        })};
-                    </select>
-                    {submitted && !derivateType &&
-                        <div className="help-block">Stock Type is required.</div>
-                    }
+                    {submitted && !currentStockType && <div className="help-block">Stock Type is required.</div>}
                 </div>
             </div>
-            <div className="form-row">
-                <div className={'form-group col-md-4' + (submitted && !expiryDate ? ' help-block' : '')} >
-                    <label htmlFor="name">Expiry Date</label>
-                    <DatePicker className="form-control required"
-                        placeholderText="Click to select a expiry date"
-                        minDate={new Date()}
-                        todayButton="Today"
-                        selected={expiryDate}
-                        onChange={this.handleDateChange}
-                    />
-                    {submitted && !expiryDate && <div className="help-block">Expiry Date is required.</div>}
+            {
+                currentStockType &&
+                (currentStockType.indexOf('isIndex') >= 0 || currentStockType.indexOf('isFuture') >= 0)
+                &&
+                <div className="form-row">
+                    <div className={'form-group col-md-6' + (submitted && !derivateType ? ' help-block' : '')}>
+                        <label htmlFor="description">Derivate Type</label>
+                        <select className="form-control required">
+                            <option key="">Select</option>
+                            {Constants.DerivateTypes && Constants.DerivateTypes.map((e, key) => {
+                                return <option key={key} value={e.Key}>{e.Value}</option>
+                            })};
+                        </select>
+                        {submitted && !derivateType && <div className="help-block">Stock Type is required.</div>}
+                    </div>
+                    <div className={'form-group col-md-6' + (submitted && !expiryDate ? ' help-block' : '')} >
+                        <label htmlFor="expiryDate">Expiry Date</label>
+                        <div>
+                            <DatePicker name="expiryDate" className="form-control required"
+                                placeholderText="Click to select a expiry date"
+                                minDate={new Date()}
+                                todayButton="Today"
+                                selected={expiryDate}
+                                onChange={this.handleDateChange}
+                            />
+                            {submitted && !expiryDate && <div className="help-block">Expiry Date is required.</div>}
+                        </div>
+                    </div>
                 </div>
-                <div className={'form-group col-md-4' + (submitted && !quantity ? ' help-block' : '')}>
+            }
+            <div className="form-row">
+                <div className={'form-group col-md-6' + (submitted && !quantity ? ' help-block' : '')}>
                     <label htmlFor="description">Quantity</label>
                     <input type="number" className="form-control required" name="quantity" placeholder="Quantity"
                         value={quantity} onChange={this.handleChange} />
-                    {submitted && !symbol && <div className="help-block">Quantity is required.</div>}
+                    {submitted && !quantity && <div className="help-block">Quantity is required.</div>}
                 </div>
-                <div className={'form-group col-md-4' + (submitted && !unit ? ' help-block' : '')}>
+                <div className={'form-group col-md-6' + (submitted && !unit ? ' help-block' : '')}>
                     <label htmlFor="description">Unit</label>
                     <input type="text" className="form-control required" name="unit" placeholder="Unit"
                         value={unit} onChange={this.handleChange} />
@@ -208,9 +227,10 @@ class StockForm extends Component {
 
 
 function mapStateToProps(state) {
-    const { stock } = state;
+    const { stock, market } = state;
     return {
         stock,
+        market
     };
 }
 const connectedStockForm = connect(mapStateToProps)(StockForm);

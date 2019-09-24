@@ -2,11 +2,20 @@ import config from 'config';
 import { authHeader, handleResponse } from '_helpers';
 
 export const masterService = {
+    get,
     getAll,
     create,
     update,
     delete: _delete
 };
+
+function get(type) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(`${config.apiUrl}/${type}`, requestOptions).then(handleResponse);
+}
 
 function getAll(type) {
     const requestOptions = {
