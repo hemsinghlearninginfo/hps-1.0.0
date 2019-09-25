@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
+import moment from 'moment';
 
 import { Loading, Icon } from '_controls';
-import { Constants } from '_helpers';
+import { Constants, commonMethods } from '_helpers';
 import { masterActions } from '_actions';
 
 class StockForm extends Component {
@@ -57,16 +58,16 @@ class StockForm extends Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        // if (nextProps.stock.isPosted) {
-        //     this.props.refreshList();
-        //     this.props.cancelModal();
-        //     commonMethods.callClick('closePopUp');
-        //     commonMethods.scrollTop();
-        // }
-        // else if (nextProps.stock.isPostingFail) {
-        //     this.setState({ submitted: false, isLoading: false });
-        //     //this.props.refreshList();
-        // }
+        if (nextProps.stock.isPosted) {
+            this.props.refreshList();
+            this.props.cancelModal();
+            commonMethods.callClick('closePopUp');
+            commonMethods.scrollTop();
+        }
+        else if (nextProps.stock.isPostingFail) {
+            this.setState({ submitted: false, isLoading: false });
+            this.props.refreshList();
+        }
     }
 
     handleChange(e) {
@@ -100,7 +101,6 @@ class StockForm extends Component {
         else {
             isValid = false;
         }
-
         this.setState({ isLoading: isValid });
         if (isValid) {
             let data = this.getObject();
@@ -121,8 +121,8 @@ class StockForm extends Component {
             name: this.state.name,
             description: this.state.description,
             symbol: this.state.symbol,
-            marketType: this.state.market,
-            expiryDate: this.state.expiryDate,
+            market: this.state.marketType,
+            expiryDate: moment(moment(this.state.expiryDate).format('LL')),
             isIndex: this.state.currentStockType === 'isIndex',
             isFuture: this.state.currentStockType === 'isFuture',
             isCash: this.state.currentStockType === 'isCash',
@@ -203,6 +203,7 @@ class StockForm extends Component {
                                 minDate={new Date()}
                                 todayButton="Today"
                                 selected={expiryDate}
+                                dateFormat="dd/MM/yyyy"
                                 onChange={this.handleDateChange}
                             />
                             {submitted && !expiryDate && <div className="help-block">Expiry Date is required.</div>}

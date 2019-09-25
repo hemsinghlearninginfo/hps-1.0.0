@@ -6,15 +6,15 @@ const schema = new Schema({
     description: { type: String, required: true },
     symbol: { type: String, required: true },
     
+    isIndex: { type: Boolean, default: false },
+    isFuture: { type: Boolean, default: false },
+    isCash: { type: Boolean, default: false },
+    
     expiryDate: { type: Date, default: null },
     quantity: { type: String, default: null },
     unit: { type: String, default: '' },
 
-    isIndex: { type: Boolean, default: false },
-    isFuture: { type: Boolean, default: false },
-    isCash: { type: Boolean, default: false },
     derivateType: { type: String, default: '' },
-    
     market:
     {
         type: Schema.Types.ObjectId,

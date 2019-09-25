@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { Icon, InlineLoader, ModalPopUpButton } from '_controls';
 import { Action } from '_helpers';
 
@@ -42,7 +43,7 @@ class List extends Component {
     }
 
     render() {
-        const { data, heading, actionItem } = this.props;
+        const { data, heading, actionItem, config } = this.props;
         const { searchText, sortKey, order } = this.state;
 
         let headingForTable = heading ? ['action|Action', ...heading] : heading;
@@ -58,22 +59,34 @@ class List extends Component {
 
         const headingRow = data.items && headingForTable.map((item, index) => {
             return item.split('|')[0] === 'action' ? <th key={index}>Action</th> : <th className="pointer" key={index}
-                onClick={() => { this.setSortKey(item.split('|')[0]) }}>
-                {sortKey === item.split('|')[0] ? <Icon type={order} /> : ' '}{item.split('|')[1]}
+                onClick={() => { this.setSortKey(item.includes('|') ? item.split('|')[0] : item) }}>
+                {sortKey === (item.includes('|') ? item.split('|')[0] : item) ? <Icon type={order} /> : ' '}{(item.includes('|') ? item.split('|')[1] : item)}
             </th>;
         });
 
-        const dataRow = dataFromObject && dataFromObject.map((item) => {
+        let dataRecordValue = '';
+        let dataRow = dataFromObject && dataFromObject.map((item) => {
             return <tr key={item.id}>{
                 headingForTable.map((itemHeading, index) => {
+                    dataRecordValue = item[itemHeading.split('|')[0]];
+                    if(config && config.removeTime){
+                        let removeTimeFields = config.removeTimeFields.includes('|')? config.removeTimeFields.split('|') : config.removeTimeFields;
+                        if(removeTimeFields === itemHeading.split('|')[0]){
+                            dataRecordValue = moment(dataRecordValue.split('T')[0]).format('DD-MM-YYYY');
+                        }
+                    }
                     return itemHeading.split('|')[0] === 'action' ? <td key={index}>
                         <ModalPopUpButton buttonType='warning' action={() => actionItem(Action.Edit, item.id)}><Icon type="edit" /></ModalPopUpButton>{' '}
                         <ModalPopUpButton modalPopUp='#modalPopUpConfirm' buttonType='danger' action={() => actionItem(Action.Delete, item.id)}><Icon type="delete" /></ModalPopUpButton>
                     </td> :
-                        <td key={index}>{item[itemHeading.split('|')[0]] !== undefined ? item[itemHeading.split('|')[0]].toString() : ''}</td>;
+                        <td key={index}>{dataRecordValue !== undefined ? dataRecordValue.toString() : ''}</td>;
                 })}
             </tr>
         });
+        if (dataRow && dataRow.length === 0) {
+            dataRow = <tr><td className="justify-content-center" colSpan={headingForTable.length}>Not data found...</td></tr>
+        }
+
 
         return (
             <>

@@ -157,7 +157,7 @@ function getAllStock() {
     };
 
     function request() { return { type: masterConstants.MASTER_STOCK_GETALL_REQUEST } }
-    function success(market) { return { type: masterConstants.MASTER_STOCK_GETALL_SUCCESS, market } }
+    function success(stock) { return { type: masterConstants.MASTER_STOCK_GETALL_SUCCESS, stock } }
     function failure(error) { return { type: masterConstants.MASTER_STOCK_GETALL_FAILURE, error } }
 }
 

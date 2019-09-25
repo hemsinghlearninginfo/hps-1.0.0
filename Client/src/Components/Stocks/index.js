@@ -22,6 +22,7 @@ class StockPage extends Component {
         this.actionItem = this.actionItem.bind(this);
         this.cancelModal = this.cancelModal.bind(this);
         this.confirmDelete = this.confirmDelete.bind(this);
+        this.addMarketText = this.addMarketText.bind(this);
     }
 
     componentDidMount() {
@@ -30,6 +31,7 @@ class StockPage extends Component {
 
     fetchData() {
         this.props.dispatch(masterActions.getAllStock());
+        this.props.dispatch(masterActions.getMarket());
     }
 
     addNew() {
@@ -60,10 +62,25 @@ class StockPage extends Component {
         }
     }
 
+    addMarketText(stock, market) {
+        return stock;
+        // return stock && market &&
+        //     stock.items && market.items &&
+        //     stock.items.map((item, index) => {
+        //         item.marketName = market.items.filter(x => x.id === item.market)[0].name
+        //     });
+    }
+
     render() {
-        const { stock } = this.props;
+        const { stock, market } = this.props;
+        const manipulatedStock = this.addMarketText(stock, market);
         const { action, isOpenModal, dataObject } = this.state;
-        const heading = ['name|Name', 'description|Description', 'isActive|Active'];
+        const heading = ['name|Name', 'description|Description', 'symbol|Symbol', 'isIndex', 'isFuture', 'isCash', 'expiryDate|Expiry Date', 'quantity|Quantity', 'unit|Unit', 'derivateType|Derivate Type', 'isActive|Active'];
+        const config = {
+            removeTime: true,
+            removeTimeFields: 'expiryDate'
+        }
+
         return (
             <Authorise isNotMessage={true} userroles={[Role.SuperAdmin, Role.Admin]}>
                 <ModalConfirm heading="Confirm Delete" message="Are you sure to delete this Stock" callBack={this.confirmDelete} actionButtonText="Delete" />
@@ -84,7 +101,7 @@ class StockPage extends Component {
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            <List data={stock} heading={heading} actionItem={this.actionItem} />
+                            <List data={manipulatedStock} heading={heading} actionItem={this.actionItem} config={config} />
                         </div>
                     </div>
                 </PageTemplate>
@@ -94,10 +111,11 @@ class StockPage extends Component {
 }
 
 function mapStateToProps(state) {
-    const { stock, loading } = state;
+    const { stock, market, loading } = state;
     return {
         loading,
         stock,
+        market,
     };
 }
 
