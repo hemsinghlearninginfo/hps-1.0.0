@@ -74,7 +74,7 @@ class FAQForm extends Component {
         if (question && answer) {
             this.setState({ isLoading: true });
             const { dispatch } = this.props;
-            if (commonMethods.isNullOrUndefined(id)) {
+            if (!commonMethods.isBlank(id)) {
                 dispatch(faqActions.create({ question, answer, isActive }));
             }
             else {

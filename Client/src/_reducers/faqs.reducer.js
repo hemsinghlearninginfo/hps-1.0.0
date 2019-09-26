@@ -26,6 +26,7 @@ export function faqs(state = {}, action) {
       };
     case faqConstants.DELETE_SUCCESS:
       return {
+        ...state,
         items: state.items.filter(faq => faq.id !== action.id)
       };
     case faqConstants.DELETE_FAILURE:

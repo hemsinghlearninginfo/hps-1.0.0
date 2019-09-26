@@ -110,7 +110,7 @@ class ListFAQ extends Component {
 
         return (
             <>
-                <ModalConfirm heading="Confirm Delete" message="Are you sure to delete this FAQ" callBack={this.confirmDelete} actionButtonText="Save FAQ" />
+                <ModalConfirm heading="Confirm Delete" message="Are you sure to delete this FAQ?" callBack={this.confirmDelete} actionButtonText="Delete FAQ" />
                 {faqs.loading && <em>Loading faqs...</em>}
                 {faqs.error && <span className="text-danger">ERROR: {faqs.error}</span>}
                 {isFaqsExists && searchControl}

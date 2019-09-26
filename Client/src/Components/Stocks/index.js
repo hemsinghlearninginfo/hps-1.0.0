@@ -63,19 +63,22 @@ class StockPage extends Component {
     }
 
     addMarketText(stock, market) {
-        return stock;
-        // return stock && market &&
-        //     stock.items && market.items &&
-        //     stock.items.map((item, index) => {
-        //         item.marketName = market.items.filter(x => x.id === item.market)[0].name
-        //     });
+        let mappedRecords = stock && market &&
+            stock.items && market.items &&
+            stock.items.map((item, index) => {
+                item.marketName = market.items.filter(x => x.id === item.market)[0].name
+                return item;
+            });
+        const finalObject = [];
+        finalObject.items = mappedRecords;
+        return finalObject;
     }
 
     render() {
         const { stock, market } = this.props;
         const manipulatedStock = this.addMarketText(stock, market);
         const { action, isOpenModal, dataObject } = this.state;
-        const heading = ['name|Name', 'description|Description', 'symbol|Symbol', 'isIndex', 'isFuture', 'isCash', 'expiryDate|Expiry Date', 'quantity|Quantity', 'unit|Unit', 'derivateType|Derivate Type', 'isActive|Active'];
+        const heading = ['marketName|Market', 'name|Name', 'description|Description', 'symbol|Symbol', 'isIndex', 'isFuture', 'isCash', 'expiryDate|Expiry Date', 'quantity|Quantity', 'unit|Unit', 'derivateType|Derivate Type', 'isActive|Active'];
         const config = {
             removeTime: true,
             removeTimeFields: 'expiryDate'
@@ -101,7 +104,7 @@ class StockPage extends Component {
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            <List data={manipulatedStock} heading={heading} actionItem={this.actionItem} config={config} />
+                            {manipulatedStock && <List data={manipulatedStock} heading={heading} actionItem={this.actionItem} config={config} />}
                         </div>
                     </div>
                 </PageTemplate>

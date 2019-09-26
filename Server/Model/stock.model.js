@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema({
     name: { type: String, required: true },
-    description: { type: String, required: true },
+    description: { type: String, default: null },
     symbol: { type: String, required: true },
     
     isIndex: { type: Boolean, default: false },
@@ -12,9 +12,9 @@ const schema = new Schema({
     
     expiryDate: { type: Date, default: null },
     quantity: { type: String, default: null },
-    unit: { type: String, default: '' },
+    unit: { type: String, default: null },
 
-    derivateType: { type: String, default: '' },
+    derivateType: { type: String, default: null },
     market:
     {
         type: Schema.Types.ObjectId,

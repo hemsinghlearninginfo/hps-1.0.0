@@ -88,10 +88,10 @@ class StockForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        let isValid = true;
-        const { name, description, symbol, expiryDate, currentStockType, marketType, derivateType, quantity, unit, isActive, submitted, isLoading } = this.state;
         this.setState({ submitted: true, isLoading: true });
-        if (name && description && symbol && currentStockType && marketType && quantity && unit) {
+        let isValid = true;
+        const { name, symbol, expiryDate, currentStockType, marketType, derivateType, quantity } = this.state;
+        if (name && symbol && currentStockType && marketType && quantity) {
             if (currentStockType.indexOf('isIndex') >= 0 || currentStockType.indexOf('isFuture') >= 0) {
                 if (!(expiryDate && derivateType)) {
                     isValid = false;
@@ -123,9 +123,9 @@ class StockForm extends Component {
             symbol: this.state.symbol,
             market: this.state.marketType,
             expiryDate: moment(moment(this.state.expiryDate).format('LL')),
-            isIndex: this.state.currentStockType === 'isIndex',
-            isFuture: this.state.currentStockType === 'isFuture',
-            isCash: this.state.currentStockType === 'isCash',
+            isIndex: this.state.currentStockType === Constants.StockTypes[0].Key,
+            isFuture: this.state.currentStockType === Constants.StockTypes[1].Key,
+            isCash: this.state.currentStockType === Constants.StockTypes[2].Key,
             derivateType: this.state.derivateType !== "" ? this.state.derivateType : undefined,
             quantity: this.state.quantity,
             unit: this.state.unit,
@@ -152,11 +152,10 @@ class StockForm extends Component {
                     {submitted && !symbol && <div className="help-block">Symbol is required.</div>}
                 </div>
             </div>
-            <div className={'form-group' + (submitted && !description ? ' help-block' : '')}>
+            <div className='form-group'>
                 <label htmlFor="description">Description</label>
-                <textarea className="form-control required" name="description" placeholder="Description"
+                <textarea className="form-control" name="description" placeholder="Description"
                     value={description} onChange={this.handleChange} />
-                {submitted && !description && <div className="help-block">Description is required.</div>}
             </div>
             <div className="form-row">
                 <div className={'form-group col-md-6' + (submitted && !marketType ? ' help-block' : '')}>
@@ -218,11 +217,10 @@ class StockForm extends Component {
                         value={quantity} onChange={this.handleChange} />
                     {submitted && !quantity && <div className="help-block">Quantity is required.</div>}
                 </div>
-                <div className={'form-group col-md-6' + (submitted && !unit ? ' help-block' : '')}>
+                <div className='form-group col-md-6'>
                     <label htmlFor="description">Unit</label>
-                    <input type="text" className="form-control required" name="unit" placeholder="Unit"
+                    <input type="text" className="form-control" name="unit" placeholder="Unit"
                         value={unit} onChange={this.handleChange} />
-                    {submitted && !unit && <div className="help-block">Unit is required.</div>}
                 </div>
             </div>
             <div className="form-check">

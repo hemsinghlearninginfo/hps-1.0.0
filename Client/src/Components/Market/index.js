@@ -66,7 +66,7 @@ class MarketPage extends Component {
         const heading = ['name|Name', 'description|Description', 'isActive|Active'];
         return (
             <Authorise isNotMessage={true} userroles={[Role.SuperAdmin, Role.Admin]}>
-                <ModalConfirm heading="Confirm Delete" message="Are you sure to delete this Market Type" callBack={this.confirmDelete} actionButtonText="Delete" />
+                <ModalConfirm heading="Confirm Delete" message="Are you sure to delete this Market Type?" callBack={this.confirmDelete} actionButtonText="Delete" />
                 <PageTemplate heading="Market">
                     <div className="row">
                         <div className="col-lg-12 text-right">

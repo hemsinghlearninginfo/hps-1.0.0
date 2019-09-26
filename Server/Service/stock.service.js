@@ -21,7 +21,7 @@ async function getAll() {
 }
 
 async function create(data) {
-    if (validator.isEmpty(data.description) || validator.isEmpty(data.name)) {
+    if (validator.isEmpty(data.symbol) || validator.isEmpty(data.name)) {
         throw new Error(message.generic);
     }
 

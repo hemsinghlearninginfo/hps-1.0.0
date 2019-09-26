@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Icon, InlineLoader, ModalPopUpButton } from '_controls';
-import { Action } from '_helpers';
+import { Action, commonMethods } from '_helpers';
 
 class List extends Component {
 
@@ -79,14 +79,13 @@ class List extends Component {
                         <ModalPopUpButton buttonType='warning' action={() => actionItem(Action.Edit, item.id)}><Icon type="edit" /></ModalPopUpButton>{' '}
                         <ModalPopUpButton modalPopUp='#modalPopUpConfirm' buttonType='danger' action={() => actionItem(Action.Delete, item.id)}><Icon type="delete" /></ModalPopUpButton>
                     </td> :
-                        <td key={index}>{dataRecordValue !== undefined ? dataRecordValue.toString() : ''}</td>;
+                        <td key={index}>{commonMethods.isEmpty(dataRecordValue) ? dataRecordValue.toString() : ''}</td>;
                 })}
             </tr>
         });
         if (dataRow && dataRow.length === 0) {
             dataRow = <tr><td className="justify-content-center" colSpan={headingForTable.length}>Not data found...</td></tr>
         }
-
 
         return (
             <>

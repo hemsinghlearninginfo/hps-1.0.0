@@ -39,14 +39,12 @@ class MarketForm extends Component {
 
     componentWillReceiveProps = (nextProps) => {
         if (nextProps.market.isPosted) {
-            debugger;
             this.props.refreshList();
             this.props.cancelModal();
             commonMethods.callClick('closePopUp');
             commonMethods.scrollTop();
         }
         else if (nextProps.market.isPostingFail) {
-            debugger;
             this.setState({ submitted: false, isLoading: false });
             //this.props.refreshList();
         }
@@ -90,23 +88,18 @@ class MarketForm extends Component {
                             <input autoFocus type="type" className="form-control required" name="name" placeholder="Market"
                                 value={name} onChange={this.handleChange}
                             />
-                            {submitted && !name &&
-                                <div className="help-block">Market Name is required.</div>
-                            }
+                            {submitted && !name && <div className="help-block">Market Name is required.</div>}
                         </div>
                         <div className={'form-group' + (submitted && !description ? ' has-error' : '')}>
                             <label htmlFor="description">Description</label>
                             <textarea className="form-control required" name="description" placeholder="Description"
                                 value={description} onChange={this.handleChange} />
-                            {submitted && !description &&
-                                <div className="help-block">Description is required.</div>
-                            }
+                            {submitted && !description && <div className="help-block">Description is required.</div>}
                         </div>
                         <div className="form-check">
                             <label className="form-check-label" htmlFor="isActive">
                                 <input type="checkbox" className="form-check-input" name="isActive"
-                                    checked={isActive ? 1 : 0} onChange={this.handleChange} />
-                                is Active</label>
+                                    checked={isActive ? 1 : 0} onChange={this.handleChange} />is Active</label>
                         </div>
                     </div>
                     <div className="modal-footer">

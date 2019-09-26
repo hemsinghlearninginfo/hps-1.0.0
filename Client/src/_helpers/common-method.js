@@ -14,7 +14,8 @@ export const commonMethods = {
     globalLoader,
     getMessage,
     gotop,
-    isNullOrUndefined,
+    isBlank,
+    isEmpty,
 };
 
 function getCurrentUser() {
@@ -108,7 +109,10 @@ function decryptText(cipherText) {
     return plain;
 }
 
+function isBlank(object) {
+    return object && object === null && object === undefined && object !== '';
+}
 
-function isNullOrUndefined(object) {
-    return object === null || object === undefined;
+function isEmpty(object) {
+    return object && object !== null && object !== undefined && object !== '';
 }
