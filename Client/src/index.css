@@ -250,14 +250,6 @@ svg {
   color: #2a465a;
 }
 
-.global-alert {
-  position: absolute;
-  z-index: 1499;
-  width: 100%;
-  padding: 0px 10em;
-  top: 50px;
-}
-
 .row.heading h2 {
   color: #4c4a4a;
   font-size: 45px;
@@ -620,4 +612,13 @@ ul {
 .modal-footer-confirm {
   padding: .5rem !important;
   background: #f0ebfd !important;
+}
+
+.global-alert {
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+    z-index: 1499;
 }

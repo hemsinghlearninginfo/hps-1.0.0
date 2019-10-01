@@ -13,7 +13,7 @@ import MyComponents from 'Components/index';
 import Wrapper from 'Components/Shared/Wrapper';
 
 class App extends Component {
-    
+
     constructor(props) {
         super(props);
         const { dispatch } = this.props;
@@ -52,9 +52,11 @@ class App extends Component {
                         <MyComponents.Notifications />
                         <MyComponents.Header />
                         {alert.message &&
-                            (<Expire delay={8}><div id="globalAlert" className="global-alert row justify-content-center align-items-center">
-                                <div className={`alert ${alert.type}`}>{alert.message}</div>
-                            </div></Expire>)
+                            (<Expire delay={8}>
+                                <div id="globalAlert" className="global-alert">
+                                    <div className={`alert ${alert.type}`}>{alert.message}</div>
+                                </div>
+                            </Expire>)
                         }
                         <Switch>
                             <Route exact path="/" component={MyComponents.Home} />

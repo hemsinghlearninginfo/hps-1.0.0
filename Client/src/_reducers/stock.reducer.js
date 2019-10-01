@@ -27,7 +27,7 @@ export function stock(state = {}, action) {
     case masterConstants.MASTER_STOCK_DELETE_SUCCESS:
       return {
         ...state,
-        items: state.items.filter(stock => stock.id !== action.id)
+        items: state.items.length > 0 ? state.items.filter(stock => stock.id !== action.id) : []
       };
     case masterConstants.MASTER_STOCK_DELETE_FAILURE:
       return {

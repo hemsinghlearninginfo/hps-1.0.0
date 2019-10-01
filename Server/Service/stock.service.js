@@ -21,27 +21,27 @@ async function getAll() {
 }
 
 async function create(data) {
-    if (validator.isEmpty(data.symbol) || validator.isEmpty(data.name)) {
+    if (validator.isEmpty(data.symbol) || validator.isEmpty(data.name) || validator.isEmpty(data.market)) {
         throw new Error(message.generic);
     }
 
-    if (await StockDb.findOne({ name: data.symbol })) {
-        throw new Error(util.format(message.alreadyAdded, 'Stock', data.name));
+    if (await StockDb.findOne({$and: [{ symbol: data.symbol }, { market: data.market }]})) {
+        throw new Error(util.format(message.alreadyAdded, 'Stock symbol details', data.symbol));
     }
 
-    let marketDb = new StockDb(data);
-    await marketDb.save();
+    let stockDb = new StockDb(data);
+    await stockDb.save();
 }
 
 async function update(id, data) {
-    const market = await StockDb.findById(id);
-    if (!market) throw new Error(util.format(message.notfound, 'Stock'));
+    const stock = await StockDb.findById(id);
+    if (!stock) throw new Error(util.format(message.notfound, 'Stock'));
 
-    if (market.name !== data.name && await StockDb.findOne({ name: data.name })) {
+    if (stock.name !== data.name && await StockDb.findOne({$and: [{ symbol: data.symbol }, { market: data.market }]})) {
         throw new Error(util.format(message.alreadyAdded, 'Stock', data.name));
     }
-    Object.assign(market, data);
-    await market.save();
+    Object.assign(stock, data);
+    await stock.save();
 }
 
 

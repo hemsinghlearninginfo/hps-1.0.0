@@ -32,6 +32,7 @@ class StockForm extends Component {
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.fetchData = this.fetchData.bind(this);
+        this.setEditData = this.setEditData.bind(this);
         this.getObject = this.getObject.bind(this);
     }
 
@@ -41,20 +42,27 @@ class StockForm extends Component {
 
     componentDidMount() {
         this.fetchData();
-        // const dataProps = this.props;
-        // if (dataProps.dataObject != null && dataProps.dataObject._id !== null && dataProps.action === Action.Edit) {
-        //     this.setState({
-        //         id: dataProps.dataObject._id,
-        //         name: dataProps.dataObject.name,
-        //         description: dataProps.dataObject.description,
-        //         isActive: dataProps.dataObject.isActive,
-        //         submitted: false,
-        //         isLoading: false
-        //     });
-        // }
-        // else if (dataProps.action === Action.Add) {
-        //     this.setState({ id: null, name: '', description: '', isActive: true, submitted: false, isLoading: false });
-        // }
+        this.setEditData();
+    }
+
+    setEditData() {
+        if (this.props.dataObject !== null) {
+            const editObject = this.props.dataObject;
+            console.log(editObject);
+            this.setState({
+                id: editObject.id,
+                name: editObject.name,
+                description: editObject.description,
+                symbol: editObject.symbol,
+                expiryDate: editObject.expiryDate,
+                //currentStockType: editObject.isActive,
+                marketType: editObject.market,
+                derivateType: editObject.derivateType,
+                quantity: editObject.quantity,
+                unit: editObject.isActive,
+                isActive: editObject.isActive,
+            });
+        }
     }
 
     componentWillReceiveProps = (nextProps) => {
