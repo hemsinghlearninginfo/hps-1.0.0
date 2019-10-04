@@ -48,14 +48,14 @@ class StockForm extends Component {
     setEditData() {
         if (this.props.dataObject !== null) {
             const editObject = this.props.dataObject;
-            console.log(editObject);
+            debugger;
             this.setState({
                 id: editObject.id,
                 name: editObject.name,
                 description: editObject.description,
                 symbol: editObject.symbol,
-                expiryDate: editObject.expiryDate,
-                //currentStockType: editObject.isActive,
+                expiryDate: commonMethods.isBlank(editObject.expiryDate) ? '' : new Date(editObject.expiryDate),
+                currentStockType: "isIndex",
                 marketType: editObject.market,
                 derivateType: editObject.derivateType,
                 quantity: editObject.quantity,
@@ -205,12 +205,13 @@ class StockForm extends Component {
                     <div className={'form-group col-md-6' + (submitted && !expiryDate ? ' help-block' : '')} >
                         <label htmlFor="expiryDate">Expiry Date</label>
                         <div>
-                            <DatePicker name="expiryDate" className="form-control required"
+                            <DatePicker name="expiryDate"
+                                className="form-control required"
                                 placeholderText="Click to select a expiry date"
                                 minDate={new Date()}
                                 todayButton="Today"
-                                selected={expiryDate}
                                 dateFormat="dd/MM/yyyy"
+                                selected={expiryDate}
                                 onChange={this.handleDateChange}
                             />
                             {submitted && !expiryDate && <div className="help-block">Expiry Date is required.</div>}
