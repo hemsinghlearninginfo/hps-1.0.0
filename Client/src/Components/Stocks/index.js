@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import { PageTemplate, Icon, ModalPopUp, ModalPopUpButton, ModalConfirm, Authorise, List } from '_controls';
-import { Role, Action } from '_helpers';
+import { Role, Action, commonMethods } from '_helpers';
 import { masterActions } from '_actions';
 import { StockForm } from './StockForm';
 
@@ -63,10 +64,11 @@ class StockPage extends Component {
     }
 
     addMarketText(stock, market) {
+        //debugger;
         let mappedRecords = stock && market &&
             stock.items && market.items &&
             stock.items.map((item, index) => {
-                item.marketName = market.items.filter(x => x.id === item.market)[0].name
+                item.marketName = market.items.filter(x => x.id === item.market)[0].name;
                 return item;
             });
         const finalObject = [];

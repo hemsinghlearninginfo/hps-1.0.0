@@ -72,7 +72,7 @@ class List extends Component {
                     if(config && config.removeTime){
                         let removeTimeFields = config.removeTimeFields.includes('|')? config.removeTimeFields.split('|') : config.removeTimeFields;
                         if(removeTimeFields === itemHeading.split('|')[0]){
-                            dataRecordValue = moment(dataRecordValue.split('T')[0]).format('DD-MM-YYYY');
+                            dataRecordValue = commonMethods.isEmpty(dataRecordValue) ? commonMethods.convertLocalDateToUTCDate(dataRecordValue).toDateString() : '';
                         }
                     }
                     return itemHeading.split('|')[0] === 'action' ? <td key={index}>

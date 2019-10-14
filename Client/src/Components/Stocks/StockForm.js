@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import moment from 'moment';
+import { enGB } from "date-fns/esm/locale";
+
 
 import { Loading, Icon } from '_controls';
 import { Constants, commonMethods } from '_helpers';
@@ -43,23 +45,23 @@ class StockForm extends Component {
     componentDidMount() {
         this.fetchData();
         this.setEditData();
+        registerLocale("en-GB", enGB);
     }
 
     setEditData() {
         if (this.props.dataObject !== null) {
             const editObject = this.props.dataObject;
-            debugger;
             this.setState({
                 id: editObject.id,
                 name: editObject.name,
                 description: editObject.description,
                 symbol: editObject.symbol,
-                expiryDate: commonMethods.isBlank(editObject.expiryDate) ? '' : new Date(editObject.expiryDate),
+                expiryDate: commonMethods.isEmpty(editObject.expiryDate) ? new Date(editObject.expiryDate) : '',
                 currentStockType: "isIndex",
                 marketType: editObject.market,
                 derivateType: editObject.derivateType,
                 quantity: editObject.quantity,
-                unit: editObject.isActive,
+                unit: editObject.unit,
                 isActive: editObject.isActive,
             });
         }
@@ -112,7 +114,6 @@ class StockForm extends Component {
         this.setState({ isLoading: isValid });
         if (isValid) {
             let data = this.getObject();
-            console.log(data);
             const { dispatch } = this.props;
             if (data.id === undefined || data.id === null) {
                 dispatch(masterActions.createStock(data));
@@ -130,7 +131,7 @@ class StockForm extends Component {
             description: this.state.description,
             symbol: this.state.symbol,
             market: this.state.marketType,
-            expiryDate: moment(moment(this.state.expiryDate).format('LL')),
+            expiryDate: commonMethods.isEmpty(this.state.expiryDate) ? commonMethods.convertLocalDateToUTCDate(this.state.expiryDate, true) : null,
             isIndex: this.state.currentStockType === Constants.StockTypes[0].Key,
             isFuture: this.state.currentStockType === Constants.StockTypes[1].Key,
             isCash: this.state.currentStockType === Constants.StockTypes[2].Key,
@@ -211,6 +212,7 @@ class StockForm extends Component {
                                 minDate={new Date()}
                                 todayButton="Today"
                                 dateFormat="dd/MM/yyyy"
+                                locale="en-GB"
                                 selected={expiryDate}
                                 onChange={this.handleDateChange}
                             />

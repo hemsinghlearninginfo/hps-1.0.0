@@ -16,6 +16,8 @@ export const commonMethods = {
     gotop,
     isBlank,
     isEmpty,
+    getDate,
+    convertLocalDateToUTCDate,
 };
 
 function getCurrentUser() {
@@ -115,4 +117,33 @@ function isBlank(object) {
 
 function isEmpty(object) {
     return object && object !== null && object !== undefined && object !== '';
+}
+
+function getDate(object) {
+    if (isEmpty(object)) {
+        debugger;
+        object = object.split('T')[0];
+    }
+    return object;
+}
+
+//Covert datetime by GMT offset 
+//If toUTC is true then return UTC time other wise return local time
+function convertLocalDateToUTCDate(date, toUTC) {
+    if (isEmpty(date)) {
+        date = new Date(date);
+        //Local time converted to UTC
+        //console.log("Time: " + date);
+        var localOffset = date.getTimezoneOffset() * 60000;
+        var localTime = date.getTime();
+        if (toUTC) {
+            date = localTime + localOffset;
+        } else {
+            date = localTime - localOffset;
+        }
+        date = new Date(date);
+        //console.log("Converted time: " + date);
+        return date;
+    }
+    return date;
 }
