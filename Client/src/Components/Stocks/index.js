@@ -64,7 +64,6 @@ class StockPage extends Component {
     }
 
     addMarketText(stock, market) {
-        //debugger;
         let mappedRecords = stock && market &&
             stock.items && market.items &&
             stock.items.map((item, index) => {

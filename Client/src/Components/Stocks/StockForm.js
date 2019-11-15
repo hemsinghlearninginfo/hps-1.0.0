@@ -56,8 +56,8 @@ class StockForm extends Component {
                 name: editObject.name,
                 description: editObject.description,
                 symbol: editObject.symbol,
-                expiryDate: commonMethods.isEmpty(editObject.expiryDate) ? new Date(editObject.expiryDate) : '',
-                currentStockType: "isIndex",
+                expiryDate: commonMethods.isNotEmpty(editObject.expiryDate) ? new Date(editObject.expiryDate) : '',
+                currentStockType: editObject.isIndex ? "isIndex" : editObject.isCash ? "isCash" : editObject.isFuture ? "isFuture" : null,
                 marketType: editObject.market,
                 derivateType: editObject.derivateType,
                 quantity: editObject.quantity,
@@ -115,10 +115,12 @@ class StockForm extends Component {
         if (isValid) {
             let data = this.getObject();
             const { dispatch } = this.props;
+            debugger;
             if (data.id === undefined || data.id === null) {
                 dispatch(masterActions.createStock(data));
             }
             else {
+                console.log(data);
                 dispatch(masterActions.updateStock(data));
             }
         }
@@ -131,11 +133,11 @@ class StockForm extends Component {
             description: this.state.description,
             symbol: this.state.symbol,
             market: this.state.marketType,
-            expiryDate: commonMethods.isEmpty(this.state.expiryDate) ? commonMethods.convertLocalDateToUTCDate(this.state.expiryDate, true) : null,
+            expiryDate: commonMethods.isNotEmpty(this.state.expiryDate) && (this.state.currentStockType && (this.state.currentStockType.indexOf('isIndex') >= 0 || this.state.currentStockType.indexOf('isFuture') >= 0)) ? this.state.expiryDate : null,
             isIndex: this.state.currentStockType === Constants.StockTypes[0].Key,
             isFuture: this.state.currentStockType === Constants.StockTypes[1].Key,
             isCash: this.state.currentStockType === Constants.StockTypes[2].Key,
-            derivateType: this.state.derivateType !== "" ? this.state.derivateType : undefined,
+            derivateType: this.state.currentStockType && (this.state.currentStockType.indexOf('isIndex') >= 0 || this.state.currentStockType.indexOf('isFuture') >= 0) && this.state.derivateType !== "" ? this.state.derivateType : null,
             quantity: this.state.quantity,
             unit: this.state.unit,
         }
@@ -211,7 +213,6 @@ class StockForm extends Component {
                                 placeholderText="Click to select a expiry date"
                                 minDate={new Date()}
                                 todayButton="Today"
-                                dateFormat="dd/MM/yyyy"
                                 locale="en-GB"
                                 selected={expiryDate}
                                 onChange={this.handleDateChange}

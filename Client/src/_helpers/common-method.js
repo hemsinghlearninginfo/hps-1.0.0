@@ -14,10 +14,10 @@ export const commonMethods = {
     globalLoader,
     getMessage,
     gotop,
-    isBlank,
-    isEmpty,
+    isNotEmpty,
     getDate,
     convertLocalDateToUTCDate,
+    onlyDate,
 };
 
 function getCurrentUser() {
@@ -111,17 +111,13 @@ function decryptText(cipherText) {
     return plain;
 }
 
-function isBlank(object) {
-    return object && object === null && object === undefined && object !== '';
-}
 
-function isEmpty(object) {
+function isNotEmpty(object) {
     return object && object !== null && object !== undefined && object !== '';
 }
 
 function getDate(object) {
-    if (isEmpty(object)) {
-        debugger;
+    if (isNotEmpty(object)) {
         object = object.split('T')[0];
     }
     return object;
@@ -130,8 +126,9 @@ function getDate(object) {
 //Covert datetime by GMT offset 
 //If toUTC is true then return UTC time other wise return local time
 function convertLocalDateToUTCDate(date, toUTC) {
-    if (isEmpty(date)) {
+    if (isNotEmpty(date)) {
         date = new Date(date);
+        date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
         //Local time converted to UTC
         //console.log("Time: " + date);
         var localOffset = date.getTimezoneOffset() * 60000;
@@ -144,6 +141,13 @@ function convertLocalDateToUTCDate(date, toUTC) {
         date = new Date(date);
         //console.log("Converted time: " + date);
         return date;
+    }
+    return date;
+}
+
+function onlyDate(date) {
+    if (isNotEmpty(date)) {
+        return date.split(',')[0];
     }
     return date;
 }

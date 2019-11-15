@@ -72,14 +72,14 @@ class List extends Component {
                     if(config && config.removeTime){
                         let removeTimeFields = config.removeTimeFields.includes('|')? config.removeTimeFields.split('|') : config.removeTimeFields;
                         if(removeTimeFields === itemHeading.split('|')[0]){
-                            dataRecordValue = commonMethods.isEmpty(dataRecordValue) ? commonMethods.convertLocalDateToUTCDate(dataRecordValue).toDateString() : '';
+                            dataRecordValue = commonMethods.isNotEmpty(dataRecordValue) ? commonMethods.onlyDate(commonMethods.convertLocalDateToUTCDate(dataRecordValue).toLocaleString()) : '';
                         }
                     }
                     return itemHeading.split('|')[0] === 'action' ? <td key={index}>
                         <ModalPopUpButton buttonType='warning' action={() => actionItem(Action.Edit, item.id)}><Icon type="edit" /></ModalPopUpButton>{' '}
                         <ModalPopUpButton modalPopUp='#modalPopUpConfirm' buttonType='danger' action={() => actionItem(Action.Delete, item.id)}><Icon type="delete" /></ModalPopUpButton>
                     </td> :
-                        <td key={index}>{commonMethods.isEmpty(dataRecordValue) ? dataRecordValue.toString() : ''}</td>;
+                        <td key={index}>{commonMethods.isNotEmpty(dataRecordValue) ? dataRecordValue.toString() : ''}</td>;
                 })}
             </tr>
         });
