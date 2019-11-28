@@ -79,7 +79,7 @@ class StockPage extends Component {
         const { stock, market } = this.props;
         const manipulatedStock = this.addMarketText(stock, market);
         const { action, isOpenModal, dataObject } = this.state;
-        const heading = ['marketName|Market', 'name|Name', 'description|Description', 'symbol|Symbol', 'isIndex', 'isFuture', 'isCash', 'expiryDate|Expiry Date', 'quantity|Quantity', 'unit|Unit', 'derivateType|Derivate Type', 'isActive|Active'];
+        const heading = ['marketName|Market', 'name|Name', 'description|Description', 'symbol|Symbol', 'isIndex', 'isIndexOption', 'isFuture', 'isFutureOption', 'isCash', 'expiryDate|Expiry Date', 'quantity|Quantity', 'unit|Unit', 'derivateType|Derivate Type', 'isActive|Active'];
         const config = {
             removeTime: true,
             removeTimeFields: 'expiryDate'

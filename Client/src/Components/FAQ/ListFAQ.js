@@ -12,7 +12,7 @@ class ListFAQ extends Component {
             faqs: [],
             searchText: '',
             confirmDelete: false,
-            idToDelete : null
+            idToDelete: null
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleConfirm = this.handleConfirm.bind(this);
@@ -27,7 +27,7 @@ class ListFAQ extends Component {
         this.setState({ confirmDelete: true, idToDelete });
     }
 
-    confirmDelete(){
+    confirmDelete() {
         this.props.faqDeleteById(this.state.idToDelete);
     }
 
@@ -75,19 +75,16 @@ class ListFAQ extends Component {
                                                 </div>
                                                 <div className="col-sm-2 text-right">
                                                     <Authorise userroles={[Role.SuperAdmin, Role.Admin]}>
-                                                        <>
-                                                            <ModalPopUpButton action={() => this.props.faqEditId(faq.id)}><Icon type='Edit' /> Edit</ModalPopUpButton>
-                                                            {' '}
-                                                            <button type="button"
-                                                                className="btn btn-sm btn-danger"
-                                                                data-toggle="modal"
-                                                                data-backdrop="static" data-keyboard="false"
-                                                                data-target="#modalPopUpConfirm"
-                                                                onClick={() => { this.handleConfirm(faq.id); return true; }}
-                                                            ><Icon type='Delete' /> Delete</button>
-                                                        </>
+                                                        <ModalPopUpButton action={() => this.props.faqEditId(faq.id)}><Icon type='Edit' /> Edit</ModalPopUpButton>
+                                                        {' '}
+                                                        <button type="button"
+                                                            className="btn btn-sm btn-danger"
+                                                            data-toggle="modal"
+                                                            data-backdrop="static" data-keyboard="false"
+                                                            data-target="#modalPopUpConfirm"
+                                                            onClick={() => { this.handleConfirm(faq.id); return true; }}
+                                                        ><Icon type='Delete' /> Delete</button>
                                                     </Authorise>
-
                                                 </div>
                                             </div>
                                         </div>

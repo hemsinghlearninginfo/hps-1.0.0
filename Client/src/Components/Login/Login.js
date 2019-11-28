@@ -52,7 +52,7 @@ class Login extends React.Component {
                         <form name="form" onSubmit={this.handleSubmit}>
                             <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
                                 <label htmlFor="username">Username</label>
-                                <input autoFocus type="text" className="form-control required" name="username" autocomplete="off"
+                                <input autoFocus type="text" className="form-control required" name="username" autoComplete="off"
                                     value={username} onChange={this.handleChange} placeholder="email@domain.com" />
                                 {submitted && !username &&
                                     <div className="help-block">Username is required</div>

@@ -4,9 +4,8 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import moment from 'moment';
 import { enGB } from "date-fns/esm/locale";
 
-
 import { Loading, Icon } from '_controls';
-import { Constants, commonMethods } from '_helpers';
+import { Constants, commonMethods, Action } from '_helpers';
 import { masterActions } from '_actions';
 
 class StockForm extends Component {
@@ -36,6 +35,7 @@ class StockForm extends Component {
         this.fetchData = this.fetchData.bind(this);
         this.setEditData = this.setEditData.bind(this);
         this.getObject = this.getObject.bind(this);
+        commonMethods.getModalCloseEvent();
     }
 
     fetchData() {
@@ -49,7 +49,8 @@ class StockForm extends Component {
     }
 
     setEditData() {
-        if (this.props.dataObject !== null) {
+        
+        if (this.props.dataObject !== null && this.props.action === Action.Edit) {
             const editObject = this.props.dataObject;
             this.setState({
                 id: editObject.id,
@@ -57,7 +58,7 @@ class StockForm extends Component {
                 description: editObject.description,
                 symbol: editObject.symbol,
                 expiryDate: commonMethods.isNotEmpty(editObject.expiryDate) ? new Date(editObject.expiryDate) : '',
-                currentStockType: editObject.isIndex ? "isIndex" : editObject.isCash ? "isCash" : editObject.isFuture ? "isFuture" : null,
+                currentStockType: editObject.isIndex ? "isIndex" : editObject.isIndexOption ? "isIndexOption" : editObject.isCash ? "isCash" : editObject.isFuture ? "isFuture" : editObject.isFutureOption ? "isFutureOption" : null,
                 marketType: editObject.market,
                 derivateType: editObject.derivateType,
                 quantity: editObject.quantity,
@@ -102,10 +103,8 @@ class StockForm extends Component {
         let isValid = true;
         const { name, symbol, expiryDate, currentStockType, marketType, derivateType, quantity } = this.state;
         if (name && symbol && currentStockType && marketType && quantity) {
-            if (currentStockType.indexOf('isIndex') >= 0 || currentStockType.indexOf('isFuture') >= 0) {
-                if (!(expiryDate && derivateType)) {
-                    isValid = false;
-                }
+            if ((currentStockType.indexOf('Cash') == -1 && expiryDate == null) || (currentStockType.indexOf('Option') >= 0 && !(expiryDate && derivateType))) {
+                isValid = false;
             }
         }
         else {
@@ -115,7 +114,6 @@ class StockForm extends Component {
         if (isValid) {
             let data = this.getObject();
             const { dispatch } = this.props;
-            debugger;
             if (data.id === undefined || data.id === null) {
                 dispatch(masterActions.createStock(data));
             }
@@ -135,8 +133,10 @@ class StockForm extends Component {
             market: this.state.marketType,
             expiryDate: commonMethods.isNotEmpty(this.state.expiryDate) && (this.state.currentStockType && (this.state.currentStockType.indexOf('isIndex') >= 0 || this.state.currentStockType.indexOf('isFuture') >= 0)) ? this.state.expiryDate : null,
             isIndex: this.state.currentStockType === Constants.StockTypes[0].Key,
-            isFuture: this.state.currentStockType === Constants.StockTypes[1].Key,
-            isCash: this.state.currentStockType === Constants.StockTypes[2].Key,
+            isIndexOption: this.state.currentStockType === Constants.StockTypes[1].Key,
+            isFuture: this.state.currentStockType === Constants.StockTypes[2].Key,
+            isFutureOption: this.state.currentStockType === Constants.StockTypes[3].Key,
+            isCash: this.state.currentStockType === Constants.StockTypes[4].Key,
             derivateType: this.state.currentStockType && (this.state.currentStockType.indexOf('isIndex') >= 0 || this.state.currentStockType.indexOf('isFuture') >= 0) && this.state.derivateType !== "" ? this.state.derivateType : null,
             quantity: this.state.quantity,
             unit: this.state.unit,
@@ -191,35 +191,38 @@ class StockForm extends Component {
                 </div>
             </div>
             {
-                currentStockType &&
-                (currentStockType.indexOf('isIndex') >= 0 || currentStockType.indexOf('isFuture') >= 0)
-                &&
                 <div className="form-row">
-                    <div className={'form-group col-md-6' + (submitted && !derivateType ? ' help-block' : '')}>
-                        <label htmlFor="description">Derivate Type</label>
-                        <select name="derivateType" className="form-control required" onChange={this.handleChange} value={derivateType}>
-                            <option key="">Select</option>
-                            {Constants.DerivateTypes && Constants.DerivateTypes.map((e, key) => {
-                                return <option key={key} value={e.Key}>{e.Value}</option>
-                            })};
-                        </select>
-                        {submitted && !derivateType && <div className="help-block">Derivate Type is required.</div>}
-                    </div>
-                    <div className={'form-group col-md-6' + (submitted && !expiryDate ? ' help-block' : '')} >
-                        <label htmlFor="expiryDate">Expiry Date</label>
-                        <div>
-                            <DatePicker name="expiryDate"
-                                className="form-control required"
-                                placeholderText="Click to select a expiry date"
-                                minDate={new Date()}
-                                todayButton="Today"
-                                locale="en-GB"
-                                selected={expiryDate}
-                                onChange={this.handleDateChange}
-                            />
-                            {submitted && !expiryDate && <div className="help-block">Expiry Date is required.</div>}
+                    {
+                        currentStockType && currentStockType.indexOf('Cash') == -1
+                        && <div className={'form-group col-md-6' + (submitted && !expiryDate ? ' help-block' : '')} >
+                            <label htmlFor="expiryDate">Expiry Date</label>
+                            <div>
+                                <DatePicker name="expiryDate"
+                                    className="form-control required"
+                                    placeholderText="Click to select a expiry date"
+                                    minDate={new Date()}
+                                    todayButton="Today"
+                                    locale="en-GB"
+                                    selected={expiryDate}
+                                    onChange={this.handleDateChange}
+                                />
+                                {submitted && !expiryDate && <div className="help-block">Expiry Date is required.</div>}
+                            </div>
                         </div>
-                    </div>
+                    }
+                    {
+                        currentStockType && currentStockType.indexOf('Option') >= 0
+                        && <div className={'form-group col-md-6' + (submitted && !derivateType ? ' help-block' : '')}>
+                            <label htmlFor="description">Derivate Type</label>
+                            <select name="derivateType" className="form-control required" onChange={this.handleChange} value={derivateType}>
+                                <option key="">Select</option>
+                                {Constants.DerivateTypes && Constants.DerivateTypes.map((e, key) => {
+                                    return <option key={key} value={e.Key}>{e.Value}</option>
+                                })};
+                        </select>
+                            {submitted && !derivateType && <div className="help-block">Derivate Type is required.</div>}
+                        </div>
+                    }
                 </div>
             }
             <div className="form-row">
@@ -270,5 +273,3 @@ function mapStateToProps(state) {
 }
 const connectedStockForm = connect(mapStateToProps)(StockForm);
 export { connectedStockForm as StockForm };
-
-//export {MarketForm}; 

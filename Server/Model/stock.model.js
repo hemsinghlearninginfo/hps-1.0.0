@@ -7,7 +7,9 @@ const schema = new Schema({
     symbol: { type: String, required: true },
     
     isIndex: { type: Boolean, default: false },
+    isIndexOption: { type: Boolean, default: false },
     isFuture: { type: Boolean, default: false },
+    isFutureOption: { type: Boolean, default: false },
     isCash: { type: Boolean, default: false },
     
     expiryDate: { type: Date, default: null },

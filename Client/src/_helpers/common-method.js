@@ -113,7 +113,7 @@ function decryptText(cipherText) {
 
 
 function isNotEmpty(object) {
-    return object && object !== null && object !== undefined && object !== '';
+    return object !== null && object !== undefined && object !== '';
 }
 
 function getDate(object) {

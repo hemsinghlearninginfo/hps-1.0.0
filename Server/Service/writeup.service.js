@@ -16,7 +16,7 @@ module.exports = {
 };
 
 async function getAll() {
-    return await WriteUpDb.find();
+    return await WriteUpDb.find().sort( { createdDate: -1 } );
 }
 
 async function create(writeUpParam) {

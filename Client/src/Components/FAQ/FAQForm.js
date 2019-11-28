@@ -75,10 +75,10 @@ class FAQForm extends Component {
             this.setState({ isLoading: true });
             const { dispatch } = this.props;
             if (commonMethods.isNotEmpty(id)) {
-                dispatch(faqActions.create({ question, answer, isActive }));
+                dispatch(faqActions.update({ id, question, answer, isActive }));
             }
             else {
-                dispatch(faqActions.update({ id, question, answer, isActive }));
+                dispatch(faqActions.create({ question, answer, isActive }));
             }
         }
     }

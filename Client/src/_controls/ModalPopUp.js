@@ -12,9 +12,9 @@ class ModalPopUp extends Component {
                         <div className="modal-content">
                             <div className="modal-header shadow-sm">
                                 <h5 className="modal-title" id="exampleModalLabel">{this.props.heading}</h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                {/* <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
-                                </button>
+                                </button> */}
                             </div>
                             <div className="modal-alert">
                                 {this.props.modalAlert.message &&

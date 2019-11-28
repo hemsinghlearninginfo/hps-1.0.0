@@ -17,7 +17,6 @@ async function get() {
 }
 
 async function getAll() {
-    let result = await StockDb.find();
     return await StockDb.find();
 }
 
