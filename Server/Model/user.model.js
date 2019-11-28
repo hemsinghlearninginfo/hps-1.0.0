@@ -9,6 +9,7 @@ const schema = new Schema({
     role: { type: String, default: 'User' },
     image: { type: String, default: "none", required: true },
     referralCode: { type: String, default: "none" },
+    isVerified: { type: Boolean, default: false },
     createdDate: { type: Date, default: Date.now }
 });
 

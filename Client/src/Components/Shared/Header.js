@@ -60,6 +60,15 @@ export class Header extends Component {
                             <Link to="/msg" className="nav-item nav-link active"><Icon type='message' /> Messages</Link>
                         </Authorise> */}
 
+                        <Authorise isLoggedIn="true">
+                            <div className="nav-item dropdown">
+                                <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown"><Icon type='TRADE' /> Trade</a>
+                                <div className="dropdown-menu">
+                                    <Link to="/trade" className="dropdown-item"> Live</Link>
+                                    <Link to="/trade" className="dropdown-item"> Paper</Link>
+                                </div>
+                            </div>
+                        </Authorise>
                         <Authorise userroles={[Role.SuperAdmin, Role.Admin]}>
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown"><Icon type='TOOLS' /> App Setting</a>

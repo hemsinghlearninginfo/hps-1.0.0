@@ -9,6 +9,7 @@ import { SlideMasters } from 'Components/Master';
 import { WriteUp, SlideWriteUps } from 'Components/WriteUp';
 import { MarketPage } from 'Components/Market';
 import { StockPage } from 'Components/Stocks';
+import { TradePage } from 'Components/Trade';
 import { Home } from 'Components/Home';
 import { Login, ForgotPassword } from 'Components/Login';
 import { Register } from 'Components/Register';
@@ -42,6 +43,7 @@ export default class MyComponent {
 
     static MarketPage = MarketPage;
     static StockPage = StockPage;
+    static TradePage = TradePage;
 
     static Messages = Messages;
 }

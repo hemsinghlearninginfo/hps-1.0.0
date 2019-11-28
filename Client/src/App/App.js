@@ -6,7 +6,6 @@ import { history, Role, commonMethods } from '_helpers';
 import { userService } from '_services';
 import { alertActions } from '_actions';
 import { PrivateRoute, Expire } from '_controls';
-import { FAQPage } from 'Components/FAQ';
 import { userConstants } from '_constants';
 
 import MyComponents from 'Components/index';
@@ -64,11 +63,14 @@ class App extends Component {
                             <Route path="/login" component={MyComponents.Login} />
                             <Route path="/fp" component={MyComponents.ForgotPassword} />
                             <Route path="/register" component={MyComponents.Register} />
-                            <Route path="/faq" component={FAQPage} />
+                            <Route path="/faq" component={MyComponents.FAQPage} />
                             <Route path="/writeup" component={MyComponents.WriteUp} />
                             <PrivateRoute exact path="/profile" component={MyComponents.Profile} />
                             <PrivateRoute exact path="/market" component={MyComponents.MarketPage} />
                             <PrivateRoute exact path="/stocks" component={MyComponents.StockPage} />
+                            <PrivateRoute exact path="/msg" component={MyComponents.Messages} />
+                            <PrivateRoute exact path="/trade" component={MyComponents.TradePage} />
+                            <PrivateRoute exact path="/trade" component={MyComponents.TradePage} />
                             <PrivateRoute exact path="/msg" component={MyComponents.Messages} />
                             <Route path='/404' component={MyComponents.Error404} />
                             <Redirect path='*' to='/404' />
