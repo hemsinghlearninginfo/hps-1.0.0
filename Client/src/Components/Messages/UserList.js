@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 import './message.css';
 
 class UserList extends Component {
@@ -12,7 +12,7 @@ class UserList extends Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        if (nextProps.newUser != undefined) {
+        if (nextProps.newUser !== undefined) {
             const { users } = this.state;
             users.splice(0,0,nextProps.newUser);
             this.setState({ users });

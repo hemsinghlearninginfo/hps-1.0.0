@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { PageTemplate, ModalPopUp, ModalPopUpButton, Authorise } from '_controls';
+import { PageTemplate } from '_controls';
+//import { PageTemplate, ModalPopUp, ModalPopUpButton, Authorise } from '_controls';
 // import { TradeForm } from './TradeForm';
 // import { ListTrade } from './ListTrade';
 // import { Role, commonMethods } from '_helpers';
@@ -12,11 +13,12 @@ class TradePage extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.state = {
-        //     role: null,
-        //     tradeObject: null,
-        //     action: 'Add',
-        // }
+        this.state = {
+            type : 'live'
+            //role: null,
+            //tradeObject: null,
+            //action: 'Add',
+        }
         // this.tradeEditId = this.tradeEditId.bind(this);
         // this.addNewTrade = this.addNewTrade.bind(this);
 

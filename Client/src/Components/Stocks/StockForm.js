@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DatePicker, { registerLocale } from "react-datepicker";
-import moment from 'moment';
 import { enGB } from "date-fns/esm/locale";
 
 import { Loading, Icon } from '_controls';
@@ -103,7 +102,7 @@ class StockForm extends Component {
         let isValid = true;
         const { name, symbol, expiryDate, currentStockType, marketType, derivateType, quantity } = this.state;
         if (name && symbol && currentStockType && marketType && quantity) {
-            if ((currentStockType.indexOf('Cash') == -1 && expiryDate == null) || (currentStockType.indexOf('Option') >= 0 && !(expiryDate && derivateType))) {
+            if ((currentStockType.indexOf('Cash') === -1 && expiryDate === null) || (currentStockType.indexOf('Option') >= 0 && !(expiryDate && derivateType))) {
                 isValid = false;
             }
         }
@@ -193,7 +192,7 @@ class StockForm extends Component {
             {
                 <div className="form-row">
                     {
-                        currentStockType && currentStockType.indexOf('Cash') == -1
+                        currentStockType && currentStockType.indexOf('Cash') === -1
                         && <div className={'form-group col-md-6' + (submitted && !expiryDate ? ' help-block' : '')} >
                             <label htmlFor="expiryDate">Expiry Date</label>
                             <div>

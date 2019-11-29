@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { Icon, InlineLoader, ModalPopUpButton } from '_controls';
 import { Action, commonMethods } from '_helpers';
 

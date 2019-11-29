@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 
 import { PageTemplate, Icon, ModalPopUp, ModalPopUpButton, ModalConfirm, Authorise, List } from '_controls';
-import { Role, Action, commonMethods } from '_helpers';
+import { Role, Action } from '_helpers';
 import { masterActions } from '_actions';
 import { StockForm } from './StockForm';
 
